@@ -1,29 +1,31 @@
+import classes from './Sidebar.module.css'
+
 function Sidebar() {
 	return (
-		<nav className='sidebar'>
-			<ul className='sidebar__list'>
-				<li className='sidebar__item'>
-					<a className='sidebar__link'>
+		<nav className={classes.sidebar}>
+			<ul className={classes.sidebar__list}>
+				<li className={classes.sidebar__item}>
+					<a className={classes.sidebar__link}>
 						Profile
 					</a>
 				</li>
-				<li className='sidebar__item'>
-					<a className='sidebar__link'>
+				<li className={classes.sidebar__item}>
+					<a className={classes.sidebar__link}>
 						Messages
 					</a>
 				</li>
-				<li className='sidebar__item'>
-					<a className='sidebar__link'>
+				<li className={classes.sidebar__item}>
+					<a className={classes.sidebar__link}>
 						News
 					</a>
 				</li>
-				<li className='sidebar__item'>
-					<a className='sidebar__link'>
+				<li className={classes.sidebar__item}>
+					<a className={classes.sidebar__link}>
 						Music
 					</a>
 				</li>
-				<li className='sidebar__item'>
-					<a className='sidebar__link'>
+				<li className={classes.sidebar__item}>
+					<a className={classes.sidebar__link}>
 						Settings
 					</a>
 				</li>

@@ -1,0 +1,10 @@
+.sidebar{
+	border: 1px solid #000;
+	grid-area: sidebar;
+}
+
+.sidebar__list{}
+
+.sidebar__item{}
+
+.sidebar__link{}
