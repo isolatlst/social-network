@@ -1,0 +1,30 @@
+.profile{
+	width: 100%;
+	border: 1px solid #000;
+	grid-area: main;
+}
+
+.profile__image{
+	max-width: 100%;
+}
+
+.profileDescription{
+
+}
+
+.description__avatar img{
+	width: 100px;
+	height: 100px;
+}
+
+.description__name{
+
+}
+
+.description__info{
+
+}
+
+.description__text{
+
+}
