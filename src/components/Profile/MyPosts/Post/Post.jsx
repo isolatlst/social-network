@@ -1,11 +1,11 @@
 import classes from './Post.module.css'
 import Avatar from '../../Avatar/Avatar'
 
-function Post() {
+function Post(props) {
 	return (
 		<div className={classes.posts__item}>
 			<Avatar />
-			<div>Some text</div>
+			<div>{props.message}</div>
 		</div>
 	);
 }

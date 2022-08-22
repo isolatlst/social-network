@@ -1,10 +1,21 @@
 .sidebar{
-	border: 1px solid #000;
 	grid-area: sidebar;
 }
 
-.sidebar__list{}
+.sidebar__list{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0px auto;
+	font-family: arial;
+}
 
-.sidebar__item{}
+.sidebar__item{
+	margin-bottom: 25px;
+	font-size: 20px;
+}
 
-.sidebar__link{}
+.sidebar__link:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
