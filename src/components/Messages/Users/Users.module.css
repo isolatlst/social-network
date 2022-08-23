@@ -1,0 +1,6 @@
+.users{
+	display: grid;
+	align-content: start;
+	grid-gap: 20px;
+}
+

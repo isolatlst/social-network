@@ -1,8 +1,10 @@
 import classes from './Wallpaper.module.css'
 
-function Wallpaper() {
+function Wallpaper(props) {
 	return (
-		<img className={classes.profile__image} src='https://wallup.net/wp-content/uploads/2019/09/182467-yosemite.jpg' />
+		<div className={classes.wallpaper}>
+			<img className={classes.wallpaper__image} src={props.wallpaper__link} />
+		</div>
 	);
 }
 

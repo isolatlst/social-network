@@ -15,7 +15,15 @@
 	font-size: 20px;
 }
 
-.sidebar__link:hover{
+.sidebar__link, .active{
+	color: inherit;
+}
+
+.sidebar__link:hover, .active:hover{
 	cursor: pointer;
 	text-decoration: underline;
+}
+
+.active{
+	color: blueviolet;
 }

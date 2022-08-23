@@ -1,7 +1,12 @@
-.profile__image{
-	width: 100%;
-	max-height: 40vh;
-	object-fit: cover;
+.wallpaper{
+	height: 40vh;
 	border-radius: 20px;
+	overflow: hidden;
+}
+
+.wallpaper__image{
+	width: 100%;
+	max-height: 100%;
+	object-fit: cover;
 }
 

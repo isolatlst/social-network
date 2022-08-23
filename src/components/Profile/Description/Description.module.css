@@ -1,3 +1,16 @@
+.description{
+	display: grid;
+	grid-template-areas:
+	"void void" 
+	"avatar name"
+	"posts posts";
+	grid-template-columns: minmax(50px, 150px) 1fr;
+	grid-template-rows: minmax(10px, 25px) 150px 1fr;
+	grid-gap: 20px;
+	max-width: 90%;
+	margin: 0 auto;
+}
+
 .description__info{
 	display: grid;
 	align-content: stretch;

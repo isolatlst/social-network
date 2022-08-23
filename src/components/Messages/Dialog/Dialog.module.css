@@ -1,0 +1,5 @@
+.dialog{
+	display: grid;
+	align-content: start;
+	padding: 10px;
+}
