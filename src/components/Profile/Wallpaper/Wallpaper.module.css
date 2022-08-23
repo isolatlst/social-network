@@ -1,5 +1,5 @@
 .wallpaper{
-	height: 40vh;
+	max-height: 40vh;
 	border-radius: 20px;
 	overflow: hidden;
 }

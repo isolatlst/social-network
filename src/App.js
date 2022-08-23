@@ -15,7 +15,7 @@ function App() {
 				<Sidebar />
 				<Routes className='main'>
 					<Route path='/profile' element={<Profile />} />
-					<Route path='/messages' element={<Messages />} />
+					<Route path='/messages/*' element={<Messages />} />
 				</Routes>
 			</Router >
 		</div>

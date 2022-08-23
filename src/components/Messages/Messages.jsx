@@ -1,12 +1,15 @@
-import Dialog from './Dialog/Dialog';
+import { Route, Routes } from 'react-router-dom'
+import Dialog from './Dialog/Dialog'
+import Users from './Users/Users'
 import classes from './Messages.module.css'
-import Users from './Users/Users';
 
 function Messages() {
 	return (
 		<main className={classes.content}>
 			< Users />
-			< Dialog friend__name='Dima' friend_avatar__link='https://a.d-cd.net/bEAAAgDEreA-1920.jpg' />
+			<Routes>
+				<Route path='/1' element={< Dialog friend__name='Dennis' friend_avatar__link='https://a.d-cd.net/bEAAAgDEreA-1920.jpg' />} />
+			</Routes>
 		</main>
 	);
 }

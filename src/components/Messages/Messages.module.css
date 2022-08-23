@@ -1,16 +1,15 @@
 .content{
 	position: relative;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	height: 100%;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 2fr;
 	grid-gap: 30px;
 }
-.content > div:nth-child(1)::after{
-	content: '';
-	position: absolute;
-	top: 5%;
-	right: 50%;
-	display: flex;
-	width: 2px;
-	height: 90%;
-	background: rgba(0, 0, 0, 0.25);
-}
+@media (max-width: 767px) {.content{grid-gap: 15px;}}
+@media (max-width: 500px) {.content{grid-gap: 0px;}}
+
+
+/* .content > div:nth-child(1){
+	border-right: 2px solid  rgba(0, 0, 0, 0.25);
+} */
