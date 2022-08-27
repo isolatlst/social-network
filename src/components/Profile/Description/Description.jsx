@@ -5,7 +5,7 @@ import classes from './Description.module.css'
 function Description(props) {
 	return (
 		<div className={classes.description}>
-			< Avatar avatar__link={props.avatar__link} />
+			< Avatar avatar={props.avatar} />
 			<div className={classes.description__info}>
 				<div className={classes.description__name}>{props.name}</div>
 				<div className={classes.description__text}>Date of Birth: {props.birth}</div>

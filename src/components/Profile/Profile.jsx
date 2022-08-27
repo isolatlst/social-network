@@ -3,7 +3,7 @@ import Description from './Description/Description'
 import MyPosts from './MyPosts/MyPosts'
 
 function Profile() {
-	let avatar__link = 'https://pbs.twimg.com/profile_banners/157025420/1537698290/1500x500';
+	let avatar = 'https://pbs.twimg.com/profile_banners/157025420/1537698290/1500x500';
 
 	return (
 		<main>
@@ -12,8 +12,8 @@ function Profile() {
 				name='Kirill Gurin' birth='29.12.2001'
 				city='Minsk' education='BSUIR'
 				site="github.com/isolatlst"
-				avatar__link={avatar__link} />
-			< MyPosts avatar__link={avatar__link} />
+				avatar={avatar} />
+			< MyPosts avatar={avatar} />
 		</main >
 	);
 }

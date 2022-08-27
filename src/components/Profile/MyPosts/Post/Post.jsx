@@ -4,7 +4,7 @@ import Avatar from '../../Avatar/Avatar'
 function Post(props) {
 	return (
 		<div className={classes.posts__item}>
-			<Avatar avatar__link={props.avatar__link} />
+			<Avatar avatar={props.avatar} />
 			<div>{props.message}</div>
 		</div>
 	);

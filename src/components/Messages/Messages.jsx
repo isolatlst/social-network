@@ -8,7 +8,7 @@ function Messages() {
 		<main className={classes.content}>
 			< Users />
 			<Routes>
-				<Route path='/1' element={< Dialog friend__name='Dennis' friend_avatar__link='https://a.d-cd.net/bEAAAgDEreA-1920.jpg' />} />
+				<Route path='/1' element={< Dialog friend__name='Dennis' friend__avatar='https://a.d-cd.net/bEAAAgDEreA-1920.jpg' />} />
 			</Routes>
 		</main>
 	);

@@ -2,6 +2,15 @@ import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 function MyPosts(props) {
+	let avatar = props.avatar
+	let postsData = [
+		{ id: 1, post: 'I try to learning react' },
+		{ id: 2, post: 'Hello! Its my social network' }
+	]
+
+	let posts = postsData.map(post => < Post message={post.post} avatar={avatar} />)
+
+
 	return (
 		<div className={classes.profilePosts}>
 			<div className={classes.title}>My posts</div>
@@ -10,8 +19,7 @@ function MyPosts(props) {
 				<button role='button'>Add post</button>
 			</div>
 			<div className={classes.posts__list}>
-				< Post message='Hello! Its my social network' avatar__link={props.avatar__link} />
-				< Post message='I try to learning react' avatar__link={props.avatar__link} />
+				{posts}
 			</div>
 		</div>
 	);
