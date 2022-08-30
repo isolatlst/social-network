@@ -7,15 +7,15 @@ import Messages from './components/Messages/Messages';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 
-function App() {
+function App(props) {
 	return (
 		<div className="App">
 			<Header />
 			<Router>
 				<Sidebar />
 				<Routes className='main'>
-					<Route path='/profile' element={<Profile />} />
-					<Route path='/messages/*' element={<Messages />} />
+					<Route path='/profile' element={<Profile profileData={props.profileData} />} />
+					<Route path='/messages/*' element={<Messages usersData={props.usersData} />} />
 				</Routes>
 			</Router >
 		</div>

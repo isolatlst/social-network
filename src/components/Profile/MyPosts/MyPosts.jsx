@@ -2,13 +2,7 @@ import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 function MyPosts(props) {
-	let avatar = props.avatar
-	let postsData = [
-		{ id: 1, post: 'I try to learning react' },
-		{ id: 2, post: 'Hello! Its my social network' }
-	]
-
-	let posts = postsData.map(post => < Post message={post.post} avatar={avatar} />)
+	let posts = props.postsData.map(post => < Post message={post.post} avatar={props.avatar} />)
 
 
 	return (

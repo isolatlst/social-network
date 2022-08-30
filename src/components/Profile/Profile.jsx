@@ -2,18 +2,16 @@ import Wallpaper from './Wallpaper/Wallpaper'
 import Description from './Description/Description'
 import MyPosts from './MyPosts/MyPosts'
 
-function Profile() {
-	let avatar = 'https://pbs.twimg.com/profile_banners/157025420/1537698290/1500x500';
-
+function Profile(props) {
 	return (
 		<main>
-			< Wallpaper wallpaper__link='https://wallup.net/wp-content/uploads/2019/09/182467-yosemite.jpg' />
+			< Wallpaper wallpaper={props.profileData.wallpaper} />
 			< Description
-				name='Kirill Gurin' birth='29.12.2001'
-				city='Minsk' education='BSUIR'
-				site="github.com/isolatlst"
-				avatar={avatar} />
-			< MyPosts avatar={avatar} />
+				name={props.profileData.name} birth={props.profileData.birth}
+				city={props.profileData.city} education={props.profileData.education}
+				site={props.profileData.site}
+				avatar={props.profileData.avatar} />
+			< MyPosts avatar={props.profileData.avatar} postsData={props.profileData.postsData} />
 		</main >
 	);
 }
