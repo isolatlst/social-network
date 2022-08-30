@@ -14,8 +14,8 @@ function App(props) {
 			<Router>
 				<Sidebar />
 				<Routes className='main'>
-					<Route path='/profile' element={<Profile profileData={props.profileData} />} />
-					<Route path='/messages/*' element={<Messages usersData={props.usersData} />} />
+					<Route path='/profile' element={<Profile state={props.state.profilePage} />} />
+					<Route path='/messages/*' element={<Messages state={props.state.messagesPage} />} />
 				</Routes>
 			</Router >
 		</div>

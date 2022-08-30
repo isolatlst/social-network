@@ -4,12 +4,11 @@ import Users from './Users/Users'
 import classes from './Messages.module.css'
 
 function Messages(props) {
-
 	return (
 		<main className={classes.content}>
-			< Users usersData={props.usersData} />
+			< Users dialogsData={props.state.dialogsData} />
 			<Routes>
-				<Route path='/1' element={< Dialog friend__name='Dennis' friend__avatar='https://a.d-cd.net/bEAAAgDEreA-1920.jpg' />} />
+				<Route path='/1' element={< Dialog messagesData={props.state.messagesData} friend__name='Dennis' friend__avatar='https://a.d-cd.net/bEAAAgDEreA-1920.jpg' />} />
 			</Routes>
 		</main>
 	);
