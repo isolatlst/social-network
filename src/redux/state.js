@@ -1,3 +1,5 @@
+import renderEntireTree from "../render"
+
 let state = {
 	profilePage: {
 		profileData: {
@@ -30,6 +32,15 @@ let state = {
 			{ id: 5, date: '19:28 23/08/2022', sender: 'me', message: 'Привет, у меня тоже' }
 		]
 	}
+}
+
+export let addPost = (postMessage) => {
+	let newPost = {
+		id: state.profilePage.profileData.postsData.length + 1,
+		post: postMessage
+	}
+	state.profilePage.profileData.postsData.push(newPost)
+	renderEntireTree(state);
 }
 
 export default state

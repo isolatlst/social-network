@@ -10,7 +10,10 @@ function Profile(props) {
 				city={props.state.profileData.city} education={props.state.profileData.education}
 				site={props.state.profileData.site}
 				avatar={props.state.profileData.avatar} />
-			< MyPosts avatar={props.state.profileData.avatar} postsData={props.state.profileData.postsData} />
+			< MyPosts
+				avatar={props.state.profileData.avatar}
+				postsData={props.state.profileData.postsData}
+				addPost={props.addPost} />
 		</main >
 	);
 }
