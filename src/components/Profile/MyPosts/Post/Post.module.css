@@ -12,3 +12,11 @@
 	height: 50px;
 	margin-right: 20px;
 }
+.posts__item div {
+	max-width: 100%;
+	word-break: break-all;
+	hyphens: auto !important;
+	-moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+}

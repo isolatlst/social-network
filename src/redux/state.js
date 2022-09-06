@@ -12,8 +12,9 @@ let state = {
 			wallpaper: 'https://wallup.net/wp-content/uploads/2019/09/182467-yosemite.jpg',
 			postsData: [
 				{ id: 1, post: 'I try to learning react' },
-				{ id: 2, post: 'Hello! Its my social network' }
-			]
+				{ id: 2, post: 'Hello! Its my social network' },
+			],
+			newPostText: ''
 		}
 	},
 	messagesPage: {
@@ -34,12 +35,20 @@ let state = {
 	}
 }
 
-export let addPost = (postMessage) => {
+window.state = state;
+
+export let addPost = () => {
 	let newPost = {
 		id: state.profilePage.profileData.postsData.length + 1,
-		post: postMessage
+		post: state.profilePage.profileData.newPostText
 	}
 	state.profilePage.profileData.postsData.push(newPost)
+	state.profilePage.profileData.newPostText = ''
+	renderEntireTree(state);
+}
+
+export let updateNewPostText = postText => {
+	state.profilePage.profileData.newPostText = postText
 	renderEntireTree(state);
 }
 

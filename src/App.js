@@ -13,8 +13,12 @@ function App(props) {
 			<Router>
 				<Sidebar />
 				<Routes className='main'>
-					<Route path='/profile' element={<Profile state={props.state.profilePage} addPost={props.addPost} />} />
-					<Route path='/messages/*' element={<Messages state={props.state.messagesPage} />} />
+					<Route path='profile' element={<Profile
+						profilePage={props.state.profilePage}
+						addPost={props.addPost}
+						updateNewPostText={props.updateNewPostText} />} />
+					<Route path='messages/*' element={<Messages
+						messagesPage={props.state.messagesPage} />} />
 				</Routes>
 			</Router >
 		</div>

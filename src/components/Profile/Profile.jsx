@@ -5,15 +5,17 @@ function Profile(props) {
 	return (
 		<main>
 			< Description
-				wallpaper={props.state.profileData.wallpaper}
-				name={props.state.profileData.name} birth={props.state.profileData.birth}
-				city={props.state.profileData.city} education={props.state.profileData.education}
-				site={props.state.profileData.site}
-				avatar={props.state.profileData.avatar} />
+				wallpaper={props.profilePage.profileData.wallpaper}
+				name={props.profilePage.profileData.name} birth={props.profilePage.profileData.birth}
+				city={props.profilePage.profileData.city} education={props.profilePage.profileData.education}
+				site={props.profilePage.profileData.site}
+				avatar={props.profilePage.profileData.avatar} />
 			< MyPosts
-				avatar={props.state.profileData.avatar}
-				postsData={props.state.profileData.postsData}
-				addPost={props.addPost} />
+				avatar={props.profilePage.profileData.avatar}
+				postsData={props.profilePage.profileData.postsData}
+				newPostText={props.profilePage.profileData.newPostText}
+				addPost={props.addPost}
+				updateNewPostText={props.updateNewPostText} />
 		</main >
 	);
 }

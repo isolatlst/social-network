@@ -6,9 +6,9 @@ import classes from './Messages.module.css'
 function Messages(props) {
 	return (
 		<main className={classes.content}>
-			< Users dialogsData={props.state.dialogsData} />
+			< Users dialogsData={props.messagesPage.dialogsData} />
 			<Routes>
-				<Route path='/1' element={< Dialog messagesData={props.state.messagesData} friend__name='Dennis' friend__avatar='https://a.d-cd.net/bEAAAgDEreA-1920.jpg' />} />
+				<Route path='/1' element={< Dialog messagesData={props.messagesPage.messagesData} friend__name='Dennis' friend__avatar='https://a.d-cd.net/bEAAAgDEreA-1920.jpg' />} />
 			</Routes>
 		</main>
 	);
