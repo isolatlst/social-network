@@ -4,13 +4,6 @@ import SendMessage from './SendMessage/SendMessage'
 import React from 'react'
 
 function Dialog(props) {
-	// let textarea = React.createRef();
-
-	// let addPostHndlr = e => {
-	// 	props.postsData.push({ id: props.postsData.length + 1, post: `${textarea.current.value}` })
-	// 	alert(JSON.stringify(props));
-	// }
-
 	let messages = props.messagesData.map(message => < DialogItem friend__name={props.friend__name} friend__avatar={props.friend__avatar} friend__message={message.message} />)
 
 	return (
@@ -18,9 +11,12 @@ function Dialog(props) {
 			<div className={classes.dialog__items}>
 				{messages}
 			</div>
-			<SendMessage />
+			<SendMessage
+				dispatch={props.dispatch}
+				newMessageData={props.newMessageData} />
 		</div>
 	);
 }
 
 export default Dialog;
+

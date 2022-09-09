@@ -1,3 +1,11 @@
+//Profile const
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+
+//Messages const
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
 let store = {
 	_state: {
 		profilePage: {
@@ -25,12 +33,13 @@ let store = {
 				{ id: 5, name: 'Vlad', avatar: 'https://pressa.tv/uploads/posts/2019-01/1548187434_pressa_tv_foto-prikoly-21.jpg' }
 			],
 			messagesData: [
-				{ id: 1, date: '19:21 23/08/2022', sender: 'friend', message: 'Привет' },
-				{ id: 2, date: '19:22 23/08/2022', sender: 'friend', message: 'Как дела' },
-				{ id: 3, date: '19:22 23/08/2022', sender: 'friend', message: 'Проверка длинного сообщения на всякие глюки и тому подобное. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quos ipsam dignissimos, laudantium facilis minima, repudiandae quas consequatur atque unde, fugiat recusandae ea possimus cupiditate itaque consectetur earum neque? Vero.' },
-				{ id: 4, date: '19:24 23/08/2022', sender: 'friend', message: 'У меня все хорошо' },
-				{ id: 5, date: '19:28 23/08/2022', sender: 'me', message: 'Привет, у меня тоже' }
-			]
+				{ id: 1, date: '', sender: '', message: 'Привет' },
+				{ id: 2, date: '', sender: '', message: 'Как дела' },
+				{ id: 3, date: '', sender: '', message: 'Проверка длинного сообщения на всякие глюки и тому подобное. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quos ipsam dignissimos, laudantium facilis minima, repudiandae quas consequatur atque unde, fugiat recusandae ea possimus cupiditate itaque consectetur earum neque? Vero.' },
+				{ id: 4, date: '', sender: '', message: 'У меня все хорошо' },
+				{ id: 5, date: '', sender: '', message: 'Привет, у меня тоже' }
+			],
+			newMessageData: ''
 		}
 	},
 	setState(data) {
@@ -39,48 +48,61 @@ let store = {
 	getState() {
 		return this._state
 	},
-	addPost() {
-		let newPost = {
-			id: this._state.profilePage.profileData.postsData.length + 1,
-			post: this._state.profilePage.profileData.newPostText
-		}
-		this._state.profilePage.profileData.postsData.push(newPost)
-		this._subscriber(this._state)
-	},
-	updateNewPostText(postText) {
-		this._state.profilePage.profileData.newPostText = postText
-		this._subscriber(this._state)
-	},
-	_subscriber() {
+	_callSubscriber() {
 		console.log('no observers')
 	},
 	subscribe(observer) {
-		this._subscriber = observer
+		this._callSubscriber = observer
+	},
+
+
+	dispatch(action) {
+		switch (action.type) {
+			case ADD_POST: {
+				let newPost = {
+					id: this._state.profilePage.profileData.postsData.length + 1,
+					post: this._state.profilePage.profileData.newPostText
+				}
+				if (this._state.profilePage.profileData.newPostText) {
+					this._state.profilePage.profileData.postsData.push(newPost)
+				}
+			}
+
+			case UPDATE_NEW_POST_TEXT: {
+				this._state.profilePage.profileData.newPostText = action.postText
+			}
+
+			case SEND_MESSAGE: {
+				let newMessage = {
+					id: this._state.messagesPage.messagesData.length + 1,
+					date: '',
+					sender: '',
+					message: this._state.messagesPage.newMessageData
+				}
+				if (this._state.messagesPage.newMessageData) {
+					this._state.messagesPage.messagesData.push(newMessage)
+				}
+			}
+
+			case UPDATE_NEW_MESSAGE_TEXT: {
+				this._state.messagesPage.newMessageData = action.messageText
+			}
+
+			default:
+				this._callSubscriber(this._state)
+				break
+		}
 	}
 }
 
+//Profile export Action Creator
+export const addPostACreator = (text) => ({ type: ADD_POST, postText: text })
+export const updateNewPostACreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, postText: text })
+
+//Messages export Action Creator
+export const sendNewMessageACreator = (text) => ({ type: SEND_MESSAGE, messageText: text })
+export const updateNewMessageACreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, messageText: text })
 
 window.store = store
-
-
-// export const addPost = () => {
-// 	let newPost = {
-// 		id: state.profilePage.profileData.postsData.length + 1,
-// 		post: state.profilePage.profileData.newPostText
-// 	}
-// 	state.profilePage.profileData.postsData.push(newPost)
-// 	state.profilePage.profileData.newPostText = ''
-// 	renderEntireTree(state);
-// }
-
-// export const updateNewPostText = postText => {
-// 	state.profilePage.profileData.newPostText = postText
-// 	renderEntireTree(state);
-// }
-
-// export const subscribe = (observer) => {
-// 	renderEntireTree = observer
-// }
-
 
 export default store

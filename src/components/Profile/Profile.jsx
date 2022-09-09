@@ -14,8 +14,7 @@ function Profile(props) {
 				avatar={props.profilePage.profileData.avatar}
 				postsData={props.profilePage.profileData.postsData}
 				newPostText={props.profilePage.profileData.newPostText}
-				addPost={props.addPost}
-				updateNewPostText={props.updateNewPostText} />
+				dispatch={props.dispatch} />
 		</main >
 	);
 }

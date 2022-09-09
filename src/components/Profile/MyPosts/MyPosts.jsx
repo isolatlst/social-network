@@ -1,17 +1,14 @@
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 import React from 'react';
+import { addPostACreator, updateNewPostACreator } from '../../../redux/state'
 
 function MyPosts(props) {
-	let textarea = React.createRef();
-
 	let addPostInState = () => {
-		props.addPost()
-		props.updateNewPostText('')
+		props.dispatch(addPostACreator(''))
 	}
-	let onPostChange = () => {
-		let text = textarea.current.value
-		props.updateNewPostText(text)
+	let onPostChange = (event) => {
+		props.dispatch(updateNewPostACreator(event.target.value))
 	}
 
 	let posts = props.postsData.map(post => < Post message={post.post} avatar={props.avatar} />)
@@ -20,7 +17,7 @@ function MyPosts(props) {
 		<div className={classes.profilePosts}>
 			<div className={classes.title}>My posts</div>
 			<div className={classes.newPost}>
-				<textarea ref={textarea} onChange={onPostChange} value={props.newPostText} placeholder='type something interesting...' />
+				<textarea onChange={onPostChange} value={props.newPostText} placeholder='type something interesting...' />
 				<button role='button' onClick={addPostInState}>Add post</button>
 			</div>
 			<div className={classes.posts__list}>

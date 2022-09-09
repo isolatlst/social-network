@@ -15,10 +15,10 @@ function App(props) {
 				<Routes className='main'>
 					<Route path='profile' element={<Profile
 						profilePage={props.state.profilePage}
-						addPost={props.addPost}
-						updateNewPostText={props.updateNewPostText} />} />
+						dispatch={props.dispatch} />} />
 					<Route path='messages/*' element={<Messages
-						messagesPage={props.state.messagesPage} />} />
+						messagesPage={props.state.messagesPage}
+						dispatch={props.dispatch} />} />
 				</Routes>
 			</Router >
 		</div>
