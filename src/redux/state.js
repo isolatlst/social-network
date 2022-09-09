@@ -1,10 +1,5 @@
-//Profile const
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-
-//Messages const
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-const SEND_MESSAGE = 'SEND-MESSAGE'
+import profileReducer from './profile-reducer'
+import messagesReducer from './messages-reducer'
 
 let store = {
 	_state: {
@@ -57,51 +52,12 @@ let store = {
 
 
 	dispatch(action) {
-		switch (action.type) {
-			case ADD_POST: {
-				let newPost = {
-					id: this._state.profilePage.profileData.postsData.length + 1,
-					post: this._state.profilePage.profileData.newPostText
-				}
-				if (this._state.profilePage.profileData.newPostText) {
-					this._state.profilePage.profileData.postsData.push(newPost)
-				}
-			}
-
-			case UPDATE_NEW_POST_TEXT: {
-				this._state.profilePage.profileData.newPostText = action.postText
-			}
-
-			case SEND_MESSAGE: {
-				let newMessage = {
-					id: this._state.messagesPage.messagesData.length + 1,
-					date: '',
-					sender: '',
-					message: this._state.messagesPage.newMessageData
-				}
-				if (this._state.messagesPage.newMessageData) {
-					this._state.messagesPage.messagesData.push(newMessage)
-				}
-			}
-
-			case UPDATE_NEW_MESSAGE_TEXT: {
-				this._state.messagesPage.newMessageData = action.messageText
-			}
-
-			default:
-				this._callSubscriber(this._state)
-				break
-		}
+		this._state.profilePage.profileData = profileReducer(this._state.profilePage.profileData, action)
+		this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+		this._callSubscriber(this._state)
 	}
 }
 
-//Profile export Action Creator
-export const addPostACreator = (text) => ({ type: ADD_POST, postText: text })
-export const updateNewPostACreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, postText: text })
-
-//Messages export Action Creator
-export const sendNewMessageACreator = (text) => ({ type: SEND_MESSAGE, messageText: text })
-export const updateNewMessageACreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, messageText: text })
 
 window.store = store
 
