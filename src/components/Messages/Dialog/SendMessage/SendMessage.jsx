@@ -1,6 +1,6 @@
 import classes from './SendMessage.module.css'
 import React from 'react';
-import { updateNewMessageACreator, sendNewMessageACreator } from '../../../../redux/messages-reducer'
+import { updateNewMessageACreator, sendNewMessageACreator } from '../../../../redux/actionCreators/messages-action-creator'
 
 
 function SendMessage(props) {

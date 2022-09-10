@@ -8,7 +8,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 function App(props) {
 	return (
-		<div className="App">
+		<div className="app">
 			<Header />
 			<Router>
 				<Sidebar />

@@ -1,4 +1,8 @@
 .header{
+	display: grid;
+	grid-template-columns: 2fr 5fr 5fr;
+	grid-gap: 10px;
+	justify-items: center;
 	border: 1px solid #000;
 	grid-area: header;
 }

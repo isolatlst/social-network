@@ -8,7 +8,7 @@ function Dialog(props) {
 
 	return (
 		<div className={classes.dialog}>
-			<div className={classes.dialog__items}>
+			<div className={classes.dialog__items}  >
 				{messages}
 			</div>
 			<SendMessage
