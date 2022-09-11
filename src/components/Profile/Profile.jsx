@@ -1,20 +1,16 @@
-import Description from './Description/Description'
-import MyPosts from './MyPosts/MyPosts'
+import classes from './Profile.module.css'
+import DescriptionContainer from './Description/DescriptionContainer'
+import MyPostsContainer from './MyPosts/MyPostsContainer'
 
 function Profile(props) {
 	return (
-		<main>
-			< Description
-				wallpaper={props.profilePage.profileData.wallpaper}
-				name={props.profilePage.profileData.name} birth={props.profilePage.profileData.birth}
-				city={props.profilePage.profileData.city} education={props.profilePage.profileData.education}
-				site={props.profilePage.profileData.site}
-				avatar={props.profilePage.profileData.avatar} />
-			< MyPosts
-				avatar={props.profilePage.profileData.avatar}
-				postsData={props.profilePage.profileData.postsData}
-				newPostText={props.profilePage.profileData.newPostText}
-				dispatch={props.dispatch} />
+		<main className={classes.content}>
+			{/* < DescriptionContainer
+			// store={props.store}
+			/> */}
+			< MyPostsContainer
+			// store={props.store}
+			/>
 		</main >
 	);
 }

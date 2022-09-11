@@ -1,13 +1,4 @@
-/* .description {
-	display: grid;
-	grid-template-rows: minmax(20vh, 1fr) auto;
-	grid-template-areas:
-	"wallpaper"
-   "description";
-} */
-
 .description__body{
-	/* grid-area: description; */
 	display: grid;
 	grid-template-areas:
 	"void void" 

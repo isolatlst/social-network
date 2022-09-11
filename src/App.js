@@ -14,11 +14,11 @@ function App(props) {
 				<Sidebar />
 				<Routes className='main'>
 					<Route path='profile' element={<Profile
-						profilePage={props.state.profilePage}
-						dispatch={props.dispatch} />} />
+					// store={props.store}
+					/>} />
 					<Route path='messages/*' element={<Messages
-						messagesPage={props.state.messagesPage}
-						dispatch={props.dispatch} />} />
+					// store={props.store}
+					/>} />
 				</Routes>
 			</Router >
 		</div>
@@ -26,5 +26,3 @@ function App(props) {
 }
 
 export default App;
-
-//
