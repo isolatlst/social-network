@@ -2,13 +2,32 @@
 	width: 100%;
 	min-height: 20vh;
 	max-height: 40vh;
-	border-radius: 20px;
 	overflow: hidden;
 	position: relative;
+	background: #e6eeea;
+	border-radius: 20px;
+}
+.wallpaper::before{
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 20px;
+	background: rgb(208, 208, 208);
+	filter: blur(15px);
+	height: 105%;
+	animation: loading 4s ease-in-out infinite;
+}
+@keyframes loading {
+	from{
+		left: -20px;
+	}
+	to{
+		left: calc(100% + 20px);
+	}
 }
 
-
 .wallpaper__image{
+	display: none;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -16,4 +35,3 @@
 	top: 0;
 	left: 0;
 }
-

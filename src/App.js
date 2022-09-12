@@ -6,19 +6,15 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Messages from './components/Messages/Messages';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-function App(props) {
+function App() {
 	return (
 		<div className="app">
 			<Header />
 			<Router>
 				<Sidebar />
 				<Routes className='main'>
-					<Route path='profile' element={<Profile
-					// store={props.store}
-					/>} />
-					<Route path='messages/*' element={<Messages
-					// store={props.store}
-					/>} />
+					<Route path='profile' element={<Profile />} />
+					<Route path='messages/*' element={<Messages />} />
 				</Routes>
 			</Router >
 		</div>
