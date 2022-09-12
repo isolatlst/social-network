@@ -6,7 +6,7 @@ function MyPosts(props) {
 
 	let onPostChange = (event) => { props.updateNewPost(event.target.value) }
 
-	let posts = props.postsData.map(post => < Post message={post.post} avatar={props.avatar} />)
+	let posts = props.postsData.map(post => < Post key={post.id} message={post.post} avatar={props.avatar} />)
 
 	return (
 		<div className={classes.profilePosts}>

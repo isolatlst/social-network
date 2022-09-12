@@ -6,7 +6,7 @@ function Dialog(props) {
 
 	let onTypeMessage = (event) => { props.updateNewMessage(event.target.value) }
 
-	let messages = props.messagesData.map(message => < DialogItem friend__name={props.friend__name} friend__avatar={props.friend__avatar} friend__message={message.message} />)
+	let messages = props.messagesData.map(message => < DialogItem key={message.id} friend__name={props.friend__name} friend__avatar={props.friend__avatar} friend__message={message.message} />)
 
 	return (
 		<div className={classes.dialog}>

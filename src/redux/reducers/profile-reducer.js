@@ -20,27 +20,30 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_POST: {
-			let localState = { ...state }
-			localState.profileData = { ...state.profileData }
-			localState.profileData.postsData = [...state.profileData.postsData]
-
-			let newPost = {
-				id: localState.profileData.postsData.length + 1,
-				post: localState.profileData.newPostText
+			return {
+				...state,
+				profileData: {
+					...state.profileData,
+					postsData: [
+						...state.profileData.postsData,
+						{
+							id: state.profileData.postsData.length + 1,
+							post: state.profileData.newPostText
+						}
+					],
+					newPostText: ''
+				}
 			}
-			if (localState.profileData.newPostText) {
-				localState.profileData.postsData.push(newPost)
-				localState.profileData.newPostText = ''
-			}
-			return localState
 		}
 
 		case UPDATE_NEW_POST_TEXT: {
-			let localState = { ...state }
-			localState.profileData = { ...state.profileData }
-
-			localState.profileData.newPostText = action.postText
-			return localState
+			return {
+				...state,
+				profileData: {
+					...state.profileData,
+					newPostText: action.postText
+				}
+			}
 		}
 		default: return state
 	}

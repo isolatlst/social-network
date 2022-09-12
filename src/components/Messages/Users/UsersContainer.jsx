@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 let mapStateToProps = (state) => {
 	return {
-		users: state.messagesPage.dialogsData.map(user => < User path_id={user.id} friend__avatar={user.avatar} friend__name={user.name} />)
+		users: state.messagesPage.dialogsData.map(user => < User key={user.id} path_id={user.id} friend__avatar={user.avatar} friend__name={user.name} />)
 	}
 }
 let mapDispatchToProps = (dispatch) => ({})
