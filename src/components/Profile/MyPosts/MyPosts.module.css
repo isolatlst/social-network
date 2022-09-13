@@ -16,11 +16,8 @@ textarea{
 	font-size: 20px;
 	background-color: #E6EEEA;
 }
-button{
+.button{
 	padding: 10px 20px;
-	font-size: 20px;
-	background: #0CB658;
-	color:azure;
 	margin: 15px 0px 10px;
 }
 

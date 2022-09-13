@@ -4,7 +4,7 @@ let initialState = {
 	profileData: {
 		name: 'Kirill Gurin',
 		birth: '29.12.2001',
-		city: 'Minsk',
+		location: { city: 'Minsk', country: 'Belarus' },
 		education: 'BSUIR',
 		site: "github.com/isolatlst",
 		avatar: 'https://pbs.twimg.com/profile_banners/157025420/1537698290/1500x500',

@@ -15,7 +15,7 @@ function Dialog(props) {
 			</div>
 			<div className={classes.sendMessage}>
 				<textarea onChange={onTypeMessage} value={props.newMessageData} placeholder='type something wonderful...' />
-				<button role='button' onClick={addMessageInState}>Send message</button>
+				<button className={classes.button} onClick={addMessageInState}>Send message</button>
 			</div>
 		</div>
 	);

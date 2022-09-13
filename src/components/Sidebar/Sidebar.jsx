@@ -21,6 +21,11 @@ function Sidebar() {
 					</NavLink>
 				</li>
 				<li className={classes.sidebar__item}>
+					<NavLink to='/users' className={navData => navData.isActive ? classes.active : classes.sidebar__link}>
+						Users
+					</NavLink>
+				</li>
+				<li className={classes.sidebar__item}>
 					<NavLink to='/music' className={navData => navData.isActive ? classes.active : classes.sidebar__link}>
 						Music
 					</NavLink>

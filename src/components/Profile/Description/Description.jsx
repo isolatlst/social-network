@@ -11,7 +11,7 @@ function Description(props) {
 				<div className={classes.description__info}>
 					<div className={classes.description__name}>{props.name}</div>
 					<div className={classes.description__text}>Date of Birth: {props.birth}</div>
-					<div className={classes.description__text}>City: {props.city}</div>
+					<div className={classes.description__text}>Location: {props.location.country}, {props.location.city}</div>
 					<div className={classes.description__text}>Education: {props.education}</div>
 					<div className={classes.description__text}>Web Site: {props.site}</div>
 				</div>

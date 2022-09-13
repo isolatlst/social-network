@@ -13,7 +13,7 @@ function MyPosts(props) {
 			<div className={classes.title}>My posts</div>
 			<div className={classes.newPost}>
 				<textarea onChange={onPostChange} value={props.newPostText} placeholder='type something interesting...' />
-				<button role='button' onClick={onAddPost}>Add post</button>
+				<button className={classes.button} onClick={onAddPost}>Add post</button>
 			</div>
 			<div className={classes.posts__list}>
 				{posts}

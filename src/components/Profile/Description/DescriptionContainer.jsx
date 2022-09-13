@@ -6,7 +6,7 @@ let mapStateToProps = (state) => {
 		wallpaper: state.profilePage.profileData.wallpaper,
 		name: state.profilePage.profileData.name,
 		birth: state.profilePage.profileData.birth,
-		city: state.profilePage.profileData.city,
+		location: state.profilePage.profileData.location,
 		education: state.profilePage.profileData.education,
 		site: state.profilePage.profileData.site,
 		avatar: state.profilePage.profileData.avatar

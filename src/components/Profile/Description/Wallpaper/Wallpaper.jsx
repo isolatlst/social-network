@@ -7,7 +7,7 @@ function Wallpaper(props) {
 
 	return (
 		<div className={classes.wallpaper}>
-			<img className={classes.wallpaper__image} src={props.wallpaper} onLoad={onLoadWallpaper} />
+			<img className={classes.wallpaper__image} src={props.wallpaper} onLoad={onLoadWallpaper} alt='Wallpaper' />
 		</div>
 	);
 }
