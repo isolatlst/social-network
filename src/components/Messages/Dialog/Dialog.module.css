@@ -4,7 +4,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 89vh;
-	justify-content: end;
+	justify-content: flex-end;
 }
 /* @media (max-width: 500px) {.dialog{height: 79vh;}} */
 
@@ -34,5 +34,5 @@ textarea{
 .sendMessage{
 	display: flex;
 	flex-direction: column;
-	align-items: end;
+	align-items: flex-end;
 }
