@@ -1,20 +1,18 @@
 import express from 'express'
 import cors from 'cors'
 
-const server = express()
+//Общая настройка сервера
+const server = express()                      // инициализируем сервер
+const PORT = process.env.PORT || 3001         // выбираем порт
+server.use(cors())                            // подключаем cors
+server.use(express.json())                    // декодим полученный request
 
-const PORT = process.env.PORT || 3001
-
-server.use(cors());
-
-server.listen(PORT, () => {
-	console.log('Server is working at ' + PORT + ' port')
-})
-
+server.listen(PORT, () => console.log('Server is working at ' + PORT + ' port'))
 server.get('/', (req, res) => {
 	res.sendFile('B:/Garbage/Web/2021/react/social-network/server/index.html');
 })
 
+//Обработка get-запроса на странице users
 server.get('/users', (req, res) => {
 	res.json(
 		{
