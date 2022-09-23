@@ -38,41 +38,75 @@ import userPhoto from '../../assets/images/userPhoto.png'
 // }
 
 class Users extends React.Component {
-	constructor(props) {
-		super(props)
+	requestServer = async (params) => {
+		let data = await axios.get(`http://localhost:3001/users/?p=${params.totalPage}&count=${params.pageSize}`)
+		return data
+	}
+
+	async componentDidMount() {
 		if (this.props.usersData.length === 0) {
-			axios.get('http://localhost:3001/users')
-				.then(response => {
-					this.props.setUsers(response.data.usersData)
-				})
-				.catch(error => console.log(error))
+			let response = await this.requestServer({ totalPage: this.props.totalPage, pageSize: this.props.pageSize })
+
+			this.props.setUsers(response.data.usersData)
+			this.props.setPagesCount(response.data.pagesCount)
 		}
 	}
-	getUsers = () => {
-		if (this.props.usersData.length === 0) {
-			axios.get('http://localhost:3001/users')
-				.then(response => {
-					this.props.setUsers(response.data.usersData)
-				})
-				.catch(error => console.log(error))
+	swapPage = async (e) => {
+		if (e.target.localName === 'span') {
+			this.props.changeTotalPage(Number(e.target.innerHTML))
+
+			let response = await this.requestServer({ totalPage: Number(e.target.innerHTML), pageSize: this.props.pageSize })
+
+			this.props.setUsers(response.data.usersData)
 		}
 	}
+	selectPageSize = async (e) => {
+		if (e.target.localName === 'span') {
+			this.props.setPageSize(Number(e.target.innerHTML))
+
+			let response = await this.requestServer({ totalPage: this.props.totalPage, pageSize: Number(e.target.innerHTML) })
+
+			this.props.setUsers(response.data.usersData)
+			this.props.setPagesCount(response.data.pagesCount)
+		}
+	}
+
+
 	render() {
-		return <div className={classes.users}>
-			{
-				this.props.usersData.map(user =>
-					<div className={classes.users__item} key={user.id}>
-						<button className={classes.status_button} onClick={() => this.props.toggleFollow(user.id)}>{user.followed ? 'unfollow' : 'follow'}</button>
-						<div className={classes.avatar}>
-							< Avatar avatar={user.avatar ? user.avatar : userPhoto} />
-						</div>
-						<div className={classes.name}>{user.name}</div>
-						<div className={classes.location}>{user.location.country}, {user.location.city}</div>
+		let pages = []
+		for (let i = 1; i <= this.props.pagesCount; i++) {
+			pages.push(i)
+		}
+		return (
+			<div className={classes.users}>
+				<div className={classes.navigation}>
+					<div className={classes.pageSize} onClick={this.selectPageSize}>
+						<span className={this.props.pageSize === 3 ? classes.selectedPageSize : ''}>3</span>
+						<span className={this.props.pageSize === 5 ? classes.selectedPageSize : ''}>5</span>
+						<span className={this.props.pageSize === 10 ? classes.selectedPageSize : ''}>10</span>
 					</div>
-				)
-			}
-			<button className={classes.newUsersbtn} onClick={this.getUsers}>Show more</button>
-		</div >
+					<div className={classes.modulePagination} onClick={this.swapPage}>
+						{
+							pages.map(page =>
+								<span key={Math.random(10000)} className={this.props.totalPage === page ? classes.selectedPaginationLink : ''}> {page}</span>
+							)
+						}
+					</div>
+				</div>
+				{
+					this.props.usersData.map(user =>
+						<div className={classes.users__item} key={Math.random(10000)}>
+							<button className={classes.status_button} onClick={() => this.props.toggleFollow(user.id)}>{user.followed ? 'unfollow' : 'follow'}</button>
+							<div className={classes.avatar}>
+								< Avatar avatar={user.avatar ? user.avatar : userPhoto} />
+							</div>
+							<div className={classes.name}>{user.name}</div>
+							<div className={classes.location}>{user.location.country}, {user.location.city}</div>
+						</div>
+					)
+				}
+			</div >
+		)
 	}
 }
 
