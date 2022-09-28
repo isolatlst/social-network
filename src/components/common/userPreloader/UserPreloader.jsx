@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from '../../common/userPreloader/User-preloader.module.css'
+import classes from '../../common/userPreloader/UserPreloader.module.css'
 
 
 function UserPreloader() {

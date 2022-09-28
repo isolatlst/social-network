@@ -2,7 +2,7 @@ import './App.css';
 import './reset.css';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-import Profile from './components/Profile/Profile';
+import ProfileContainer from './components/Profile/ProfileContainer';
 import Messages from './components/Messages/Messages';
 import UsersContainer from './components/Users/UsersContainer';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
@@ -14,7 +14,7 @@ function App() {
 			<Router>
 				<Sidebar />
 				<Routes className='main'>
-					<Route path='profile' element={<Profile />} />
+					<Route path='profile/*' element={<ProfileContainer />} />
 					<Route path='messages/*' element={<Messages />} />
 					<Route path='users' element={<UsersContainer />} />
 				</Routes>

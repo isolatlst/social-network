@@ -1,21 +1,25 @@
 .users__item{
 	display: grid;
-	grid-template-areas: 
-	'button avatar name'
-	'button avatar location';
-	grid-template-columns: auto 75px 1fr;
+	grid-template-areas: 'button info';
+	grid-template-columns: auto 1fr;
 	grid-gap: 25px;
 	margin: 25px 0px;
 }
 
+.user__info{
+	display: grid;
+	grid-area: info;
+	grid-template-areas: 
+	'avatar name'
+	'avatar location';
+	grid-template-columns: 75px 1fr;
+	grid-gap: 25px;
+}
 
 .navigation{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	width: 100%;
-}
-.pageSize{
-	order: 1;
 }
 
 .navigation span{

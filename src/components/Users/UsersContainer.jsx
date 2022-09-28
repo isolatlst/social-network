@@ -9,14 +9,12 @@ class UsersContainer extends React.Component {
 	requestServer = async (params) => await axios.get(`http://localhost:3001/users/?p=${params.totalPage}&count=${params.pageSize}`)
 
 	async componentDidMount() {
-		if (this.props.usersData.length === 0) {
-			this.props.toggleFetchStatus(true)
-			let response = await this.requestServer({ totalPage: this.props.totalPage, pageSize: this.props.pageSize })
+		this.props.toggleFetchStatus(true)
+		let response = await this.requestServer({ totalPage: this.props.totalPage, pageSize: this.props.pageSize })
 
-			this.props.setUsers(response.data.usersData)
-			this.props.setPagesCount(response.data.pagesCount)
-			this.props.toggleFetchStatus(false)
-		}
+		this.props.setUsers(response.data.usersData)
+		this.props.setPagesCount(response.data.pagesCount)
+		this.props.toggleFetchStatus(false)
 	}
 	swapPage = async (e) => {
 		if (e.target.localName === 'span') {
@@ -45,12 +43,13 @@ class UsersContainer extends React.Component {
 
 	render() {
 		return <Users
-			usersData={this.props.usersData}
-			pagesCount={this.props.pagesCount}
-			pageSize={this.props.pageSize}
-			totalPage={this.props.totalPage}
-			toggleFollow={this.props.toggleFollow}
-			isFetching={this.props.isFetching}
+			{...this.props}
+			// usersData={this.props.usersData}
+			// pagesCount={this.props.pagesCount}
+			// pageSize={this.props.pageSize}
+			// totalPage={this.props.totalPage}
+			// toggleFollow={this.props.toggleFollow}
+			// isFetching={this.props.isFetching}
 			swapPage={this.swapPage}
 			selectPageSize={this.selectPageSize}
 		/>
