@@ -14,7 +14,9 @@ function App() {
 			<Router>
 				<Sidebar />
 				<Routes className='main'>
-					<Route path='profile/*' element={<ProfileContainer />} />
+					<Route path='profile/' element={<ProfileContainer />} >
+						<Route path=':userId' element={<ProfileContainer />} />
+					</Route>
 					<Route path='messages/*' element={<Messages />} />
 					<Route path='users' element={<UsersContainer />} />
 				</Routes>
