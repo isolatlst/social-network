@@ -10,7 +10,7 @@ let initialState = {
 	pagesCount: 0,
 	pageSize: 3,
 	totalPage: 1,
-	isFetching: true
+	isFetching: false
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -19,13 +19,14 @@ const usersReducer = (state = initialState, action) => {
 		case SET_USERS: {
 			return {
 				...state,
-				usersData: action.usersData
+				usersData: action.usersData,
+				isFetching: false
 			}
 		}
 		case TOGGLE_FOLLOW_TO_USER: {
 			return {
 				...state,
-				usersData: state.usersData.map(user => user.id === action.userId ? { ...user, followed: !user.followed } : user)
+				usersData: state.usersData.map(user => user.userId === action.userId ? { ...user, followed: !user.followed } : user)
 			}
 		}
 		case SET_TOTAL_PAGE: {

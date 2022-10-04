@@ -9,11 +9,28 @@
 </head>
 
 <body>
-	<p>Server is working</p>
-	<a href="/users">users</a>
+	<div class="wrapper">
+		<p>Server is working</p>
+		<a href="/users">users</a>
+		<a href="/admin">admin</a>
+	</div>
 
 	<style>
+		.wrapper {
+			display: grid;
+			justify-content: center;
+			justify-items: center;
+		}
+
+		p {
+			grid-row: 1/1;
+			grid-column: span 2;
+		}
+
 		a {
+			grid-row: 2/2;
+			flex: 1 1 33%;
+			margin: 0px 25px;
 			font-size: 24px;
 			color: #000;
 			text-decoration: underline;

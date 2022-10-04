@@ -1,19 +1,36 @@
+:root {
+	--index: calc(1vh + 1vw);
+	/* var(--index) */
+ }
+
+
 .app {
 	display: grid;
 	grid-template-areas: 
-	"header header header"
-	"sidebar main main";
+	"header header"
+	"sidebar main";
 	grid-template-rows: 60px 1fr;
 	grid-template-columns: 2fr 10fr;
 	grid-gap: 10px;
 }
 
-.main{
+main{
 	grid-area: main;
+	padding: 0px 6px 10px 0px;
 }
 
 button{
-	font-size: 20px;
+	padding: calc(var(--index)*0.5) calc(var(--index)*1);
+	font-size: calc(var(--index)*1);
 	background: #0CB658;
 	color:azure;	
+}
+
+textarea{
+	padding: calc(var(--index)/2);
+	margin:  0px 0px calc(var(--index)*1) 0px; 
+	width: 100%;
+	height: 100%;
+	font-size: calc(var(--index)*1.15);
+	background-color: #E6EEEA;
 }

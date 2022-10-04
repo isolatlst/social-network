@@ -16,6 +16,7 @@
 }
 
 .sidebar__link, .active{
+	user-select:none;
 	color: inherit;
 }
 

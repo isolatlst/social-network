@@ -1,32 +1,16 @@
 .profilePosts{
-	grid-area: posts;
 	margin: 0 auto;
-	max-width: 90%;
+	padding: 0px 10px;
 }
 .title{
-	margin-bottom: 20px;
-	font-size: 24px;
+	margin-bottom:  calc(var(--index)*1.25);
+	font-size: calc(var(--index)*1.5);
 	font-weight: 700;
 	color:blueviolet;
-}
-textarea{
-	padding: 10px;
-	width: 100%;
-	height: 10%;
-	font-size: 20px;
-	background-color: #E6EEEA;
-}
-.button{
-	padding: 10px 20px;
-	margin: 15px 0px 10px;
 }
 
 .newPost{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-}
-
-.posts__list{
-	margin-top: 0px;
 }

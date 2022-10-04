@@ -1,5 +1,5 @@
 import Dialog from './Dialog'
-import { updateNewMessageACreator, sendNewMessageACreator } from '../../../redux/actionCreators/messages-action-creator'
+import { updateNewMessage, sendNewMessage } from '../../../redux/actionCreators/messages-action-creator'
 import { connect } from 'react-redux';
 
 let mapStateToProps = (state) => {
@@ -10,13 +10,5 @@ let mapStateToProps = (state) => {
 		friend__avatar: 'https://a.d-cd.net/bEAAAgDEreA-1920.jpg'
 	}
 }
-let mapDispatchToProps = (dispatch) => {
-	return {
-		sendNewMessage: () => { dispatch(sendNewMessageACreator('')) },
-		updateNewMessage: (text) => { dispatch(updateNewMessageACreator(text)) }
-	}
-}
 
-const DialogContainer = connect(mapStateToProps, mapDispatchToProps)(Dialog)
-
-export default DialogContainer;
+export default connect(mapStateToProps, { updateNewMessage, sendNewMessage })(Dialog);

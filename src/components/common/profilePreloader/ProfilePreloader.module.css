@@ -1,0 +1,92 @@
+.description{
+	padding: 0px 6px 10px 0px;
+}
+.description__body{
+	margin: calc(var(--index)*2.5) 0px calc(var(--index)*2) 0px;
+	display: grid;
+	grid-template-areas:
+	"avatar name";
+	grid-template-columns: calc(var(--index)*7.5) 1fr;
+	grid-template-rows: calc(var(--index)*7.5); 
+	column-gap: calc(var(--index)*2);
+}
+.description__info{
+	display: grid;
+	grid-area: name;
+	row-gap: calc(var(--index)*0.75);
+}
+.description__name{
+	width: calc(var(--index)*8);
+	height: calc(var(--index)*1.4);
+	align-self: start;
+}
+.description__text{
+	align-self: end;
+	width: calc(var(--index)*12);
+	height: calc(var(--index)*1);
+}
+.wallpaper{
+	width: 100%;
+	min-height: calc(var(--index)*10.5);
+	
+	border-radius: 20px!important;
+}
+.avatar {
+	grid-area: avatar;
+	width: 100%;
+	height: 100%;
+	border-radius: 50% !important;
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.286);
+}
+.profilePosts{
+	grid-area: posts;
+	margin: 0 auto;
+	width: 90%;
+}
+.title{
+	margin-bottom:  calc(var(--index)*1.25);
+	font-size: calc(var(--index)*1.5);
+	font-weight: 700;
+	color:blueviolet;
+}
+.posts__list{
+	margin-top: 0px;
+}
+.posts__item{
+	margin-bottom: calc(var(--index)*1.25);
+	display: flex;		
+}
+.posts__item span {
+	display: flex;
+	align-self: start;
+	width: calc(var(--index)*4.5);
+	margin-right: 	calc(var(--index)*1.25);
+	border-radius: 50% !important;
+}
+.posts__item div {
+	width: 60%;
+}
+.animatePreloader{
+	border-radius: 5px;
+	overflow: hidden;
+	position: relative;
+	background: #e6eeea;
+}
+.animatePreloader::before{
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 20px;
+	background: rgb(208, 208, 208);
+	filter: blur(15px);
+	height: 105%;
+	animation: loading 4s ease-in-out 2;
+}
+@keyframes loading {
+	from{
+		left: -20px;
+	}
+	to{
+		left: calc(100% + 20px);
+	}
+}

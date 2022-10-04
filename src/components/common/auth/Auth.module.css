@@ -1,0 +1,61 @@
+.auth{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.loginForm, .registrationForm{
+	display: grid;
+	grid-template-rows: repeat(auto-fit, 45px);
+	row-gap: 30px;
+	margin: 20px;
+}
+.group { 
+  position:relative;
+}
+.input {
+	width:100%;
+	padding:10px 10px 10px 5px;
+	border-bottom:1px solid #757575;
+  	font-size:18px;
+}
+.button{
+	font-size: 18px;
+	padding-top: calc(var(--index)*0.25);
+	min-height: 45px;
+}
+.label {
+	position:absolute;
+	top:10px;
+	left:5px;
+	font-size:18px;
+	color:#999; 
+	transition:0.2s ease all; 
+	pointer-events:none;
+}
+.input:focus ~ .label, .input:valid ~ .label {
+  top:-16px;
+  font-size:14px;
+  color:#5264AE;
+}
+.bar { 
+	position:relative; 
+	display: block;
+	width:100%;
+}
+.bar:before, .bar:after {
+  content:'';
+  position:absolute;
+  bottom:0px; 
+  width:0;
+  height:2px; 
+  background:#5264AE; 
+  transition:0.2s ease all; 
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+.input:focus ~ .bar:before, .input:focus ~ .bar:after {
+  width:50%;
+}

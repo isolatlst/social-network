@@ -1,4 +1,4 @@
-import Avatar from '../../../Profile/Avatar/Avatar';
+import Avatar from '../../../common/Avatar/Avatar';
 import classes from './User.module.css'
 import { NavLink } from 'react-router-dom';
 

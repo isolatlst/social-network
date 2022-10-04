@@ -1,6 +1,6 @@
 .wallpaper{
 	width: 100%;
-	min-height: 20vh;
+	min-height: calc(var(--index)*10.5);
 	max-height: 40vh;
 	overflow: hidden;
 	position: relative;

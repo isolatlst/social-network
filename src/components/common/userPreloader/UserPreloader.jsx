@@ -1,11 +1,10 @@
-import React from 'react'
-import classes from '../../common/userPreloader/UserPreloader.module.css'
+import classes from './UserPreloader.module.css'
 
 
 function UserPreloader() {
 	return (
-		<div>
-			< div className={`${classes.item} `} >
+		<div className={classes.userPreloader}>
+			< div className={classes.item} >
 				<div className={`${classes.button} ${classes.animatePreloader}`}></div>
 				<div className={`${classes.avatar} ${classes.animatePreloader}`}></div>
 				<div className={`${classes.name} ${classes.animatePreloader}`}></div>

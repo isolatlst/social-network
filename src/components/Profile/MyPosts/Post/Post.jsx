@@ -1,5 +1,5 @@
 import classes from './Post.module.css'
-import Avatar from '../../Avatar/Avatar'
+import Avatar from '../../../common/Avatar/Avatar'
 
 function Post(props) {
 	return (

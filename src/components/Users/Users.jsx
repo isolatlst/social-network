@@ -1,8 +1,7 @@
 import React from 'react'
 import classes from './Users.module.css'
-import Avatar from '../Profile/Avatar/Avatar'
+import Avatar from '../common/Avatar/Avatar'
 import userPhoto from '../../assets/images/userPhoto.png'
-import UserPreloader from '../common/userPreloader/UserPreloader'
 import { NavLink } from 'react-router-dom'
 
 // function Users(props) {
@@ -63,20 +62,19 @@ function Users(props) {
 				</div>
 			}
 			{
-				props.isFetching ? <UserPreloader />
-					: props.usersData.map(user =>
-						<div className={classes.users__item} key={Math.random(10000)}>
-							<button className={classes.status_button} onClick={() => props.toggleFollow(user.id)}>{user.followed ? 'unfollow' : 'follow'}</button>
-							<NavLink to={'/profile/' + user.id} className={classes.user__info}>
-								<div className={classes.avatar}>
-									< Avatar avatar={user.avatar ? user.avatar : userPhoto} />
-								</div>
-								<div className={classes.name}>{user.name}</div>
-								<div className={classes.location}>{user.location.country}, {user.location.city}</div>
-							</NavLink>
-						</div>
+				props.usersData.map(user =>
+					<div className={classes.users__item} key={Math.random(10000)}>
+						<button className={classes.status_button} onClick={() => props.toggleFollow(user.userId)}>{user.followed ? 'unfollow' : 'follow'}</button>
+						<NavLink to={'/profile/' + user.userId} className={classes.user__info}>
+							<div className={classes.avatar}>
+								< Avatar avatar={user.avatar ? user.avatar : userPhoto} />
+							</div>
+							<div className={classes.name}>{`${user.firstName} ${user.lastName}`}</div>
+							<div className={classes.location}>{user.location ? user.location.country + ',' : ''} {user.location ? user.location.city : ''}</div>
+						</NavLink>
+					</div>
 
-					)
+				)
 			}
 		</main >
 	)

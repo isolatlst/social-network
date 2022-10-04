@@ -1,4 +1,4 @@
-import Avatar from '../../../Profile/Avatar/Avatar';
+import Avatar from '../../../common/Avatar/Avatar'
 import classes from './DialogItem.module.css'
 
 function DialogItem(props) {

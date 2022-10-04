@@ -2,8 +2,8 @@
 	display: grid;
 	grid-template-areas: 'button info';
 	grid-template-columns: auto 1fr;
-	grid-gap: 25px;
-	margin: 25px 0px;
+	grid-gap: calc(var(--index)*1.6);
+	margin: 15px 0px calc(var(--index)*1.75);
 }
 
 .user__info{
@@ -12,8 +12,9 @@
 	grid-template-areas: 
 	'avatar name'
 	'avatar location';
-	grid-template-columns: 75px 1fr;
-	grid-gap: 25px;
+	align-items: center;
+	grid-template-columns: calc(var(--index)*4.5) 1fr;
+	grid-gap: calc(var(--index)*1.25);
 }
 
 .navigation{
@@ -21,7 +22,6 @@
 	grid-template-columns: repeat(2, 1fr);
 	width: 100%;
 }
-
 .navigation span{
 	display: inline-block;
 	width: 30px;
@@ -44,33 +44,27 @@
 .status_button{
 	grid-area: button;
 	align-self: center;
-	padding: 10px;
-	min-width: 125px;
-	max-height: 50px;
 }
-.status_button::before{
-	content: attr(data-status);
+.status_button::before{ 
+	content: 'unfollow';
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	height: 0;
 }
 .avatar{
 	grid-area: avatar;
 	width: 100%;
 }
-.avatar img{
-	width: 100%;
-	border-radius: 50%;
-	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.286);
-	aspect-ratio: 1/1;
-	object-fit: cover;
-}
 .name{
 	grid-area: name;
 	max-width: 100%;
-	font-size: 20px;
+	font-size: calc(var(--index)*1.2);
 	font-weight: 700;
 }
 .location{
 	grid-area: location;
-	font-size: 18px;
+	font-size: calc(var(--index)*1.1);
 }
 
 
