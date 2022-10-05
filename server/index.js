@@ -292,6 +292,10 @@ server.post('/register', (req, res) => {
 //Обработка выхода
 server.delete('/logout', [requireAuth], (req, res) => {
 	delete authTokens[req.cookies.AuthToken]
+	res.json({
+		err: false,
+		message: 'Bye!'
+	})
 })
 //Обработка страницы пользователей
 const paginateUsers = (req, res, next) => {

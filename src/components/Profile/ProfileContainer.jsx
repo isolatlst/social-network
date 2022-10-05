@@ -1,7 +1,7 @@
 import React from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { profileAPI } from '../../API/api'
 import { addNewPost, updateNewPost, setUserProfile, toggleFetchStatus } from '../../redux/actionCreators/profile-action-creator'
 import { toggleAuthStatus } from '../../redux/actionCreators/auth-action-creator'
 import { toggleFollow } from '../../redux/actionCreators/users-action-creator'
@@ -10,14 +10,12 @@ import ProfilePreloader from '../common/profilePreloader/ProfilePreloader'
 
 
 class ProfileContainer extends React.Component {
-	requestServer = async (userId) => await axios.get(`/profile/${userId}`)
-
 	async componentDidMount() {
 		if (this.props.auth) {
-			let userId = this.props.params.userId ? this.props.params.userId : this.props.userId
 			this.props.toggleFetchStatus(true)
-			let response = await this.requestServer(userId)
-			this.props.setUserProfile(response.data.profileData)
+			let userId = this.props.params.userId ? this.props.params.userId : this.props.userId
+			let response = await profileAPI.getProfileAPI(userId)
+			this.props.setUserProfile(response.profileData)
 		}
 	}
 
