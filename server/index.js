@@ -41,6 +41,7 @@ const users = [
 const usersData = [
 	{
 		userId: 1,
+		followed: [],
 		firstName: 'Kirill',
 		lastName: 'Ghurin',
 		email: 'ghurin.00@mail.ru',
@@ -57,7 +58,7 @@ const usersData = [
 	},
 	{
 		userId: 2,
-		followed: true,
+		followed: [],
 		firstName: 'Dennis',
 		lastName: '',
 		email: 'dennis@mail.ru',
@@ -75,7 +76,7 @@ const usersData = [
 	},
 	{
 		userId: 3,
-		followed: false,
+		followed: [],
 		firstName: 'Egor',
 		lastName: '',
 		email: 'egor@mail.ru',
@@ -92,7 +93,7 @@ const usersData = [
 	},
 	{
 		userId: 4,
-		followed: false,
+		followed: [],
 		firstName: 'Kirill',
 		lastName: '',
 		email: 'kirill@mail.ru',
@@ -109,7 +110,7 @@ const usersData = [
 	},
 	{
 		userId: 5,
-		followed: true,
+		followed: [],
 		firstName: 'Vlad',
 		lastName: '',
 		email: 'vlad@mail.ru',
@@ -126,7 +127,7 @@ const usersData = [
 	},
 	{
 		userId: 6,
-		followed: false,
+		followed: [],
 		firstName: 'Lesha',
 		lastName: '',
 		email: 'lesha@mail.ru',
@@ -144,7 +145,7 @@ const usersData = [
 	},
 	{
 		userId: 7,
-		followed: true,
+		followed: [],
 		firstName: 'Misha',
 		lastName: '',
 		email: 'misha@mail.ru',
@@ -161,7 +162,7 @@ const usersData = [
 	},
 	{
 		userId: 8,
-		followed: true,
+		followed: [],
 		firstName: 'Vasya',
 		lastName: '',
 		email: 'vasya@mail.ru',
@@ -185,6 +186,8 @@ const authTokens = {}
 //Middleware обработчик аутентификации
 const requireAuth = (req, res, next) => {
 	if (authTokens[req.cookies['AuthToken']]) {
+		let myId = authTokens[req.cookies['AuthToken']].userId
+		res.locals.myIndex = usersData.findIndex(profile => profile.userId === myId)
 		next()
 	} else {
 		res.json({
@@ -198,7 +201,7 @@ const requireAuth = (req, res, next) => {
 
 //Обработка авторизации
 const generateAuthToken = () => {
-	return crypto.randomBytes(30).toString('hex'); 
+	return crypto.randomBytes(30).toString('hex');
 }
 server.post('/login', (req, res) => {
 	if (authTokens[req.cookies['AuthToken']]) {
@@ -264,8 +267,6 @@ server.post('/register', (req, res) => {
 
 		users.push({ // пушим в объект залогининых пользователей
 			userId,
-			firstName,
-			lastName,
 			email,
 			password: hashedPassword
 		})
@@ -274,8 +275,9 @@ server.post('/register', (req, res) => {
 			firstName,
 			lastName,
 			email,
+			followed: [],
 			birth: 'Вечно молодой, вечно пьяный',
-			location: { city: '', country: '' },
+			location: { city: '', country: 'Страна не указана' },
 			education: 'Образование не указано',
 			site: 'Сайт не указан',
 			avatar: '',
@@ -288,44 +290,78 @@ server.post('/register', (req, res) => {
 	}
 })
 //Обработка выхода
-server.post('/logout', [requireAuth], (req, res) => {
+server.delete('/logout', [requireAuth], (req, res) => {
 	delete authTokens[req.cookies.AuthToken]
 })
-//Обработка get-запроса на странице users
-server.get('/users', [requireAuth], (req, res) => {
-	let data = [...usersData]
-	data.forEach(element => ({
-		userId: element.userId,
-		followed: element.followed ? element.followed : false,
-		firstName: element.firstName,
-		lastName: element.lastName,
-		avatar: element.avatar ? element.avatar : '',
-		location: element.location ? element.location : ''
-	}));
-
+//Обработка страницы пользователей
+const paginateUsers = (req, res, next) => {
 	let pagesSize = Number(req.query.count) || 3                       			      // Назначаем размер одной страницы
-	let pagesCount = Math.ceil(data.length / pagesSize)   			                  // Считаем количество страниц
+	let pagesCount = Math.ceil(usersData.length / pagesSize)   			               // Считаем количество страниц
 	let totalPage = Number(req.query.p) < 1 ? 1 : Number(req.query.p)                // Текущая страница
 	totalPage = Number(req.query.p) > pagesCount ? pagesCount : Number(req.query.p)  // Проверка на текущую страницу
 	let from = pagesSize * (totalPage - 1)
 	let to = from + pagesSize
+
+	let dirtyData = usersData.slice(from, to)
+	let data = dirtyData.map(profile => ({
+		userId: profile.userId,
+		followed: usersData[res.locals.myIndex].followed.indexOf(profile.userId) !== -1 ? true : false,  // Поиск в массиве подписок моего ID
+		firstName: profile.firstName,
+		lastName: profile.firstName,
+		avatar: profile.avatar ? profile.avatar : '',
+		location: profile.location ? profile.location : ''
+	}))
+
+
+
+	res.locals.data = data
+	res.locals.pagesSize = pagesSize
+	res.locals.pagesCount = pagesCount
+	res.locals.totalPage = totalPage
+	next()
+}
+server.get('/users', [requireAuth, paginateUsers], (req, res) => {
 	res.json(
 		{
-			usersData: data.slice(from, to),
-			pagesCount: pagesCount,
-			pagesSize: pagesSize,
-			totalPage: totalPage,
+			usersData: res.locals.data,
+			pagesCount: res.locals.pagesCount,
+			pagesSize: res.locals.pagesSize,
+			totalPage: res.locals.totalPage,
 		}
 	)
 })
-//Обработка get-запроса страницы профиля
+//Обработка страницы профиля
 server.get('/profile/:profileId', [requireAuth], (req, res) => {
 	let data = usersData.find(profile => profile.userId === Number(req.params.profileId))
 	res.json({
 		profileData: data
 	})
 })
+//Обработка подписки/отдписки
+server.post('/follow/:userId', [requireAuth], (req, res) => {
+	let userId = Number(req.params.userId)
 
+	usersData[res.locals.myIndex].followed.push(userId)
+	res.json({
+		err: false,
+		status: true
+	})
+})
+server.delete('/follow/:userId', [requireAuth], (req, res) => {
+	let userId = Number(req.params.userId)
+	let arrIndexOfUser = usersData[res.locals.myIndex].followed.indexOf(userId)
+	if (arrIndexOfUser !== -1) {
+		usersData[res.locals.myIndex].followed.splice(arrIndexOfUser, 1)
+		res.json({
+			err: false,
+			status: false
+		})
+	} else {
+		res.json({
+			err: true
+		})
+	}
+})
 
 
 //Чекаут для сервака

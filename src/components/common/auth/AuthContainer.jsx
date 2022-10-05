@@ -19,8 +19,6 @@ class AuthContainer extends React.Component {
 		return axios(config)
 	}
 
-	async componentDidMount() { }
-
 	onInputData = (e) => {
 		this.props.setUserData(e.target.name, e.target.value)
 	}

@@ -26,7 +26,7 @@ const usersReducer = (state = initialState, action) => {
 		case TOGGLE_FOLLOW_TO_USER: {
 			return {
 				...state,
-				usersData: state.usersData.map(user => user.userId === action.userId ? { ...user, followed: !user.followed } : user)
+				usersData: state.usersData.map(user => user.userId === action.userId ? { ...user, followed: action.followedStatus } : user)
 			}
 		}
 		case SET_TOTAL_PAGE: {

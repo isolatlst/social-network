@@ -7,9 +7,9 @@ import userPhoto from '../../assets/images/userPhoto.png'
 
 
 class HeaderContainer extends React.Component {
-	requestServer = async (url) => {
+	requestServer = async (url, method) => {
 		const config = {
-			method: 'post',
+			method,
 			url: `${url}`,
 			xhrFields: { withCredentials: true }
 		}
@@ -17,7 +17,7 @@ class HeaderContainer extends React.Component {
 	}
 	async componentDidMount() {
 		if (document.cookie.length !== 0) {
-			let response = await this.requestServer('login')
+			let response = await this.requestServer('login', 'post')
 			response.data.err ? this.props.toggleAuthStatus(false) : this.props.toggleAuthStatus(true)
 			this.props.setUserData('userId', response.data.userId)
 			console.log(response.data)	//fixme
@@ -25,7 +25,7 @@ class HeaderContainer extends React.Component {
 	}
 
 	logOut = () => {
-		this.requestServer('logout')
+		this.requestServer('logout', 'delete')
 		this.props.toggleAuthStatus(false)
 	}
 

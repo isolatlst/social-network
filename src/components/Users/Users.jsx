@@ -64,13 +64,17 @@ function Users(props) {
 			{
 				props.usersData.map(user =>
 					<div className={classes.users__item} key={Math.random(10000)}>
-						<button className={classes.status_button} onClick={() => props.toggleFollow(user.userId)}>{user.followed ? 'unfollow' : 'follow'}</button>
+						{
+							props.myId !== user.userId
+								? <button className={classes.status_button} onClick={() => props.toggleFollowFunc(user.userId, user.followed)}>{user.followed ? 'unfollow' : 'follow'}</button>
+								: <button className={classes.status_button} disabled>That's me</button>
+						}
 						<NavLink to={'/profile/' + user.userId} className={classes.user__info}>
 							<div className={classes.avatar}>
 								< Avatar avatar={user.avatar ? user.avatar : userPhoto} />
 							</div>
 							<div className={classes.name}>{`${user.firstName} ${user.lastName}`}</div>
-							<div className={classes.location}>{user.location ? user.location.country + ',' : ''} {user.location ? user.location.city : ''}</div>
+							<div className={classes.location}>{user.location.country ? user.location.country : ''} {user.location.city ? user.location.city : ''}</div>
 						</NavLink>
 					</div>
 
