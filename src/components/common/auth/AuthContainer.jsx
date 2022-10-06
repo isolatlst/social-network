@@ -1,25 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { authAPI } from '../../../API/api'
-import { setUserData, toggleAuthStatus } from '../../../redux/actionCreators/auth-action-creator'
-import { setUserProfile } from '../../../redux/actionCreators/profile-action-creator'
+import { setUserData } from '../../../redux/actionCreators/auth-action-creator'
+import { logIn, register } from '../../../redux/thunks/auth-thunk'
 import Auth from './Auth'
 
 
 class AuthContainer extends React.Component {
-	onInputData = (e) => {
-		this.props.setUserData(e.target.name, e.target.value)
-	}
-	logIn = async () => {
-		let response = await authAPI.loginAPI(this.props.auth)
-		response.err ? this.props.toggleAuthStatus(false) : this.props.toggleAuthStatus(true)
-		this.props.setUserData('userId', response.userId)
-		console.log(response)  //fixme
-	}
-	register = async () => {
-		let response = await authAPI.registerAPI(this.props.auth)
-		console.log(response)  //fixme
-	}
+	onInputData = (e) => { this.props.setUserData(e.target.name, e.target.value) }
+	logIn = () => { this.props.logIn(this.props.auth) }
+	register = () => { this.props.register(this.props.auth) }
 
 	render() {
 		return this.props.authStatus ? ''
@@ -32,8 +21,14 @@ class AuthContainer extends React.Component {
 	}
 }
 
-let mapStateToProps = (state) => ({ auth: state.auth })
+
+let mapStateToProps = (state) => ({
+	auth: state.auth 				// данные, введенные пользователем
+})
 
 
-
-export default connect(mapStateToProps, { setUserData, toggleAuthStatus, setUserProfile })(AuthContainer);
+export default connect(mapStateToProps, {
+	setUserData,					// установить Id пользователя в state.auth
+	logIn,							//thunk для логинизации
+	register 						//thunk для регистрации
+})(AuthContainer);

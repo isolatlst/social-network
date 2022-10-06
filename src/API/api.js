@@ -9,7 +9,7 @@ export const usersAPI = {
 	_getConfig(totalPage, pageSize) {
 		return {
 			method: 'get',
-			url: `users/?p=${totalPage}&count=${pageSize}`,
+			url: `/users/?p=${totalPage}&count=${pageSize}`,
 			xhrFields: {
 				withCredentials: true
 			}
@@ -24,7 +24,7 @@ export const followAPI = {
 	_getConfig(method, userId) {
 		return {
 			method,
-			url: `follow/${userId}`,
+			url: `/follow/${userId}`,
 			xhrFields: {
 				withCredentials: true
 			}
@@ -47,15 +47,15 @@ export const authAPI = {
 		}
 	},
 	async loginAPI(data) {
-		let response = await axios(this._getConfig('login', data, 'post'))
+		let response = await axios(this._getConfig('/login', data, 'post'))
 		return response.data
 	},
 	async registerAPI(data) {
-		let response = await axios(this._getConfig('register', data, 'post'))
+		let response = await axios(this._getConfig('/register', data, 'post'))
 		return response.data
 	},
 	async logoutAPI() {
-		let response = await axios(this._getConfig('logout', '', 'delete'))
+		let response = await axios(this._getConfig('/logout', '', 'delete'))
 		return response.data
 	}
 }
@@ -63,7 +63,7 @@ export const profileAPI = {
 	_getConfig(userId) {
 		return {
 			method: 'get',
-			url: `profile/${userId}`,
+			url: `/profile/${userId}`,
 			xhrFields: {
 				withCredentials: true
 			}

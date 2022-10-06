@@ -25,6 +25,23 @@ button{
 	background: #0CB658;
 	color:azure;	
 }
+button:hover{
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.325);
+}
+button:active{
+	position: relative;
+	top: 1px;
+	box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.325), 0px 2px 4px rgba(0, 0, 0, 0.325);
+}
+button:disabled{
+	box-shadow: none;
+}
+button:disabled:active{
+	position: static;
+	transition: all 0 ease 1s;
+	background-color: rgb(172, 76, 76);
+	box-shadow: none;
+}
 
 textarea{
 	padding: calc(var(--index)/2);

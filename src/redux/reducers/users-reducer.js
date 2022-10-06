@@ -1,8 +1,6 @@
 import {
-	TOGGLE_FOLLOW_TO_USER,
-	SET_USERS, SET_TOTAL_PAGE,
-	SET_PAGES_COUNT, SET_PAGE_SIZE,
-	TOGGLE_FETCHING_STATUS
+	SET_USERS, SET_TOTAL_PAGE, SET_PAGES_COUNT, SET_PAGE_SIZE,
+	TOGGLE_FOLLOW_TO_USER, TOGGLE_FETCHING_STATUS, TOGGLE_IS_FOLLOWING_PROGRESS
 } from '../actions/users-action'
 
 let initialState = {
@@ -10,7 +8,8 @@ let initialState = {
 	pagesCount: 0,
 	pageSize: 3,
 	totalPage: 1,
-	isFetching: false
+	isFetching: false,
+	isFollowingInProgress: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -51,6 +50,14 @@ const usersReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isFetching: action.isFetching
+			}
+		}
+		case TOGGLE_IS_FOLLOWING_PROGRESS: {
+			return {
+				...state,
+				isFollowingInProgress: action.isFetching
+					? [...state.isFollowingInProgress, action.userId]
+					: state.isFollowingInProgress.filter(id => id !== action.userId)
 			}
 		}
 

@@ -35,7 +35,12 @@ function Users(props) {
 					<div className={classes.users__item} key={Math.random(10000)}>
 						{
 							props.myId !== user.userId
-								? <button className={classes.status_button} onClick={() => props.toggleFollowFunc(user.userId, user.followed)}>{user.followed ? 'unfollow' : 'follow'}</button>
+								? <button
+									className={classes.status_button}
+									disabled={props.isFollowingInProgress.some(id => id === user.userId)}
+									onClick={() => props.toggleFollowFunc(user.userId, user.followed)}>
+									{user.followed ? 'unfollow' : 'follow'}
+								</button>
 								: <button className={classes.status_button} disabled>That's me</button>
 						}
 						<NavLink to={'/profile/' + user.userId} className={classes.user__info}>
@@ -46,7 +51,6 @@ function Users(props) {
 							<div className={classes.location}>{user.location.country ? user.location.country : ''} {user.location.city ? user.location.city : ''}</div>
 						</NavLink>
 					</div>
-
 				)
 			}
 		</main >
