@@ -1,9 +1,9 @@
-import classes from './UserPreloader.module.css'
+import classes from './UsersPreloader.module.css'
 
 
 function UserPreloader() {
 	return (
-		<div className={classes.userPreloader}>
+		<div className={classes.usersPreloader}>
 			< div className={classes.item} >
 				<div className={`${classes.button} ${classes.animatePreloader}`}></div>
 				<div className={`${classes.avatar} ${classes.animatePreloader}`}></div>

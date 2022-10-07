@@ -1,12 +1,12 @@
 import './App.css';
 import './reset.css';
-import HeaderContainer from './components/Header/HeaderContainer';
-import Sidebar from './components/Sidebar/Sidebar';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import Messages from './components/Messages/Messages';
-import UsersContainer from './components/Users/UsersContainer';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import AuthContainer from './components/common/auth/AuthContainer';
+import Sidebar from './components/Sidebar/Sidebar';
+import HeaderContainer from './components/Header/HeaderContainer';
+import AuthContainer from './components/common/Auth/AuthContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
+import UsersContainer from './components/Users/UsersContainer';
+import Messages from './components/Messages/Messages';
 
 function App() {
 	return (

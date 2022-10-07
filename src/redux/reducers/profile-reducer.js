@@ -2,20 +2,16 @@ import { ADD_POST, UPDATE_NEW_POST_TEXT, SET_USER_PROFILE, TOGGLE_FETCHING_STATU
 
 let initialState = {
 	profileData: {
-		/*
-			name: 'Kirill Gurin',
-			birth: '29.12.2001',
-			location: { city: 'Minsk', country: 'Belarus' },
-			education: 'BSUIR',
-			site: "github.com/isolatlst",
-			avatar: 'https://pbs.twimg.com/profile_banners/157025420/1537698290/1500x500',
-			wallpaper: 'https://wallup.net/wp-content/uploads/2019/09/182467-yosemite.jpg',
-			postsData: [
-				{ id: 1, post: 'I try to learning react' },
-				{ id: 2, post: 'Hello! Its my social network' },
-			],
-		*/
-	}, // null
+		name: '',
+		birth: '',
+		location: { city: '', country: '' },
+		education: '',
+		site: '',
+		avatar: '',
+		wallpaper: '',
+		postsData: [],
+
+	}, // объект с пустыми данными
 	isFetching: false,  //fixme
 	newPostText: ''
 }
@@ -50,9 +46,7 @@ const profileReducer = (state = initialState, action) => {
 		case SET_USER_PROFILE: {
 			return {
 				...state,
-				profileData: {
-					...action.data
-				},
+				profileData: action.data,
 				isFetching: false
 			}
 		}

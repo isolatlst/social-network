@@ -5,8 +5,8 @@ import userPhoto from '../../assets/images/userPhoto.png'
 
 function Profile(props) {
 	//true - my profile; false - alien profile
-	return (props.userId === props.profileId
-		? <main className={classes.content}> 
+	return (props.userId === props.profileData.userId
+		? <main className={classes.content}>
 			< Description
 				wallpaper={props.profileData.wallpaper}
 				name={`${props.profileData.firstName} ${props.profileData.lastName}`}
