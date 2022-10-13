@@ -11,7 +11,7 @@ class AuthContainer extends React.Component {
 	register = () => { this.props.register(this.props.auth) }
 
 	render() {
-		return this.props.authStatus ? ''
+		return this.props.auth.authStatus ? <div>Вы авторизированы</div>
 			: < Auth
 				{...this.props.auth}
 				logIn={this.logIn}

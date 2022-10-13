@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { compose } from 'redux'
 import withAuthRedirectComponent from '../common/HOC AuthRedirect/WithAuthRedirectComponent'
+import { useParams } from 'react-router-dom'
 import Profile from './Profile'
-import { getProfile } from '../../redux/thunks/profile-thunk'
+import { getProfile, updateProfile } from '../../redux/thunks/profile-thunk'
 import { addNewPost, updateNewPost } from '../../redux/actionCreators/profile-action-creator'
 import ProfilePreloader from '../common/profilePreloader/ProfilePreloader'
 
@@ -35,9 +36,7 @@ let mapStateToProps = (state) => {
 let WithUrlDataContainerComponent = (props) => <ProfileContainer {...props} params={useParams()} />
 
 
-export default connect(mapStateToProps, {
-	addNewPost,																// Добавить новый пост в state.profilePage.postsData
-	updateNewPost,															// Обновить данные в state.profilePage.newPostText
-	getProfile																// Thunk получить профиль
-})(withAuthRedirectComponent(WithUrlDataContainerComponent))
-
+export default compose(
+	connect(mapStateToProps, { addNewPost, updateNewPost, getProfile, updateProfile }),
+	withAuthRedirectComponent
+)(WithUrlDataContainerComponent)

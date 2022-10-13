@@ -17,7 +17,7 @@ function Auth(props) {
 					<label className={classes.label}>Password</label>
 				</div>
 
-				<button className={classes.button} onClick={props.logIn}>Log in</button>
+				<div className={classes.button}><button onClick={props.logIn}>Log in</button></div>
 			</div >
 
 			<div className={classes.registrationForm}>
@@ -47,7 +47,7 @@ function Auth(props) {
 					<label className={classes.label}>Confirm password</label>
 				</div>
 
-				<button className={classes.button} onClick={props.register}>Register</button>
+				<div className={classes.button}><button onClick={props.register}>Register</button></div>
 			</div >
 
 		</div >

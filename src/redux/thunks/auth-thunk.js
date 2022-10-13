@@ -24,5 +24,5 @@ export const logOut = () => async (dispatch) => {
 	if (!response.err) {
 		dispatch(toggleAuthStatus(false))
 	}
-	console.log(response);
+	console.log(response); //fixme
 }

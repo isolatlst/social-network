@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import withAuthRedirectComponent from '../common/HOC AuthRedirect/WithAuthRedirectComponent'
 import Users from './Users'
 import { getUsers, toggleFollow } from '../../redux/thunks/users-thunk'
@@ -36,7 +37,7 @@ let mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {
-	toggleFollow,															// Thunk для изменения статуса запроса на подписку
-	getUsers																	// Thunk для получения пользователей
-})(withAuthRedirectComponent(UsersContainer))
+export default compose(
+	connect(mapStateToProps, { toggleFollow, getUsers }),
+	withAuthRedirectComponent
+)(UsersContainer)

@@ -60,17 +60,22 @@ export const authAPI = {
 	}
 }
 export const profileAPI = {
-	_getConfig(userId) {
+	_getConfig(url, data, method) {
 		return {
-			method: 'get',
-			url: `/profile/${userId}`,
+			method: method,
+			url: url,
 			xhrFields: {
 				withCredentials: true
-			}
+			},
+			data
 		}
 	},
 	async getProfileAPI(userId) {
-		let response = await axios(this._getConfig(userId))
+		let response = await axios(this._getConfig(`/profile/${userId}`, '', 'get'))
+		return response.data
+	},
+	async updateProfileAPI(data, type) {
+		let response = await axios(this._getConfig(`/profile`, { data, type }, 'put'))
 		return response.data
 	}
 }

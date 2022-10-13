@@ -16,8 +16,8 @@ function Sidebar() {
 					</NavLink>
 				</li>
 				<li className={classes.sidebar__item}>
-					<NavLink to='/news' className={navData => navData.isActive ? classes.active : classes.sidebar__link}>
-						News
+					<NavLink onClick={e => e.preventDefault()} to='/news' className={navData => navData.isActive ? classes.active : classes.sidebar__link}>
+						News *
 					</NavLink>
 				</li>
 				<li className={classes.sidebar__item}>
@@ -26,13 +26,13 @@ function Sidebar() {
 					</NavLink>
 				</li>
 				<li className={classes.sidebar__item}>
-					<NavLink to='/music' className={navData => navData.isActive ? classes.active : classes.sidebar__link}>
-						Music
+					<NavLink onClick={e => e.preventDefault()} to='/music' className={navData => navData.isActive ? classes.active : classes.sidebar__link}>
+						Music *
 					</NavLink>
 				</li>
 				<li className={classes.sidebar__item}>
-					<NavLink to='/settings' className={navData => navData.isActive ? classes.active : classes.sidebar__link}>
-						Settings
+					<NavLink onClick={e => e.preventDefault()} to='/settings' className={navData => navData.isActive ? classes.active : classes.sidebar__link}>
+						Settings *
 					</NavLink>
 				</li>
 			</ul>

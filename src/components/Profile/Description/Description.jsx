@@ -1,6 +1,7 @@
 import Avatar from '../../common/Avatar/Avatar'
 import Wallpaper from './Wallpaper/Wallpaper'
 import classes from './Description.module.css'
+import DescriptionText from './DescriptionText';
 
 function Description(props) { //fixme
 	return (
@@ -16,10 +17,10 @@ function Description(props) { //fixme
 					} */}
 					{/* <button className={classes.status_button} onClick={() => props.toggleFollow(userId)}>{followed ? 'unfollow' : 'follow'}</button> */}
 					<div className={classes.description__name}>{props.name}</div>
-					<div className={classes.description__text}>Date of Birth: {props.birth}</div>
-					<div className={classes.description__text}>Location: {props.location.country}	{props.location.city}</div>
-					<div className={classes.description__text}>Education: {props.education}</div>
-					<div className={classes.description__text}>Web Site: {props.site}</div>
+					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='birth' text='Date of Birth: ' data={props.birth} />
+					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='location' text='Location: ' data={`${props.location.country} ${props.location.city}`} />
+					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='education' text='Education: ' data={props.education} />
+					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='site' text='Web Site: ' data={props.site} />
 				</div>
 			</div>
 		</div>

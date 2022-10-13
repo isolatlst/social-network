@@ -18,26 +18,12 @@ server.get('/', (req, res) => res.sendFile('B:/Garbage/Web/2021/react/social-net
 
 //Константы, которые надо перенести в отдельный json
 const users = [
-	//{  //Пример объекта
-	// userId: 4231,
-	// firstName: '1',
-	// lastName: '1',
-	// email: '1',
-	// password: 'a4ayc/80/OGda4BO/1o/V0etpOqiLx1JwB5S3beHW0s=', // Хэш SHA256 для значения password
-
-	//Доп параметры объекта
-	// birth: '29.12.2001',
-	// location: { city: 'Minsk', country: 'Belarus' },
-	// education: 'BSUIR',
-	// site: "github.com/isolatlst",
-	// avatar: 'https://pbs.twimg.com/profile_banners/157025420/1537698290/1500x500',
-	// wallpaper: 'https://camo.githubusercontent.com/f75d82791bcbe38140e96f12e50892c3e2e9bb0e35677a1b444403aa07b77f15/68747470733a2f2f63646e2e6d79616e696d656c6973742e6e65742f732f636f6d6d6f6e2f75706c6f616465645f66696c65732f313437343539363033302d33353961626265363766306166306235646362303533306261613637623538302e6a706567',
-	// postsData: [
-	// 	{ id: 1, post: 'I try to learning react' },
-	// 	{ id: 2, post: 'Hello! Its my social network' },
-	// ],
-	//},
-]
+	// {
+	//    "userId": 7101,
+	//    "email": "2",
+	//    "password": "1HNeOiZeFu7gP1lxi5tdAwGcB9i2xR+Q2jpmbuwTqzU="
+	//  }
+] // серверная база данных о существующих пользователях
 const usersData = [
 	{
 		userId: 1,
@@ -178,8 +164,14 @@ const usersData = [
 		]
 	},
 
-]
-const authTokens = {}
+] // UI-ная информация о существующих пользователях
+const authTokens = {
+	// "7076c0f360b7375d2ea55de438c373f534d0f726c8ac27a9cfe2c5d9f78e": {
+	//    "userId": 7101,
+	//    "email": "2",
+	//    "password": "1HNeOiZeFu7gP1lxi5tdAwGcB9i2xR+Q2jpmbuwTqzU="
+	//  }
+} // токены авторизованных пользователей
 
 
 
@@ -196,7 +188,33 @@ const requireAuth = (req, res, next) => {
 		})
 	}
 }
+//Middleware обработчик пагинации страницы пользователей
+const paginateUsers = (req, res, next) => {
+	let pagesSize = Number(req.query.count) || 3                       			      // Назначаем размер одной страницы
+	let pagesCount = Math.ceil(usersData.length / pagesSize)   			               // Считаем количество страниц
+	let totalPage = Number(req.query.p) < 1 ? 1 : Number(req.query.p)                // Текущая страница
+	totalPage = Number(req.query.p) > pagesCount ? pagesCount : Number(req.query.p)  // Проверка на текущую страницу
+	let from = pagesSize * (totalPage - 1)
+	let to = from + pagesSize
 
+	let dirtyData = usersData.slice(from, to)
+	let data = dirtyData.map(profile => ({
+		userId: profile.userId,
+		followed: usersData[res.locals.myIndex].followed.indexOf(profile.userId) !== -1 ? true : false,  // Поиск в массиве подписок моего ID
+		firstName: profile.firstName,
+		lastName: profile.lastName,
+		avatar: profile.avatar ? profile.avatar : '',
+		location: profile.location ? profile.location : ''
+	}))
+
+
+
+	res.locals.data = data
+	res.locals.pagesSize = pagesSize
+	res.locals.pagesCount = pagesCount
+	res.locals.totalPage = totalPage
+	next()
+}
 
 
 //Обработка авторизации
@@ -276,7 +294,7 @@ server.post('/register', (req, res) => {
 			lastName,
 			email,
 			followed: [],
-			birth: 'Вечно молодой, вечно пьяный',
+			birth: 'Вечно молодой',
 			location: { city: '', country: 'Страна не указана' },
 			education: 'Образование не указано',
 			site: 'Сайт не указан',
@@ -298,32 +316,6 @@ server.delete('/logout', [requireAuth], (req, res) => {
 	})
 })
 //Обработка страницы пользователей
-const paginateUsers = (req, res, next) => {
-	let pagesSize = Number(req.query.count) || 3                       			      // Назначаем размер одной страницы
-	let pagesCount = Math.ceil(usersData.length / pagesSize)   			               // Считаем количество страниц
-	let totalPage = Number(req.query.p) < 1 ? 1 : Number(req.query.p)                // Текущая страница
-	totalPage = Number(req.query.p) > pagesCount ? pagesCount : Number(req.query.p)  // Проверка на текущую страницу
-	let from = pagesSize * (totalPage - 1)
-	let to = from + pagesSize
-
-	let dirtyData = usersData.slice(from, to)
-	let data = dirtyData.map(profile => ({
-		userId: profile.userId,
-		followed: usersData[res.locals.myIndex].followed.indexOf(profile.userId) !== -1 ? true : false,  // Поиск в массиве подписок моего ID
-		firstName: profile.firstName,
-		lastName: profile.firstName,
-		avatar: profile.avatar ? profile.avatar : '',
-		location: profile.location ? profile.location : ''
-	}))
-
-
-
-	res.locals.data = data
-	res.locals.pagesSize = pagesSize
-	res.locals.pagesCount = pagesCount
-	res.locals.totalPage = totalPage
-	next()
-}
 server.get('/users', [requireAuth, paginateUsers], (req, res) => {
 	res.json(
 		{
@@ -336,9 +328,9 @@ server.get('/users', [requireAuth, paginateUsers], (req, res) => {
 })
 //Обработка страницы профиля
 server.get('/profile/:profileId', [requireAuth], (req, res) => {
-	let data = usersData.find(profile => profile.userId === Number(req.params.profileId))
+	let profile = usersData.find(profile => profile.userId === Number(req.params.profileId))
 	res.json({
-		profileData: data
+		profileData: profile
 	})
 })
 //Обработка подписки/отдписки
@@ -366,6 +358,30 @@ server.delete('/follow/:userId', [requireAuth], (req, res) => {
 		})
 	}
 })
+//Обработка изменения данных
+server.put('/profile', [requireAuth], (req, res) => {
+	let userId = authTokens[req.cookies['AuthToken']].userId
+	let data = req.body.data
+	let type = req.body.type
+	let profile = usersData.find(profile => profile.userId === userId)
+	if (type == 'location') {
+		data = {
+			country: data.match('^.* '),
+			city: data.match('(?: ).*$')
+		}
+	}
+	if (profile) {
+		profile[type] = data
+		res.json({
+			err: false,
+			data,
+			type
+		})
+	}
+})
+
+
+
 
 
 //Чекаут для сервака

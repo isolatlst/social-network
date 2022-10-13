@@ -23,7 +23,7 @@ let initialState = {  //тест
 const authReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_USER_DATA: {
-			state[action.key] = action.data
+			state[action.key] = action.data  //fixme please
 			return {
 				...state
 			}

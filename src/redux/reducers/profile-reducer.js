@@ -1,4 +1,4 @@
-import { ADD_POST, UPDATE_NEW_POST_TEXT, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS } from '../actions/profile-action'
+import { ADD_POST, UPDATE_NEW_POST_TEXT, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE } from '../actions/profile-action'
 
 let initialState = {
 	profileData: {
@@ -54,6 +54,15 @@ const profileReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isFetching: action.isFetching
+			}
+		}
+		case UPDATE_PROFILE: {
+			state.profileData[action.dataType] = action.data  //fixme please
+			return {
+				...state,
+				profileData: {
+					...state.profileData
+				}
 			}
 		}
 

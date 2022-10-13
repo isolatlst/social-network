@@ -8,6 +8,8 @@ function Profile(props) {
 	return (props.userId === props.profileData.userId
 		? <main className={classes.content}>
 			< Description
+				isMineProfile={true}
+				updateProfile={props.updateProfile}
 				wallpaper={props.profileData.wallpaper}
 				name={`${props.profileData.firstName} ${props.profileData.lastName}`}
 				birth={props.profileData.birth}
@@ -15,15 +17,14 @@ function Profile(props) {
 				education={props.profileData.education}
 				site={props.profileData.site}
 				avatar={props.profileData.avatar ? props.profileData.avatar : userPhoto}
-				isMineProfile={true}
 			/>
 			< MyPosts
+				isMineProfile={true}
 				avatar={props.profileData.avatar ? props.profileData.avatar : userPhoto}
 				newPostText={props.newPostText}
 				postsData={props.profileData.postsData}
 				addNewPost={props.addNewPost}
 				updateNewPost={props.updateNewPost}
-				isMineProfile={true}
 			/>
 		</main>
 		: <main className={classes.content}>

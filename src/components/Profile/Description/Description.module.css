@@ -22,6 +22,21 @@
 }
 
 .description__text{
+	display: flex;
+	align-items: center;
 	font-size: calc(var(--index)*1);
 	align-self: end;
+	height: calc(var(--index)*1.07);
+}
+
+.description__text span {
+	cursor: pointer;
+	user-select: none;
+}
+.description__text img{
+	width: calc(var(--index)*1);
+}
+.description__text_edit_mode input{
+	font-size: calc(var(--index)*1);
+	text-decoration: underline;
 }
