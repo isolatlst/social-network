@@ -1,21 +1,7 @@
 import { SET_USER_DATA, TOGGLE_AUTH_STATUS } from '../actions/auth-action'
 
-// let initialState = { //ориг
-// 	userId: '',
-// 	firstName: '',
-// 	lastName: '',
-// 	email: '',
-// 	password: '',
-// 	confirmPassword: '',
-// 	authStatus: false
-// }
 let initialState = {  //тест
 	userId: '',
-	firstName: '2',
-	lastName: '2',
-	email: '2',
-	password: '2',
-	confirmPassword: '2',
 	authStatus: false
 }
 

@@ -21,10 +21,8 @@ function Profile(props) {
 			< MyPosts
 				isMineProfile={true}
 				avatar={props.profileData.avatar ? props.profileData.avatar : userPhoto}
-				newPostText={props.newPostText}
 				postsData={props.profileData.postsData}
 				addNewPost={props.addNewPost}
-				updateNewPost={props.updateNewPost}
 			/>
 		</main>
 		: <main className={classes.content}>

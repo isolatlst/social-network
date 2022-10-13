@@ -32,7 +32,7 @@ const usersData = [
 		lastName: 'Ghurin',
 		email: 'ghurin.00@mail.ru',
 		birth: '29.12.2001',
-		location: { city: 'Minsk', country: 'Belarus' },
+		location: 'Belarus Minsk',
 		education: 'BSUIR',
 		site: "github.com/isolatlst",
 		avatar: 'https://pbs.twimg.com/profile_banners/157025420/1537698290/1500x500',
@@ -49,7 +49,7 @@ const usersData = [
 		lastName: '',
 		email: 'dennis@mail.ru',
 		avatar: 'https://a.d-cd.net/bEAAAgDEreA-1920.jpg',
-		location: { city: 'Minsk', country: 'Belarus' },
+		location: 'Belarus Grodno',
 
 		birth: '15.05.2000',
 		education: 'BSUIR',
@@ -67,7 +67,7 @@ const usersData = [
 		lastName: '',
 		email: 'egor@mail.ru',
 		avatar: 'https://www.anepedia.org/img/3/3838310/i2/Фото_прикол_про_белку.jpg',
-		location: { city: 'Molodechno', country: 'Belarus' },
+		location: 'Belarus Molodetchno',
 
 		birth: '25.03.2002',
 		education: 'BNTU',
@@ -84,7 +84,7 @@ const usersData = [
 		lastName: '',
 		email: 'kirill@mail.ru',
 		avatar: 'https://ic.pics.livejournal.com/globolife/59791984/361662/361662_original.jpg',
-		location: { city: 'Minsk', country: 'Belarus' },
+		location: 'Belarus Minsk',
 
 		birth: '25.03.2002',
 		education: 'BGPU',
@@ -101,7 +101,7 @@ const usersData = [
 		lastName: '',
 		email: 'vlad@mail.ru',
 		avatar: 'https://pressa.tv/uploads/posts/2019-01/1548187434_pressa_tv_foto-prikoly-21.jpg',
-		location: { city: 'Minsk', country: 'Belarus' },
+		location: 'Belarus Minsk',
 
 		birth: '11.04.2002',
 		education: 'BSUIR',
@@ -118,7 +118,7 @@ const usersData = [
 		lastName: '',
 		email: 'lesha@mail.ru',
 		avatar: '',
-		location: { city: 'Minsk', country: 'Belarus' },
+		location: 'Belarus Minsk',
 
 		birth: '28.03.2002',
 		education: 'BSUIR',
@@ -136,7 +136,7 @@ const usersData = [
 		lastName: '',
 		email: 'misha@mail.ru',
 		avatar: 'https://a.d-cd.net/bEAAAgDEreA-1920.jpg',
-		location: { city: 'Philadelphia', country: 'USA' },
+		location: 'USA Philadelphia',
 
 		birth: '28.11.2001',
 		education: 'BSUIR',
@@ -153,7 +153,7 @@ const usersData = [
 		lastName: '',
 		email: 'vasya@mail.ru',
 		avatar: 'https://funart.pro/uploads/posts/2021-03/1617075469_18-p-oboi-natsionalnii-park-gleisher-19.jpg',
-		location: { city: 'Minsk', country: 'Belarus' },
+		location: 'Belarus Minsk',
 
 		birth: '11.07.2000',
 		education: 'BGU',
@@ -270,7 +270,7 @@ const getHashedPassword = (password) => {
 server.post('/register', (req, res) => {
 	const { email, firstName, lastName, password, confirmPassword } = req.body;
 
-	if (password === confirmPassword) {
+	if (password === confirmPassword && email && firstName && lastName && password) {
 		if (users.find(user => user.email == email)) {     // Проверка на некорректные данные
 			res.json({
 				err: true,
@@ -295,7 +295,7 @@ server.post('/register', (req, res) => {
 			email,
 			followed: [],
 			birth: 'Вечно молодой',
-			location: { city: '', country: 'Страна не указана' },
+			location: 'Страна не указана',
 			education: 'Образование не указано',
 			site: 'Сайт не указан',
 			avatar: '',
@@ -364,12 +364,6 @@ server.put('/profile', [requireAuth], (req, res) => {
 	let data = req.body.data
 	let type = req.body.type
 	let profile = usersData.find(profile => profile.userId === userId)
-	if (type == 'location') {
-		data = {
-			country: data.match('^.* '),
-			city: data.match('(?: ).*$')
-		}
-	}
 	if (profile) {
 		profile[type] = data
 		res.json({

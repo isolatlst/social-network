@@ -1,16 +1,15 @@
+import { Field, reduxForm } from 'redux-form'
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 function MyPosts(props) {
+	let onAddNewPost = (formData) => { props.addNewPost(formData.newPostData) }
 	return (
 		<div className={classes.profilePosts}>
 			<div className={classes.title}>My posts</div>
 			{
 				props.isMineProfile
-					? <div className={classes.newPost}>
-						<textarea onChange={props.updateNewPost} value={props.newPostText} placeholder='type something interesting...' />
-						<button disabled={!props.newPostText} className={classes.button} onClick={props.addNewPost}>Add post</button>
-					</div>
+					? <AddNewPostReduxForm onSubmit={onAddNewPost} />
 					: ''
 			}
 			<div className={classes.posts__list}>
@@ -19,5 +18,17 @@ function MyPosts(props) {
 		</div>
 	);
 }
+
+
+
+const AddNewPostForm = (props) => {
+	return (
+		<form className={classes.newPost} onSubmit={props.handleSubmit}>
+			<Field component='textarea' name='newPostData' placeholder='type something interesting...' />
+			<button className={classes.button}>Add post</button>
+		</form >
+	)
+}
+const AddNewPostReduxForm = reduxForm({ form: 'profileAddNewPost' })(AddNewPostForm)
 
 export default MyPosts;

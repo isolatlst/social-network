@@ -18,7 +18,7 @@ function Description(props) { //fixme
 					{/* <button className={classes.status_button} onClick={() => props.toggleFollow(userId)}>{followed ? 'unfollow' : 'follow'}</button> */}
 					<div className={classes.description__name}>{props.name}</div>
 					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='birth' text='Date of Birth: ' data={props.birth} />
-					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='location' text='Location: ' data={`${props.location.country} ${props.location.city}`} />
+					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='location' text='Location: ' data={props.location} />
 					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='education' text='Education: ' data={props.education} />
 					<DescriptionText updateProfile={props.updateProfile} isMineProfile={props.isMineProfile} type='site' text='Web Site: ' data={props.site} />
 				</div>

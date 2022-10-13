@@ -1,4 +1,4 @@
-import { UPDATE_NEW_MESSAGE_TEXT, SEND_MESSAGE } from '../actions/messages-action'
+import { SEND_MESSAGE } from '../actions/messages-action'
 
 let initialState = {
 	dialogsData: [
@@ -15,7 +15,6 @@ let initialState = {
 		{ id: 4, date: '', sender: '', message: 'У меня все хорошо' },
 		{ id: 5, date: '', sender: '', message: 'Привет, у меня тоже' }
 	],
-	newMessageData: ''
 }
 
 const messagesReducer = (state = initialState, action) => {
@@ -29,18 +28,9 @@ const messagesReducer = (state = initialState, action) => {
 						id: state.messagesData.length + 1,
 						date: '',
 						sender: '',
-						message: state.newMessageData
+						message: action.newMessageData
 					}
-				],
-				newMessageData: ''
-			}
-
-		}
-
-		case UPDATE_NEW_MESSAGE_TEXT: {
-			return {
-				...state,
-				newMessageData: action.messageText
+				]
 			}
 
 		}

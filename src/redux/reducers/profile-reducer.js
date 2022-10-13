@@ -1,10 +1,10 @@
-import { ADD_POST, UPDATE_NEW_POST_TEXT, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE } from '../actions/profile-action'
+import { ADD_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE } from '../actions/profile-action'
 
 let initialState = {
 	profileData: {
 		name: '',
 		birth: '',
-		location: { city: '', country: '' },
+		location: '',
 		education: '',
 		site: '',
 		avatar: '',
@@ -13,7 +13,6 @@ let initialState = {
 
 	}, // объект с пустыми данными
 	isFetching: false,  //fixme
-	newPostText: ''
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -27,20 +26,10 @@ const profileReducer = (state = initialState, action) => {
 						...state.profileData.postsData,
 						{
 							id: state.profileData.postsData.length + 1,
-							post: state.newPostText
+							post: action.postText
 						}
 					],
-				},
-				newPostText: ''
-			}
-		}
-		case UPDATE_NEW_POST_TEXT: {
-			return {
-				...state,
-				profileData: {
-					...state.profileData,
-				},
-				newPostText: action.postText
+				}
 			}
 		}
 		case SET_USER_PROFILE: {
@@ -60,9 +49,8 @@ const profileReducer = (state = initialState, action) => {
 			state.profileData[action.dataType] = action.data  //fixme please
 			return {
 				...state,
-				profileData: {
-					...state.profileData
-				}
+				profileData: { ...state.profileData }
+
 			}
 		}
 

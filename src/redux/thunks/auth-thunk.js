@@ -23,6 +23,7 @@ export const logOut = () => async (dispatch) => {
 	let response = await authAPI.logoutAPI()
 	if (!response.err) {
 		dispatch(toggleAuthStatus(false))
+		dispatch(setUserData('userId', 0))
 	}
 	console.log(response); //fixme
 }

@@ -48,7 +48,7 @@ function Users(props) {
 								< Avatar avatar={user.avatar ? user.avatar : userPhoto} />
 							</div>
 							<div className={classes.name}>{`${user.firstName} ${user.lastName}`}</div>
-							<div className={classes.location}>{user.location.country ? user.location.country : ''} {user.location.city ? user.location.city : ''}</div>
+							<div className={classes.location}>{user.location}</div>
 						</NavLink>
 					</div>
 				)
