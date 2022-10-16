@@ -47,6 +47,7 @@ textarea{
 	padding: calc(var(--index)/2);
 	margin:  0px 0px calc(var(--index)*1) 0px; 
 	width: 100%;
+	min-height: 50px;
 	height: 100%;
 	font-size: calc(var(--index)*1.15);
 	background-color: #E6EEEA;

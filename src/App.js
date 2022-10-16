@@ -3,7 +3,7 @@ import './reset.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
 import HeaderContainer from './components/Header/HeaderContainer';
-import AuthContainer from './components/common/Auth/AuthContainer';
+import AuthContainer from './components/Auth/AuthContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import Messages from './components/Messages/Messages';

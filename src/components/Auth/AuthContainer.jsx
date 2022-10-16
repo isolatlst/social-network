@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logIn, register } from '../../../redux/thunks/auth-thunk'
+import { logIn, register } from '../../redux/thunks/auth-thunk'
 import Auth from './Auth'
 
 

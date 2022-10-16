@@ -7,13 +7,13 @@
 	'button avatar name'
 	'button avatar location';
 	align-items: center;
-	grid-template-columns: calc(var(--index)*6.75) calc(var(--index)*4.5) calc(var(--index)*8);
+	grid-template-columns: calc(var(--index)*6) calc(var(--index)*4.5) calc(var(--index)*8);
 	grid-gap: calc(var(--index)*1.6);
 	margin: 0px 0px calc(var(--index)*2.5);
 }
 .button{
 	grid-area: button;
-	height: calc(var(--index)*2.75);
+	height: calc(var(--index)*2.3);
 	border-radius: 5px;
 }
 .avatar{

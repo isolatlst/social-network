@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import withAuthRedirectComponent from '../common/HOC AuthRedirect/WithAuthRedirectComponent'
+import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedirectComponent'
 import Users from './Users'
 import { getUsers, toggleFollow } from '../../redux/thunks/users-thunk'
-import UsersPreloader from '../common/usersPreloader/UsersPreloader'
+import UsersPreloader from '../common/Preloaders/Users/UsersPreloader'
 
 
 class UsersContainer extends React.Component {
