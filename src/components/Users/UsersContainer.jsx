@@ -2,9 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedirectComponent'
-import Users from './Users'
 import { getUsers, toggleFollow } from '../../redux/thunks/users-thunk'
+import { getFollowingInProgressSelector, getIsFetchingSelector, getPagesCountSelector, getPagesSizeSelector, getTotalPageSelector, getUsersSelector } from '../../redux/selectors/users-selectors'
 import UsersPreloader from '../common/Preloaders/Users/UsersPreloader'
+import Users from './Users'
 
 
 class UsersContainer extends React.Component {
@@ -27,12 +28,12 @@ class UsersContainer extends React.Component {
 let mapStateToProps = (state) => {
 	return {
 		myId: state.auth.userId,					 								// Id аккаунта (моего)
-		usersData: state.usersPage.usersData,   								// Данные пользователей
-		pagesCount: state.usersPage.pagesCount, 								// Число страниц
-		pageSize: state.usersPage.pageSize,     								// Размер страницы (кол. пользователей)
-		totalPage: state.usersPage.totalPage,   								// Номер текущей страницы
-		isFollowingInProgress: state.usersPage.isFollowingInProgress,  // boolean запрос на подписку
-		isFetching: state.usersPage.isFetching,								// Boolean идёт ли загрузка страницы                         //fixme
+		usersData: getUsersSelector(state),
+		pagesCount: getPagesCountSelector(state),
+		pageSize: getPagesSizeSelector(state),
+		totalPage: getTotalPageSelector(state),
+		isFollowingInProgress: getFollowingInProgressSelector(state),
+		isFetching: getIsFetchingSelector(state),
 	}
 }
 
