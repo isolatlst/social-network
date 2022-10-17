@@ -24,7 +24,10 @@ const LoginForm = (props) => {
 			<Field component={Input} validate={[requiredField, maxLength25]}
 				name="password" type="password"
 				text="Password" />
-			<div className={classes.button}><button>Log in</button></div>
+			<div className={classes.button}>
+				<span>{props.error}</span>
+				<button>Log in</button>
+			</div>
 		</form >
 	)
 }
@@ -48,7 +51,10 @@ const RegisterForm = (props) => {
 			<Field component={Input} validate={[requiredField, confirmPassword]}
 				name="confirmPassword" type="password"
 				text="Confirm password" />
-			<div className={classes.button}><button>Register</button></div>
+			<div className={classes.button}>
+				<span>{props.error}</span>
+				<button>Register</button>
+			</div>
 		</form >
 	)
 }

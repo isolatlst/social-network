@@ -302,7 +302,7 @@ server.post('/register', (req, res) => {
 			wallpaper: 'https://trikky.ru/wp-content/blogs.dir/1/files/2021/11/07/maxresdefault-3.jpg',
 			postsData: [],
 		})
-		res.json({ err: false, message: 'Registration complete. Please login to continue' })
+		res.json({ err: false, message: 'Registration complete' })
 	} else {
 		res.json({ err: true, message: 'Registration failed' })
 	}

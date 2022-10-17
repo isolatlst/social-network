@@ -9,13 +9,20 @@
 	margin: 20px;
 }
 .button{
+	position: relative;
 	display: flex;
 	justify-content: center;
-	min-height: 45px;
 }
 .button button{
+	margin-top: 10px;
+	padding-top: calc(var(--index)*0.25);
 	width: 50%;
 	height: 100%;
-	padding-top: calc(var(--index)*0.25);
+	min-height: 45px;
 	font-size: 18px;
 } 
+.button span{
+	position: absolute;
+	top: -10px;
+	font-size: 16px;
+}

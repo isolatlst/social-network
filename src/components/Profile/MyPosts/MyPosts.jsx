@@ -8,7 +8,9 @@ function MyPosts(props) {
 	let onAddNewPost = (formData) => { props.addNewPost(formData.newPostData) }
 	return (
 		<div className={classes.profilePosts}>
-			<div className={classes.title}>My posts</div>
+			<div className={classes.title}>
+				{props.isMineProfile ? 'My posts' : props.postsData.length ? 'My posts' : 'The user did not add posts to the wall'}
+			</div>
 			{
 				props.isMineProfile
 					? <AddNewPostReduxForm onSubmit={onAddNewPost} />
