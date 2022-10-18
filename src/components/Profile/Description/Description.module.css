@@ -26,7 +26,6 @@
 	display: flex;
 	align-items: center;
 	font-size: calc(var(--index)*1);
-	align-self: end;
 	height: calc(var(--index)*1.07);
 }
 
@@ -34,13 +33,14 @@
 	cursor: pointer;
 	user-select: none;
 }
-.isFetchingImage{
+.isFetchingBlock{
+	background: url('../../../assets/icons/loading.gif') 0 0/auto 100% no-repeat;
 	position: absolute;
 	left: calc(var(--index)*-1.05);
 	width: calc(var(--index)*1.05);
+	height: calc(var(--index)*1.05);
 }
 .description__text_edit_mode input{
 	font-size: calc(var(--index)*1);
 	text-decoration: underline;
 }
-
