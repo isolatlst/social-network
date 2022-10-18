@@ -13,7 +13,7 @@ import {
 export const logIn = (authData) => async (dispatch) => {
 	let response = await authAPI.loginAPI(authData)
 	response.err ? dispatch(toggleAuthStatus(false)) : dispatch(toggleAuthStatus(true))
-	dispatch(setUserData('userId', response.userId))
+	dispatch(setUserData(response.userId))
 	dispatch(stopSubmit('authLogin', { _error: response.message }))
 }
 
@@ -27,7 +27,7 @@ export const logOut = () => async (dispatch) => {
 	let response = await authAPI.logoutAPI()
 	if (!response.err) {
 		dispatch(toggleAuthStatus(false))
-		dispatch(setUserData('userId', 0))
+		dispatch(setUserData(0))
 		dispatch(setUserProfile({ postsData: [] }))
 	}
 	// dispatch(stopSubmit('logout', { _error: response.message }))

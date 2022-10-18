@@ -22,6 +22,7 @@
 }
 
 .description__text{
+	position: relative;
 	display: flex;
 	align-items: center;
 	font-size: calc(var(--index)*1);
@@ -33,10 +34,13 @@
 	cursor: pointer;
 	user-select: none;
 }
-.description__text img{
-	width: calc(var(--index)*1);
+.isFetchingImage{
+	position: absolute;
+	left: calc(var(--index)*-1.05);
+	width: calc(var(--index)*1.05);
 }
 .description__text_edit_mode input{
 	font-size: calc(var(--index)*1);
 	text-decoration: underline;
 }
+
