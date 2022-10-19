@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
-import userPhoto from '../../assets/images/userPhoto.png'
 import { logIn, logOut } from '../../redux/thunks/auth-thunk'
 
 
@@ -20,7 +19,7 @@ class HeaderContainer extends React.Component {
 let mapStateToProps = (state) => {
 	return {
 		auth: state.auth.authStatus,											// boolean авторизован ли пользователь
-		avatar: state.auth.avatar ? state.auth.avatar : userPhoto,  // аватар пользователя в state.auth
+		avatar: state.auth.avatar,  											// аватар пользователя в state.auth
 	}
 }
 

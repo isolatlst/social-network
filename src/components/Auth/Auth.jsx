@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Input } from '../common/FormControls/FormControls'
+import Modal from '../common/Modal/Modal'
 import { confirmPassword, maxLength25, requiredField } from '../common/validators/validators'
 import classes from './Auth.module.css'
 
 
 function Auth(props) {
+	const [isModalOpen, setOpenModal] = useState(false)
+
 	return (
-		<div className={classes.auth}>
-			<LoginReduxForm onSubmit={props.logIn} />
-			<RegisterReduxForm onSubmit={props.register} />
-		</div>
+		<main className={classes.auth}>
+			<LoginReduxForm onSubmit={props.logIn} setOpenModal={setOpenModal} />
+			< Modal isModalOpen={isModalOpen} setOpenModal={setOpenModal}>
+				<RegisterReduxForm onSubmit={props.register} />
+			</Modal>
+		</main>
 	)
 }
 
@@ -24,9 +29,12 @@ const LoginForm = (props) => {
 			<Field component={Input} validate={[requiredField, maxLength25]}
 				name="password" type="password"
 				text="Password" />
-			<div className={classes.button}>
-				<span>{props.error}</span>
+			<span className={classes.error}>{props.error}</span>
+			<div className={`${classes.button} ${classes.loginBtn}`}>
 				<button>Log in</button>
+			</div>
+			<div className={`${classes.button} ${classes.goToRegister}`} onClick={e => props.setOpenModal(true)}>
+				<button onClick={e => e.preventDefault()}>Register</button> {/* Go to register */}
 			</div>
 		</form >
 	)

@@ -1,7 +1,6 @@
 import classes from './Profile.module.css'
 import MyPosts from './MyPosts/MyPosts'
 import Description from './Description/Description'
-import userPhoto from '../../assets/images/userPhoto.png'
 
 function Profile(props) {
 	//true - my profile; false - alien profile
@@ -16,11 +15,11 @@ function Profile(props) {
 				location={props.profileData.location}
 				education={props.profileData.education}
 				site={props.profileData.site}
-				avatar={props.profileData.avatar ? props.profileData.avatar : userPhoto}
+				avatar={props.profileData.avatar}
 			/>
 			< MyPosts
 				isMineProfile={true}
-				avatar={props.profileData.avatar ? props.profileData.avatar : userPhoto}
+				avatar={props.profileData.avatar}
 				postsData={props.profileData.postsData}
 				addNewPost={props.addNewPost}
 			/>
@@ -33,11 +32,11 @@ function Profile(props) {
 				location={props.profileData.location}
 				education={props.profileData.education}
 				site={props.profileData.site}
-				avatar={props.profileData.avatar ? props.profileData.avatar : userPhoto}
+				avatar={props.profileData.avatar}
 				isMineProfile={false}
 			/>
 			< MyPosts
-				avatar={props.profileData.avatar ? props.profileData.avatar : userPhoto}
+				avatar={props.profileData.avatar}
 				postsData={props.profileData.postsData}
 				isMineProfile={false}
 			/>

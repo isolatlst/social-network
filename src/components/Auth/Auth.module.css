@@ -1,6 +1,6 @@
 .auth{
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-template-columns: minmax(250px, 400px)
 }
 .loginForm, .registrationForm{
 	display: grid;
@@ -8,21 +8,39 @@
 	row-gap: 30px;
 	margin: 20px;
 }
+.loginForm{
+	position: relative;
+	grid-template-areas:
+	'email email'
+	'password password'
+	'loginBtn goToRegister';
+	grid-template-columns: 1fr 1fr;
+	column-gap: 20px;
+}
+.loginBtn{	grid-area: loginBtn;}
+.goToRegister{	grid-area: goToRegister; position: relative;} /*Да, это стыдно*/
+.loginForm div:nth-child(1) {	grid-area: email; }
+.loginForm div:nth-child(2) {	grid-area: password;}
+.error{
+	position: absolute; /*Я ведь не спорю*/
+	bottom: -30px;
+	width: 100%;
+	grid-area: password;
+	text-align: center;
+	font-size: 16px;
+}
+
 .button{
 	position: relative;
+	margin-top: 10px;
 	display: flex;
 	justify-content: center;
 }
 .button button{
-	margin-top: 10px;
+	border-radius: 3px;
 	padding-top: calc(var(--index)*0.25);
-	width: 50%;
+	width: 100%;
 	height: 100%;
 	min-height: 45px;
 	font-size: 18px;
 } 
-.button span{
-	position: absolute;
-	top: -10px;
-	font-size: 16px;
-}

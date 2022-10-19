@@ -18,7 +18,7 @@
 .description__name{
 	align-self: start;
 	font-size: calc(var(--index)*1.35);
-	font-weight: 700;
+	font-weight: 700; 
 }
 
 .description__text{

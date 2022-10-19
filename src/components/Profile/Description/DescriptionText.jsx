@@ -18,8 +18,10 @@ const DescriptionText = (props) => {
 	const activateEditMode = () => toggleEditMode(true)
 	const deactivateEditMode = () => {
 		toggleEditMode(false)
-		toggleIsFetching(true)
-		props.updateProfile(data, props.type)
+		if (props.data !== data) {
+			toggleIsFetching(true)
+			props.updateProfile(data.trim(), props.type)
+		}
 	}
 
 	return (
