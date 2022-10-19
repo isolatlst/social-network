@@ -17,7 +17,7 @@ function MyPosts(props) {
 					: ''
 			}
 			<div className={classes.posts__list}>
-				{props.postsData.map(post => < Post key={post.id} message={post.post} avatar={props.avatar} />)}
+				{props.postsData.map(post => < Post key={post.id} id={post.id} message={post.post} avatar={props.avatar} deletePost={props.deletePost} />)}
 			</div>
 		</div>
 	);

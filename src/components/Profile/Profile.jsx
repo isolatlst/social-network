@@ -4,40 +4,42 @@ import Description from './Description/Description'
 
 function Profile(props) {
 	//true - my profile; false - alien profile
-	return (props.userId === props.profileData.userId
+
+	return (props.userId === props.profileId
 		? <main className={classes.content}>
 			< Description
 				isMineProfile={true}
 				updateProfile={props.updateProfile}
-				wallpaper={props.profileData.wallpaper}
-				name={`${props.profileData.firstName} ${props.profileData.lastName}`}
-				birth={props.profileData.birth}
-				location={props.profileData.location}
-				education={props.profileData.education}
-				site={props.profileData.site}
-				avatar={props.profileData.avatar}
+				wallpaper={props.wallpaper}
+				name={props.name}
+				birth={props.birth}
+				location={props.location}
+				education={props.education}
+				site={props.site}
+				avatar={props.avatar}
 			/>
 			< MyPosts
 				isMineProfile={true}
-				avatar={props.profileData.avatar}
-				postsData={props.profileData.postsData}
+				avatar={props.avatar}
+				postsData={props.postsData}
 				addNewPost={props.addNewPost}
+				deletePost={props.deletePost}
 			/>
 		</main>
 		: <main className={classes.content}>
 			< Description
-				wallpaper={props.profileData.wallpaper}
-				name={`${props.profileData.firstName} ${props.profileData.lastName}`}
-				birth={props.profileData.birth}
-				location={props.profileData.location}
-				education={props.profileData.education}
-				site={props.profileData.site}
-				avatar={props.profileData.avatar}
+				wallpaper={props.wallpaper}
+				name={props.name}
+				birth={props.birth}
+				location={props.location}
+				education={props.education}
+				site={props.site}
+				avatar={props.avatar}
 				isMineProfile={false}
 			/>
 			< MyPosts
-				avatar={props.profileData.avatar}
-				postsData={props.profileData.postsData}
+				avatar={props.avatar}
+				postsData={props.postsData}
 				isMineProfile={false}
 			/>
 		</main>

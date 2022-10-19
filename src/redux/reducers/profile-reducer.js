@@ -1,17 +1,15 @@
-import { ADD_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE } from '../actions/profile-action'
+import { ADD_POST, DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE } from '../actions/profile-action'
 
 let initialState = {
-	profileData: {
-		name: '',
-		birth: '',
-		location: '',
-		education: '',
-		site: '',
-		avatar: '',
-		wallpaper: '',
-		postsData: [],
-
-	}, // объект с пустыми данными
+	userId: NaN,
+	name: '',
+	birth: '',
+	location: '',
+	education: '',
+	site: '',
+	avatar: '',
+	wallpaper: '',
+	postsData: [],
 	isFetching: false,  //fixme
 }
 
@@ -20,22 +18,20 @@ const profileReducer = (state = initialState, action) => {
 		case ADD_POST: {
 			return {
 				...state,
-				profileData: {
-					...state.profileData,
-					postsData: [
-						...state.profileData.postsData,
-						{
-							id: state.profileData.postsData.length + 1,
-							post: action.postText
-						}
-					],
-				}
+				postsData: [
+					...state.postsData,
+					{
+						id: state.postsData.length + 1,
+						post: action.postText
+					}
+				],
+
 			}
 		}
 		case SET_USER_PROFILE: {
 			return {
 				...state,
-				profileData: action.data,
+				...action.data,
 				isFetching: false
 			}
 		}
@@ -46,10 +42,15 @@ const profileReducer = (state = initialState, action) => {
 			}
 		}
 		case UPDATE_PROFILE: {
-			state.profileData[action.dataType] = action.data  //fixme please
+			state[action.dataType] = action.data  //fixme please
+			return {
+				...state
+			}
+		}
+		case DELETE_POST: {
 			return {
 				...state,
-				profileData: { ...state.profileData }
+				postsData: state.postsData.filter(post => post.id !== action.postId)
 
 			}
 		}

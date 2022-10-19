@@ -5,7 +5,7 @@ import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedir
 import { useParams } from 'react-router-dom'
 import Profile from './Profile'
 import { getProfile, updateProfile } from '../../redux/thunks/profile-thunk'
-import { addNewPost } from '../../redux/actionCreators/profile-action-creator'
+import { addNewPost, deletePost } from '../../redux/actionCreators/profile-action-creator'
 import ProfilePreloader from '../common/Preloaders/Profile/ProfilePreloader'
 
 
@@ -23,7 +23,15 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
 	return {
 		userId: state.auth.userId,										// Id аккаунта (моего)
-		profileData: state.profilePage.profileData,				// Данные профиля
+		profileId: state.profilePage.userId,						// Id профиля
+		wallpaper: state.profilePage.wallpaper,
+		name: `${state.profilePage.firstName} ${state.profilePage.lastName}`,
+		birth: state.profilePage.birth,
+		location: state.profilePage.location,
+		education: state.profilePage.education,
+		site: state.profilePage.site,
+		avatar: state.profilePage.avatar,
+		postsData: state.profilePage.postsData,
 		isFetching: state.profilePage.isFetching					// Boolean идёт ли загрузка страницы               //fixme
 	}
 }
@@ -33,6 +41,6 @@ let WithUrlDataContainerComponent = (props) => <ProfileContainer {...props} para
 
 
 export default compose(
-	connect(mapStateToProps, { addNewPost, getProfile, updateProfile }),
+	connect(mapStateToProps, { addNewPost, getProfile, updateProfile, deletePost }),
 	withAuthRedirectComponent
 )(WithUrlDataContainerComponent)
