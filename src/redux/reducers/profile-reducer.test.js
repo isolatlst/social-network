@@ -1,4 +1,4 @@
-import { addNewPost, deletePost } from '../actionCreators/profile-action-creator';
+import { deletePost } from '../actionCreators/profile-action-creator';
 import profileReducer from './profile-reducer'
 
 let initialState = {
@@ -13,31 +13,6 @@ let initialState = {
 	isFetching: false,
 }
 
-test('length of posts should be increment', () => {
-	//1. Start test data
-	let action = addNewPost('Just test add post')
-	//2. action
-	let newState = profileReducer(initialState, action)
-	//3. Expectation (only one)
-	expect(newState.postsData.length).toBe(1)
-});
-
-test('reducer add correct text', () => {
-	//1. Start test data
-	let action = addNewPost('Just test add post')
-	//2. action
-	let newState = profileReducer(initialState, action)
-	//3. Expectation (only one)
-	expect(JSON.stringify(newState.postsData)).toBe(
-		JSON.stringify(
-			[{
-				'id': initialState.postsData.length + 1,
-				'post': 'Just test add post'
-
-			}]
-		)
-	)
-});
 
 test('reducer delete post', () => {
 	//1. Start test data

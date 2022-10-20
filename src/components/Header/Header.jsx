@@ -4,15 +4,15 @@ import logo from './logo.svg'
 import Avatar from '../common/Avatar/Avatar'
 
 
-function Header(props) {
+function Header({ avatar, auth, ...props }) {
 	return (
 		<header className={classes.header}>
 			<img src={logo} className={classes.header__logo} alt="logo" />
 			{
-				props.auth
+				auth
 					? <div className={classes.logout}>
-						< Avatar avatar={props.avatar} />
-						<div className={classes.link} onClick={props.logOut}>Log out</div>
+						< Avatar avatar={avatar} />
+						<div className={classes.link} onClick={e => props.logOut()}>Log out</div>
 					</div>
 					: <div className={classes.login}>
 						<NavLink to='/auth' className={classes.link} >
@@ -20,7 +20,6 @@ function Header(props) {
 						</NavLink>
 					</div>
 			}
-
 		</header>
 	);
 }

@@ -1,81 +1,95 @@
 import axios from 'axios'
 
-
-// const axiosInstance = axios.create({
-// 	withCredentials: true,
-// })
+const _getConfig = (method, url, data = null) => ({
+	method,
+	url,
+	xhrFields: {
+		withCredentials: true
+	},
+	data
+})
 
 export const usersAPI = {
-	_getConfig(totalPage, pageSize) {
-		return {
-			method: 'get',
-			url: `/users/?p=${totalPage}&count=${pageSize}`,
-			xhrFields: {
-				withCredentials: true
-			}
-		}
-	},
-	async getUsersAPI(data) {
-		let response = await axios(this._getConfig(data.totalPage, data.pageSize))
-		return response.data
+	async getUsersAPI(incData) {
+		let { data } = await axios(
+			_getConfig(
+				'get',
+				`/users/?p=${incData.totalPage}&count=${incData.pageSize}`,
+			)
+		)
+		return data
 	}
 }
 export const followAPI = {
-	_getConfig(method, userId) {
-		return {
-			method,
-			url: `/follow/${userId}`,
-			xhrFields: {
-				withCredentials: true
-			}
-		}
-	},
-	async toggleFollowAPI(method, userId) {
-		let response = await axios(this._getConfig(method, userId))
-		return response.data
+	async toggleFollowAPI(isFollowed, userId) {
+		let { data } = await axios(
+			_getConfig(
+				isFollowed ? 'delete' : 'post',
+				`/follow/${userId}`,
+			)
+		)
+		return data
 	}
 }
 export const authAPI = {
-	_getConfig(url, data, method) {
-		return {
-			method,
-			url,
-			xhrFields: {
-				withCredentials: true
-			},
-			data
-		}
+	async loginAPI(incData) {
+		let { data } = await axios(
+			_getConfig(
+				'post',
+				`/login`,
+				incData
+			)
+		)
+		return data
 	},
-	async loginAPI(data) {
-		let response = await axios(this._getConfig('/login', data, 'post'))
-		return response.data
-	},
-	async registerAPI(data) {
-		let response = await axios(this._getConfig('/register', data, 'post'))
-		return response.data
+	async registerAPI(incData) {
+		let { data } = await axios(
+			_getConfig(
+				'post',
+				`/register`,
+				incData
+			)
+		)
+		return data
 	},
 	async logoutAPI() {
-		let response = await axios(this._getConfig('/logout', '', 'delete'))
-		return response.data
+		let { data } = await axios(
+			_getConfig(
+				'delete',
+				`/logout`
+			)
+		)
+		return data
 	}
 }
 export const profileAPI = {
-	_getConfig(url, data, method) {
-		return {
-			method: method,
-			url: url,
-			xhrFields: {
-				withCredentials: true
-			},
-			data
-		}
-	},
 	async getProfileAPI(userId) {
-		let response = await axios(this._getConfig(`/profile/${userId}`, '', 'get'))
-		return response.data
+		let { data } = await axios(
+			_getConfig(
+				'get',
+				`/profile/${userId}`,
+			)
+		)
+		return data
 	},
-	async updateProfileAPI(data, type) {
-		let response = await axios(this._getConfig(`/profile`, { data, type }, 'put'))
-		return response.data
+	async updateProfileAPI(incData, type, userId) {
+		let { data } = await axios(
+			_getConfig(
+				'put',
+				`/profile`,
+				{ data: incData, type, userId }
+			)
+		)
+		return data
+	},
+	async deletePostAPI(postId, profileId) {
+		let { data } = await axios(
+			_getConfig(
+				'delete',
+				`/profile/delete-post`,
+				{ postId, profileId }
+			)
+		)
+		return data
 	}
 }

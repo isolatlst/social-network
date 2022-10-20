@@ -217,6 +217,7 @@ const paginateUsers = (req, res, next) => {
 }
 
 
+
 //Обработка авторизации
 const generateAuthToken = () => {
 	return crypto.randomBytes(30).toString('hex');
@@ -258,6 +259,10 @@ server.post('/login', (req, res) => {
 					message: 'Invalid username or password'
 				})
 			}
+		} else {
+			res.json({
+				err: true
+			})
 		}
 	}
 });
@@ -360,12 +365,12 @@ server.delete('/follow/:userId', [requireAuth], (req, res) => {
 })
 //Обработка изменения данных
 server.put('/profile', [requireAuth], (req, res) => {
-	let userId = authTokens[req.cookies['AuthToken']].userId
-	let data = req.body.data
+	let userId = req.body.userId
 	let type = req.body.type
 	let profile = usersData.find(profile => profile.userId === userId)
 	if (profile) {
-		profile[type] = data
+		let data = Array.isArray(profile[type]) ? { id: profile[type].length, post: req.body.data } : req.body.data
+		Array.isArray(profile[type]) ? profile[type].unshift(data) : profile[type] = data
 		res.json({
 			err: false,
 			data,
@@ -373,7 +378,27 @@ server.put('/profile', [requireAuth], (req, res) => {
 		})
 	}
 })
-
+//Обработка удаления поста со страницы
+server.delete('/profile/delete-post', [requireAuth], (req, res) => {
+	let profileId = req.body.profileId
+	let profileIndex = usersData.findIndex(profile => profile.userId === profileId)
+	if (profileIndex !== -1) {
+		let postId = req.body.postId
+		let postIndex = usersData[profileIndex].postsData.findIndex(post => post.id === postId)
+		if (postIndex !== -1) {
+			usersData[profileIndex].postsData.splice(postIndex, 1)
+			res.json({
+				err: false,
+				postId
+			})
+		} else {
+			res.json({
+				err: true,
+				postId
+			})
+		}
+	}
+})
 
 
 

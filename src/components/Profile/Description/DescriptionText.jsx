@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 
 
 
-const DescriptionText = (props) => {
+const DescriptionText = ({ userId, type, text, ...props }) => {
 	const [editMode, toggleEditMode] = useState(false)
 	const [data, setData] = useState(props.data)
 	const [isFetching, toggleIsFetching] = useState(false)
@@ -20,22 +20,23 @@ const DescriptionText = (props) => {
 		toggleEditMode(false)
 		if (props.data !== data) {
 			toggleIsFetching(true)
-			props.updateProfile(data.trim(), props.type)
+			props.updateProfile(data.trim(), type, userId)
 		}
 	}
 
 	return (
 		editMode
 			? < div className={`${classes.description__text} ${classes.description__text_edit_mode}`} >
-				{props.text}
+				{text}
 				&nbsp;
 				<input onChange={onChangeData} onBlur={deactivateEditMode} autoFocus type="text" value={data} />
 			</div>
 			: < div className={classes.description__text} >
 				{isFetching ? <span className={classes.isFetchingBlock} /> : ''}
-				{props.text}
+				{text}
 				&nbsp;
-				<span onDoubleClick={props.isMineProfile ? activateEditMode : null}>
+				<span className={props.isMineProfile ? classes.editable : ''}
+					onDoubleClick={props.isMineProfile ? activateEditMode : null}>
 					{data}
 				</span>
 			</ div>

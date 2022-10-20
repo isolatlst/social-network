@@ -11,24 +11,23 @@ import {
 
 
 export const logIn = (authData) => async (dispatch) => {
-	let response = await authAPI.loginAPI(authData)
-	response.err ? dispatch(toggleAuthStatus(false)) : dispatch(toggleAuthStatus(true))
-	dispatch(setUserData(response.userId))
-	dispatch(stopSubmit('authLogin', { _error: response.message }))
+	let { err, userId, message } = await authAPI.loginAPI(authData)
+	err ? dispatch(toggleAuthStatus(false)) : dispatch(toggleAuthStatus(true))
+	dispatch(setUserData(userId))
+	dispatch(stopSubmit('authLogin', { _error: message }))
 }
 
 
 export const register = (authData) => async (dispatch) => {
-	let response = await authAPI.registerAPI(authData)
-	dispatch(stopSubmit('authRegister', { _error: response.message }))
+	let { message } = await authAPI.registerAPI(authData)
+	dispatch(stopSubmit('authRegister', { _error: message }))
 }
 
 export const logOut = () => async (dispatch) => {
-	let response = await authAPI.logoutAPI()
-	if (!response.err) {
+	let { err } = await authAPI.logoutAPI()
+	if (!err) {
 		dispatch(toggleAuthStatus(false))
 		dispatch(setUserData(0))
-		dispatch(setUserProfile({ postsData: [] }))
+		dispatch(setUserProfile({ userId: 0, email: '', firstName: '', lastName: '', name: '', birth: '', location: '', education: '', site: '', avatar: '', wallpaper: '', postsData: [], }))
 	}
-	// dispatch(stopSubmit('logout', { _error: response.message }))
 }

@@ -2,9 +2,9 @@ import classes from './Avatar.module.css'
 // import userPhoto from '../../../assets/images/userPhoto.png'
 import userPhoto from '../../../assets/images/zxc-cat.gif'
 
-function Avatar(props) {
+function Avatar({ avatar }) {
 	return (
-		<img className={classes.avatar} src={props.avatar ? props.avatar : userPhoto} alt="(*_*)" />
+		<img className={classes.avatar} src={avatar ? avatar : userPhoto} alt="(*_*)" />
 	)
 }
 

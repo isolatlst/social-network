@@ -7,13 +7,19 @@ import AuthContainer from './components/Auth/AuthContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import Messages from './components/Messages/Messages';
+import { connect } from 'react-redux';
+import { logIn } from './redux/thunks/auth-thunk'
+import { useEffect } from 'react';
 
-function App() {
+function App(props) {
+	useEffect(() => {
+		if (document.cookie.length) props.logIn()
+	}, [])// eslint-disable-line react-hooks/exhaustive-deps
 	return (
 		<div className="app">
 			<Router>
 				<HeaderContainer />
-				<Sidebar />
+				<Sidebar myId={props.myId} />
 				<Routes className='main'>
 					<Route path='/' element={<AuthContainer />}>
 						<Route path='auth' element={<AuthContainer />} />
@@ -29,4 +35,12 @@ function App() {
 	);
 }
 
-export default App;
+let mapStateToProps = (state) => {
+	return {
+		auth: state.auth.authStatus,
+		myId: state.auth.userId,
+	}
+}
+
+
+export default connect(mapStateToProps, { logIn })(App);

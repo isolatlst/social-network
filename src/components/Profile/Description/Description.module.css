@@ -29,7 +29,7 @@
 	height: calc(var(--index)*1.07);
 }
 
-.description__text span {
+.editable {
 	cursor: pointer;
 	user-select: none;
 }

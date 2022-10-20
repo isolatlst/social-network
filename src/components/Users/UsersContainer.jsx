@@ -6,22 +6,24 @@ import { getUsers, toggleFollow } from '../../redux/thunks/users-thunk'
 import { getFollowingInProgressSelector, getIsFetchingSelector, getPagesCountSelector, getPagesSizeSelector, getTotalPageSelector, getUsersSelector } from '../../redux/selectors/users-selectors'
 import UsersPreloader from '../common/Preloaders/Users/UsersPreloader'
 import Users from './Users'
+import { useEffect } from 'react'
 
 
-class UsersContainer extends React.Component {
-	componentDidMount() { this.props.getUsers(this.props.totalPage, this.props.pageSize) }
-	toggleFollowFunc = (userId, isFollowed) => { this.props.toggleFollow(userId, isFollowed) }
-	swapPage = (e) => { if (e.target.localName === 'span') this.props.getUsers(Number(e.target.innerHTML), this.props.pageSize) }
-	selectPageSize = (e) => { if (e.target.localName === 'span') this.props.getUsers(1, Number(e.target.innerHTML)) }
-	render() {
-		if (this.props.isFetching) return <UsersPreloader />  //fixme
-		return <Users
-			{...this.props}
-			swapPage={this.swapPage}
-			selectPageSize={this.selectPageSize}
-			toggleFollowFunc={this.toggleFollowFunc}
+function UsersContainer({ isFetching, ...props }) {
+	useEffect(() => {
+		props.getUsers(props.totalPage, props.pageSize)
+	}, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+	const swapPage = (e) => { if (e.target.localName === 'span') props.getUsers(Number(e.target.innerHTML), props.pageSize) }
+	const selectPageSize = (e) => { if (e.target.localName === 'span') props.getUsers(1, Number(e.target.innerHTML)) }
+
+	return isFetching
+		? <UsersPreloader />
+		: <Users
+			{...props}
+			swapPage={swapPage}
+			selectPageSize={selectPageSize}
 		/>
-	}
 }
 
 

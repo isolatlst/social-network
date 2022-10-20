@@ -4,18 +4,16 @@ import { Navigate } from 'react-router-dom'
 import { logIn, register } from '../../redux/thunks/auth-thunk'
 import Auth from './Auth'
 
+function AuthContainer({ auth: { authStatus, userId }, ...props }) {
+	const logIn = (formData) => { props.logIn(formData) }
+	const register = (formData) => { props.register(formData) }
 
-class AuthContainer extends React.Component {
-	logIn = (formData) => { this.props.logIn(formData) }
-	register = (formData) => { this.props.register(formData) }
-
-	render() {
-		return this.props.auth.authStatus ? < Navigate to='/profile' />
-			: < Auth
-				logIn={this.logIn}
-				register={this.register}
-			/>
-	}
+	return authStatus
+		? < Navigate to={`/profile/${userId}`} />
+		: < Auth
+			logIn={logIn}
+			register={register}
+		/>
 }
 
 

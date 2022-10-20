@@ -1,0 +1,43 @@
+.users__item{
+	display: grid;
+	grid-template-areas: 'button info';
+	grid-template-columns: auto 1fr;
+	grid-gap: calc(var(--index)*1.6);
+	margin: 15px 0px calc(var(--index)*1.75);
+}
+
+.user__info{
+	display: grid;
+	grid-area: info;
+	grid-template-areas: 
+	'avatar name'
+	'avatar location';
+	align-items: center;
+	grid-template-columns: calc(var(--index)*4.5) 1fr;
+	grid-gap: calc(var(--index)*1.25);
+}
+.status_button{
+	grid-area: button;
+	align-self: center;
+}
+.status_button::before{ 
+	content: 'unfollow';
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	height: 0;
+}
+.avatar{
+	grid-area: avatar;
+	width: 100%;
+}
+.name{
+	grid-area: name;
+	max-width: 100%;
+	font-size: calc(var(--index)*1.2);
+	font-weight: 700;
+}
+.location{
+	grid-area: location;
+	font-size: calc(var(--index)*1.1);
+}

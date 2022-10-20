@@ -1,12 +1,12 @@
 import classes from './Post.module.css'
 import Avatar from '../../../common/Avatar/Avatar'
 
-function Post(props) {
+function Post({ avatar, message, id, ...props }) {
 	return (
 		<div className={classes.posts__item}>
-			<div className={classes.deletePostButton} onClick={e => props.deletePost(props.id)}></div>
-			<Avatar avatar={props.avatar} />
-			<div>{props.message}</div>
+			{props.isMineProfile ? <div className={classes.deletePostButton} onClick={e => props.deletePost(id)}></div> : ''}
+			<Avatar avatar={avatar} />
+			<div>{message}</div>
 		</div>
 	);
 }

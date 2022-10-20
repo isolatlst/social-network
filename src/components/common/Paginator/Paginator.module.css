@@ -1,0 +1,20 @@
+.navigation{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: 100%;
+}
+.navigation span{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 18px;
+	cursor: pointer;
+}
+.selectedPaginationLink, .selectedPageSize{
+	background: #000;
+	color: #fff;
+}

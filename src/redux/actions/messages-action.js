@@ -1,2 +1,2 @@
 //Messages const
-export const SEND_MESSAGE = 'SEND-MESSAGE'
+export const SEND_MESSAGE = 'MESSAGES/SEND-MESSAGE'

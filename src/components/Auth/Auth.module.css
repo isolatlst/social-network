@@ -3,13 +3,13 @@
 	grid-template-columns: minmax(250px, 400px)
 }
 .loginForm, .registrationForm{
+	position: relative;
 	display: grid;
 	grid-template-rows: repeat(auto-fit, 45px);
 	row-gap: 30px;
 	margin: 20px;
 }
 .loginForm{
-	position: relative;
 	grid-template-areas:
 	'email email'
 	'password password'
@@ -18,11 +18,11 @@
 	column-gap: 20px;
 }
 .loginBtn{	grid-area: loginBtn;}
-.goToRegister{	grid-area: goToRegister; position: relative;} /*Да, это стыдно*/
+.goToRegister{	grid-area: goToRegister; }
 .loginForm div:nth-child(1) {	grid-area: email; }
 .loginForm div:nth-child(2) {	grid-area: password;}
 .error{
-	position: absolute; /*Я ведь не спорю*/
+	position: absolute; 
 	bottom: -30px;
 	width: 100%;
 	grid-area: password;
@@ -44,3 +44,7 @@
 	min-height: 45px;
 	font-size: 18px;
 } 
+.button .error{
+	position: absolute; 
+	bottom: 50px;
+}

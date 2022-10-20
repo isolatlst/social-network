@@ -4,20 +4,20 @@ import { compose } from 'redux'
 import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedirectComponent'
 import { useParams } from 'react-router-dom'
 import Profile from './Profile'
-import { getProfile, updateProfile } from '../../redux/thunks/profile-thunk'
-import { addNewPost, deletePost } from '../../redux/actionCreators/profile-action-creator'
+import { getProfile, updateProfile, deleteProfilePost } from '../../redux/thunks/profile-thunk'
 import ProfilePreloader from '../common/Preloaders/Profile/ProfilePreloader'
+import { useEffect } from 'react'
 
 
-class ProfileContainer extends React.Component {
-	componentDidMount() { this.props.getProfile(this.props.params.userId ? this.props.params.userId : this.props.userId) }
+function ProfileContainer({ isFetching, ...props }) {
+	let { userId } = useParams()
+	useEffect(() => {
+		props.getProfile(userId)
+	}, [userId]) // eslint-disable-line react-hooks/exhaustive-deps
 
-	render() {
-		if (this.props.isFetching) return <ProfilePreloader />        //fixme
-		return <Profile
-			{...this.props}
-		/>
-	}
+	return isFetching
+		? <ProfilePreloader />
+		: <Profile {...props} />
 }
 
 let mapStateToProps = (state) => {
@@ -32,15 +32,11 @@ let mapStateToProps = (state) => {
 		site: state.profilePage.site,
 		avatar: state.profilePage.avatar,
 		postsData: state.profilePage.postsData,
-		isFetching: state.profilePage.isFetching					// Boolean идёт ли загрузка страницы               //fixme
+		isFetching: state.profilePage.isFetching
 	}
 }
 
-
-let WithUrlDataContainerComponent = (props) => <ProfileContainer {...props} params={useParams()} />
-
-
 export default compose(
-	connect(mapStateToProps, { addNewPost, getProfile, updateProfile, deletePost }),
+	connect(mapStateToProps, { getProfile, updateProfile, deleteProfilePost }),
 	withAuthRedirectComponent
-)(WithUrlDataContainerComponent)
+)(ProfileContainer)

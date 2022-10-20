@@ -1,7 +1,10 @@
-import { ADD_POST, DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE } from '../actions/profile-action'
+import { DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE } from '../actions/profile-action'
 
 let initialState = {
-	userId: NaN,
+	userId: 0,
+	email: '',
+	firstName: '',
+	lastName: '',
 	name: '',
 	birth: '',
 	location: '',
@@ -10,24 +13,11 @@ let initialState = {
 	avatar: '',
 	wallpaper: '',
 	postsData: [],
-	isFetching: false,  //fixme
+	isFetching: false,
 }
 
 const profileReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case ADD_POST: {
-			return {
-				...state,
-				postsData: [
-					...state.postsData,
-					{
-						id: state.postsData.length + 1,
-						post: action.postText
-					}
-				],
-
-			}
-		}
 		case SET_USER_PROFILE: {
 			return {
 				...state,
@@ -42,16 +32,17 @@ const profileReducer = (state = initialState, action) => {
 			}
 		}
 		case UPDATE_PROFILE: {
-			state[action.dataType] = action.data  //fixme please
 			return {
-				...state
+				...state,
+				[action.dataType]: Array.isArray(state[action.dataType]) ? [action.data, ...state[action.dataType]] : action.data
 			}
 		}
 		case DELETE_POST: {
 			return {
 				...state,
-				postsData: state.postsData.filter(post => post.id !== action.postId)
-
+				postsData: action.isDeleted
+					? state.postsData.filter(post => post.id !== action.postId)
+					: [...state.postsData]
 			}
 		}
 

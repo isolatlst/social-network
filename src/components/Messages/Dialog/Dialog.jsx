@@ -5,12 +5,14 @@ import DialogItem from './DialogItem/DialogItem';
 function Dialog(props) {
 	let addNewMessage = (formData) => { props.sendNewMessage(formData.newMessageData) }
 
-	let messages = props.messagesData.map(message => < DialogItem key={message.id} friend__name={props.friend__name} friend__avatar={props.friend__avatar} friend__message={message.message} />)
-
 	return (
 		<div className={classes.dialog}>
 			<div className={classes.dialog__items}  >
-				{messages}
+				{
+					props.messagesData.map(message =>
+						< DialogItem key={message.id} friend__name={props.friend__name} friend__avatar={props.friend__avatar} friend__message={message.message} />
+					)
+				}
 			</div>
 			<AddMessageReduxForm onSubmit={addNewMessage} />
 		</div>

@@ -1,11 +1,13 @@
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { maxLength150 } from '../../common/validators/validators'
-import { Textarea } from '../../common/FormControls/FormControls'
+import { createField, Textarea } from '../../common/FormControls/FormControls'
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 function MyPosts(props) {
-	let onAddNewPost = (formData) => { props.addNewPost(formData.newPostData) }
+	let addNewPost = (formData) => { props.updateProfile(formData.newPostData, 'postsData', props.userId); }
+	let deletePost = (postId) => { props.deleteProfilePost(postId, props.userId) }
+
 	return (
 		<div className={classes.profilePosts}>
 			<div className={classes.title}>
@@ -13,11 +15,11 @@ function MyPosts(props) {
 			</div>
 			{
 				props.isMineProfile
-					? <AddNewPostReduxForm onSubmit={onAddNewPost} />
+					? <AddNewPostReduxForm onSubmit={addNewPost} />
 					: ''
 			}
 			<div className={classes.posts__list}>
-				{props.postsData.map(post => < Post key={post.id} id={post.id} message={post.post} avatar={props.avatar} deletePost={props.deletePost} />)}
+				{props.postsData.map(post => < Post key={post.id} id={post.id} message={post.post} avatar={props.avatar} isMineProfile={props.isMineProfile} deletePost={deletePost} />)}
 			</div>
 		</div>
 	);
@@ -28,8 +30,7 @@ function MyPosts(props) {
 const AddNewPostForm = (props) => {
 	return (
 		<form className={classes.newPost} onSubmit={props.handleSubmit}>
-			<Field component={Textarea} name='newPostData' placeholder='type something interesting...'
-				validate={[maxLength150]} maxLength={150} />
+			{createField(Textarea, [maxLength150], 'type something interesting...', 'newPostData', '', '', { maxLength: 150 })}
 			<button className={classes.button}>Add post</button>
 		</form >
 	)
