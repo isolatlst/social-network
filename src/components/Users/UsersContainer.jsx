@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedirectComponent'
@@ -8,7 +8,6 @@ import UsersPreloader from '../common/Preloaders/Users/UsersPreloader'
 import classes from './Users.module.css'
 import Users from './Users'
 import Paginator from '../common/Paginator/Paginator'
-import { useEffect } from 'react'
 
 
 function UsersContainer({ isFetching, ...props }) {
@@ -19,16 +18,18 @@ function UsersContainer({ isFetching, ...props }) {
 	const swapPage = (page) => { props.getUsers(page, props.pageSize) }
 	const selectPageSize = (e) => { if (e.target.localName === 'span') props.getUsers(props.totalPage, Number(e.target.innerHTML)) }
 
+
+	if (!props.pagesCount) {
+		return <UsersPreloader />
+	}
 	return <main className={classes.content}>
 		{
-			isFetching ?
-				props.pagesCount
-					? <>
-						< Paginator pagesCount={props.pagesCount} totalPage={props.totalPage} pageSize={props.pageSize}
-							swapPage={swapPage} selectPageSize={selectPageSize} />
-						<UsersPreloader />
-					</>
-					: <UsersPreloader />
+			isFetching
+				? <>
+					< Paginator pagesCount={props.pagesCount} totalPage={props.totalPage} pageSize={props.pageSize}
+						swapPage={swapPage} selectPageSize={selectPageSize} />
+					<UsersPreloader />
+				</>
 				: <>
 					< Paginator pagesCount={props.pagesCount} totalPage={props.totalPage} pageSize={props.pageSize}
 						swapPage={swapPage} selectPageSize={selectPageSize} />

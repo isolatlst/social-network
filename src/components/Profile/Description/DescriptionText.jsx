@@ -1,8 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import classes from './Description.module.css'
-import { useState } from 'react'
-import { useEffect } from 'react'
-
+import loader from '../../../assets/icons/loading.gif'
 
 
 const DescriptionText = ({ userId, type, text, ...props }) => {
@@ -39,6 +37,7 @@ const DescriptionText = ({ userId, type, text, ...props }) => {
 					onDoubleClick={props.isMineProfile ? activateEditMode : null}>
 					{data}
 				</span>
+				<img src={loader} alt="load" /> {/*Так-то тут display: none потому что react умеет делать только динамический import*/}
 			</ div>
 	)
 }

@@ -44,3 +44,6 @@
 	font-size: calc(var(--index)*1);
 	text-decoration: underline;
 }
+.description__text img {
+	display: none;
+}

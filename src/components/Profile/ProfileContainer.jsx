@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedirectComponent'
@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom'
 import Profile from './Profile'
 import { getProfile, updateProfile, deleteProfilePost } from '../../redux/thunks/profile-thunk'
 import ProfilePreloader from '../common/Preloaders/Profile/ProfilePreloader'
-import { useEffect } from 'react'
 
 
 function ProfileContainer({ isFetching, ...props }) {
