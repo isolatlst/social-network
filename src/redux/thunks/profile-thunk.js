@@ -1,3 +1,4 @@
+import { reset } from "redux-form"
 import {
 	profileAPI
 } from "../../API/api"
@@ -12,10 +13,11 @@ export const getProfile = (userId) => async (dispatch) => {
 	dispatch(setUserProfile(profileData))
 }
 
-export const updateProfile = (incData, incType, userId) => async (dispatch) => {
+export const updateProfile = (incData, incType, userId, form) => async (dispatch) => {
 	let { err, data, type } = await profileAPI.updateProfileAPI(incData, incType, userId)
 	if (!err) {
 		dispatch(updateProfileData(data, type))
+		dispatch(reset(form))
 	}
 }
 

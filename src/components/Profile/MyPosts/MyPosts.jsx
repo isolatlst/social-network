@@ -5,7 +5,7 @@ import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 function MyPosts(props) {
-	let addNewPost = (formData) => { props.updateProfile(formData.newPostData, 'postsData', props.userId); }
+	let addNewPost = (formData) => { props.updateProfile(formData.newPostData, 'postsData', props.userId, 'profileAddNewPost'); }
 	let deletePost = (postId) => { props.deleteProfilePost(postId, props.userId) }
 
 	return (

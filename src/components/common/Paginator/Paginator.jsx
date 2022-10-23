@@ -1,21 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classes from './Paginator.module.css'
 
 
 
-function Paginator({ pagesCount, totalPage, pageSize, ...props }) {
-	let pages = []
+function Paginator({ pagesCount, totalPage, pageSize, portionSize = 5, ...props }) {
+	const pages = []
 	for (let i = 1; i <= pagesCount; i++) {
 		pages.push(i)
 	}
+	const portionCount = Math.ceil(pagesCount / portionSize)
+	const [currentPortion, setCurrentPortion] = useState(Math.ceil(totalPage / portionSize))
+	const leftPortionPageNumber = portionSize * (currentPortion - 1)
+	const rightPortionPageNumber = leftPortionPageNumber + portionSize + 1
+
 	return (
 		<div className={classes.navigation}>
-			<div className={classes.modulePagination} onClick={props.swapPage}>
-				{
-					pages.map((page, index) =>
-						<span key={index} className={totalPage === page ? classes.selectedPaginationLink : ''}> {page}</span>
+			<div className={classes.modulePagination}>
+				<button disabled={!(currentPortion > 1)}
+					className={`${classes.button} ${!(currentPortion > 1) && classes.disabled}`}
+					onClick={() => { setCurrentPortion(currentPortion - 1) }}>
+					{'<'}
+				</button>
+				{pages
+					.filter(page => page > leftPortionPageNumber && page < rightPortionPageNumber)
+					.map(page =>
+						<span key={page} onClick={() => props.swapPage(page)} className={totalPage === page ? classes.selectedPaginationLink : ''}> {page}</span>
 					)
 				}
+				<button disabled={currentPortion > portionCount}
+					className={`${classes.button} ${currentPortion >= portionCount && classes.disabled}`}
+					onClick={() => { setCurrentPortion(currentPortion + 1) }}>
+					{'>'}
+				</button>
 			</div>
 			<div className={classes.pageSize} onClick={props.selectPageSize}>
 				<span className={pageSize === 3 ? classes.selectedPageSize : ''}>3</span>

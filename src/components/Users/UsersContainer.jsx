@@ -5,7 +5,9 @@ import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedir
 import { getUsers, toggleFollow } from '../../redux/thunks/users-thunk'
 import { getFollowingInProgressSelector, getIsFetchingSelector, getPagesCountSelector, getPagesSizeSelector, getTotalPageSelector, getUsersSelector } from '../../redux/selectors/users-selectors'
 import UsersPreloader from '../common/Preloaders/Users/UsersPreloader'
+import classes from './Users.module.css'
 import Users from './Users'
+import Paginator from '../common/Paginator/Paginator'
 import { useEffect } from 'react'
 
 
@@ -14,16 +16,26 @@ function UsersContainer({ isFetching, ...props }) {
 		props.getUsers(props.totalPage, props.pageSize)
 	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-	const swapPage = (e) => { if (e.target.localName === 'span') props.getUsers(Number(e.target.innerHTML), props.pageSize) }
-	const selectPageSize = (e) => { if (e.target.localName === 'span') props.getUsers(1, Number(e.target.innerHTML)) }
+	const swapPage = (page) => { props.getUsers(page, props.pageSize) }
+	const selectPageSize = (e) => { if (e.target.localName === 'span') props.getUsers(props.totalPage, Number(e.target.innerHTML)) }
 
-	return isFetching
-		? <UsersPreloader />
-		: <Users
-			{...props}
-			swapPage={swapPage}
-			selectPageSize={selectPageSize}
-		/>
+	return <main className={classes.content}>
+		{
+			isFetching ?
+				props.pagesCount
+					? <>
+						< Paginator pagesCount={props.pagesCount} totalPage={props.totalPage} pageSize={props.pageSize}
+							swapPage={swapPage} selectPageSize={selectPageSize} />
+						<UsersPreloader />
+					</>
+					: <UsersPreloader />
+				: <>
+					< Paginator pagesCount={props.pagesCount} totalPage={props.totalPage} pageSize={props.pageSize}
+						swapPage={swapPage} selectPageSize={selectPageSize} />
+					<Users {...props} />
+				</>
+		}
+	</main>
 }
 
 

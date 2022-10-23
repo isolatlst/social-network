@@ -11,9 +11,9 @@ function Auth(props) {
 	const [isModalOpen, setOpenModal] = useState(false)
 
 	return (
-		<main className={classes.auth}>
+		<main className={classes.auth} onKeyDown={e => { if (e.keyCode === 27) setOpenModal(false) }}>
 			<LoginReduxForm onSubmit={props.logIn} setOpenModal={setOpenModal} />
-			< Modal isModalOpen={isModalOpen} setOpenModal={setOpenModal}>
+			< Modal isModalOpen={isModalOpen} setOpenModal={setOpenModal} >
 				<RegisterReduxForm onSubmit={props.register} />
 			</Modal>
 		</main>
@@ -38,9 +38,10 @@ const LoginForm = (props) => {
 }
 const LoginReduxForm = reduxForm({ form: 'authLogin' })(LoginForm)
 
+
 const RegisterForm = (props) => {
 	return (
-		<form className={classes.registrationForm} onSubmit={props.handleSubmit}>
+		<form className={classes.registrationForm} onSubmit={props.handleSubmit} >
 			{createField(Input, [requiredField], '', 'firstName', 'text', 'First name')}
 			{createField(Input, [requiredField], '', 'lastName', 'text', 'Last name')}
 			{createField(Input, [requiredField], '', 'email', 'text', 'Email address')} {/*+correctEmail*/}
