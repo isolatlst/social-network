@@ -16,22 +16,22 @@ function Paginator({ pagesCount, totalPage, pageSize, portionSize = 5, ...props 
 	return (
 		<div className={classes.navigation}>
 			<div className={classes.modulePagination}>
-				<button disabled={!(currentPortion > 1)}
+				{portionCount > 1 && <button disabled={!(currentPortion > 1)}
 					className={`${classes.button} ${!(currentPortion > 1) && classes.disabled}`}
 					onClick={() => { setCurrentPortion(currentPortion - 1) }}>
 					{'<'}
-				</button>
+				</button>}
 				{pages
 					.filter(page => page > leftPortionPageNumber && page < rightPortionPageNumber)
 					.map(page =>
 						<span key={page} onClick={() => props.swapPage(page)} className={totalPage === page ? classes.selectedPaginationLink : ''}> {page}</span>
 					)
 				}
-				<button disabled={currentPortion > portionCount}
+				{portionCount > 1 && <button disabled={currentPortion > portionCount}
 					className={`${classes.button} ${currentPortion >= portionCount && classes.disabled}`}
 					onClick={() => { setCurrentPortion(currentPortion + 1) }}>
 					{'>'}
-				</button>
+				</button>}
 			</div>
 			<div className={classes.pageSize} onClick={props.selectPageSize}>
 				<span className={pageSize === 3 ? classes.selectedPageSize : ''}>3</span>
