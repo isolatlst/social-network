@@ -19,7 +19,7 @@ function App(props) {
 	}, [])// eslint-disable-line react-hooks/exhaustive-deps
 	return (
 		<div className="app">
-			<Router>
+			<Router basename={process.env.PUBLIC_URL}>
 				<HeaderContainer />
 				<Sidebar myId={props.myId} />
 				<React.Suspense fallback={<div>Loading...</div>}>

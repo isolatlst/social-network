@@ -8,7 +8,7 @@ function Description(props) { //fixme
 		<div className={classes.description}>
 			< Wallpaper wallpaper={props.wallpaper} />
 			<div className={classes.description__body}>
-				< Avatar avatar={props.avatar} />
+				< Avatar avatar={props.avatar} scalable={true} />
 				<div className={classes.description__info}>
 					{/* {
 						!props.isMineProfile

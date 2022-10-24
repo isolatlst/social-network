@@ -3,19 +3,20 @@
 	display: grid;
 	grid-template-areas:
 	"avatar name";
-	grid-template-columns: calc(var(--index)*7.5) 1fr;
-	column-gap: calc(var(--index)*2);
+	grid-template-columns: minmax(60px,calc(var(--index)*7.5)) minmax(165px, 1fr);
+	column-gap: calc(var(--index)*1.75);
 }
 
 .description__info{
 	display: grid;
 	grid-area: name;
 	align-items: end;
-	row-gap: calc(var(--index)*0.75);
+	row-gap: calc(1vw*1.25);
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 .description__name{
+	margin-bottom: 5px;
 	align-self: start;
 	font-size: calc(var(--index)*1.35);
 	font-weight: 700; 
@@ -28,10 +29,15 @@
 	font-size: calc(var(--index)*1);
 	height: calc(var(--index)*1.07);
 }
+@media (max-width: 400px) {
+	.description__text{font-size: 10px;}
+}
 
 .editable {
 	cursor: pointer;
 	user-select: none;
+	white-space: nowrap;
+	width: 100%;
 }
 .isFetchingBlock{
 	background: url('../../../assets/icons/loading.gif') 0 0/auto 100% no-repeat;
@@ -41,9 +47,14 @@
 	height: calc(var(--index)*1.05);
 }
 .description__text_edit_mode input{
-	font-size: calc(var(--index)*1);
+	font-size: inherit;
+	width: 100%;
 	text-decoration: underline;
+	
 }
 .description__text img {
 	display: none;
+}
+.text{
+	white-space: nowrap;
 }

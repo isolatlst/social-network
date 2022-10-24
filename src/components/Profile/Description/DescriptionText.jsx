@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import classes from './Description.module.css'
 import loader from '../../../assets/icons/loading.gif'
+import { onDoubleClick } from '../../common/custom-events/custom-events'
 
 
 const DescriptionText = ({ userId, type, text, ...props }) => {
@@ -13,7 +14,7 @@ const DescriptionText = ({ userId, type, text, ...props }) => {
 	}, [props.data])
 
 	const onChangeData = (e) => setData(e.currentTarget.value)
-	const activateEditMode = () => toggleEditMode(true)
+	const activateEditMode = () => onDoubleClick(toggleEditMode, true)
 	const deactivateEditMode = () => {
 		toggleEditMode(false)
 		if (props.data !== data) {
@@ -25,16 +26,16 @@ const DescriptionText = ({ userId, type, text, ...props }) => {
 	return (
 		editMode
 			? < div className={`${classes.description__text} ${classes.description__text_edit_mode}`} >
-				{text}
+				<span className={classes.text}>{text}</span>
 				&nbsp;
-				<input onChange={onChangeData} onBlur={deactivateEditMode} autoFocus type="text" value={data} />
+				<input onChange={onChangeData} onBlur={deactivateEditMode} autoFocus type="text" value={data} meta-width={data.length} />
 			</div>
-			: < div className={classes.description__text} >
+			: <div className={classes.description__text} >
 				{isFetching ? <span className={classes.isFetchingBlock} /> : ''}
-				{text}
+				<span className={classes.text}>{text}</span>
 				&nbsp;
 				<span className={props.isMineProfile ? classes.editable : ''}
-					onDoubleClick={props.isMineProfile ? activateEditMode : null}>
+					onClick={props.isMineProfile ? activateEditMode : null}>
 					{data}
 				</span>
 				<img src={loader} alt="load" /> {/*Так-то тут display: none потому что react умеет делать только динамический import*/}
