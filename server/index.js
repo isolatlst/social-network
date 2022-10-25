@@ -313,6 +313,7 @@ server.post('/register', (req, res) => {
 //Обработка выхода
 server.delete('/logout', [requireAuth], (req, res) => {
 	delete authTokens[req.cookies.AuthToken]
+	res.clearCookie('AuthToken')
 	res.json({
 		err: false,
 		message: 'Bye!'

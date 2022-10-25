@@ -6,7 +6,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import './reset.css';
 import Sidebar from './components/Sidebar/Sidebar';
-import HeaderContainer from './components/Header/HeaderContainer';
+import Header from './components/Header/Header';
 const AuthContainer = React.lazy(() => import('./components/Auth/AuthContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
@@ -15,12 +15,12 @@ const Messages = React.lazy(() => import('./components/Messages/Messages'));
 
 function App(props) {
 	useEffect(() => {
-		if (/AuthToken=/.test(document.cookie)) props.logIn()
+		if (/AuthToken=*./.test(document.cookie)) props.logIn()
 	}, [])// eslint-disable-line react-hooks/exhaustive-deps
 	return (
 		<div className="app">
 			<Router basename={process.env.PUBLIC_URL}>
-				<HeaderContainer />
+				<Header />
 				<Sidebar myId={props.myId} />
 				<React.Suspense fallback={<div>Loading...</div>}>
 					<Routes className='main'>

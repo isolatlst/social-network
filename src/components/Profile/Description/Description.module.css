@@ -1,4 +1,5 @@
 .description__body{
+	position: relative;
 	margin: calc(var(--index)*2.5) 0px calc(var(--index)*2) 0px;
 	display: grid;
 	grid-template-areas:
@@ -56,5 +57,17 @@
 	display: none;
 }
 .text{
+	white-space: nowrap;
+}
+
+
+.changePhotos{
+	position: absolute;
+	top: calc(var(--index)*-1.5);
+	right: 10px;
+	font-size: calc(var(--index)*1);
+	text-decoration: underline;
+}
+.changePhotos__text{
 	white-space: nowrap;
 }

@@ -12,9 +12,12 @@ import {
 
 export const logIn = (authData) => async (dispatch) => {
 	let { err, userId, message } = await authAPI.loginAPI(authData)
-	err ? dispatch(toggleAuthStatus(false)) : dispatch(toggleAuthStatus(true))
-	dispatch(setUserData(userId))
-	dispatch(stopSubmit('authLogin', { _error: message }))
+	if (!err) {
+		dispatch(toggleAuthStatus(true))
+		dispatch(setUserData(userId))
+	} else {
+		dispatch(stopSubmit('authLogin', { _error: message }))
+	}
 }
 
 

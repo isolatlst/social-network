@@ -10,10 +10,6 @@
 	padding: 10px;
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
-.dialog__item img{
-	grid-area: avatar;
-	align-self: start;
-}
 .dialog__name{
 	grid-area: name;
 	font-size: 1.25em;

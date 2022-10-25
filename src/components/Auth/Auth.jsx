@@ -30,6 +30,8 @@ const LoginForm = (props) => {
 			<div className={`${classes.button} ${classes.loginBtn}`}>
 				<button>Log in</button>
 			</div>
+
+
 			<div className={`${classes.button} ${classes.goToRegister}`} onClick={e => props.setOpenModal(true)}>
 				<button onClick={e => e.preventDefault()}>Register</button> {/* Go to register */}
 			</div>

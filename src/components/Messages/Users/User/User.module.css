@@ -1,17 +1,15 @@
 .users__item{
 	position: relative;
 	display: grid;
+	grid-template-areas: 'avatar name';
 	padding: 10px;
 	grid-gap: 10px;
 	align-items: center;
 	grid-template-columns: minmax(20px, 65px) minmax(135px ,1fr);
 }
-.users__item img{
-	grid-column: 1/1;
-	grid-row: 1/1;
-}
+
 .users__name{
-	grid-column: 2/2;
+	grid-area: name;
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 20px;
 	font-weight: 700;

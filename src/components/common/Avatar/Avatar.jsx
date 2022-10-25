@@ -9,8 +9,10 @@ function Avatar({ avatar, scalable = false }) {
 	const scaleAvatar = (e) => onDoubleClick(setScaling, true)
 
 	return (
-		<img onClick={scalable ? scaleAvatar : null} onBlur={() => setScaling(false)} tabIndex={100}
-			className={`${classes.avatar} ${scalable && isScaling ? classes.avatarScale : ''}`} src={avatar ? avatar : userPhoto} alt="(*_*)" />
+		<div className={`${classes.avatar} ${scalable && isScaling ? classes.avatarScale : ''}`}
+			onClick={scalable ? scaleAvatar : null} onBlur={() => setScaling(false)} tabIndex={100}>
+			<img src={avatar ? avatar : userPhoto} alt="(*_*)" />
+		</div>
 	)
 }
 

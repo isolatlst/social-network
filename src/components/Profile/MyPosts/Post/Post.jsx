@@ -6,7 +6,7 @@ function Post({ avatar, message, id, ...props }) {
 		<div className={classes.posts__item}>
 			{props.isMineProfile ? <div className={classes.deletePostButton} onClick={e => props.deletePost(id)}></div> : ''}
 			<Avatar avatar={avatar} />
-			<div>{message}</div>
+			<div className={classes.message}>{message}</div>
 		</div>
 	);
 }
