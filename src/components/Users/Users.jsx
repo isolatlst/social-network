@@ -7,8 +7,8 @@ function Users({ myId, usersData, ...props }) {
 	return (
 		<>
 			{
-				usersData.map((user, index) =>
-					<User key={index} myId={myId} user={user} toggleFollow={props.toggleFollow} isFollowingInProgress={props.isFollowingInProgress} />
+				usersData.map(user =>
+					<User key={user.userId} myId={myId} user={user} toggleFollow={props.toggleFollow} isFollowingInProgress={props.isFollowingInProgress} />
 				)
 			}
 		</>

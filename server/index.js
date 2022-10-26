@@ -27,7 +27,7 @@ const users = [
 const usersData = [
 	{
 		userId: 1,
-		followed: [],
+		followed: {/*key - userId, value - usersData index, */ },
 		firstName: 'Kirill',
 		lastName: 'Ghurin',
 		email: 'ghurin.00@mail.ru',
@@ -44,7 +44,7 @@ const usersData = [
 	},
 	{
 		userId: 2,
-		followed: [],
+		followed: {/*key - userId, value - usersData index, */ },
 		firstName: 'Dennis',
 		lastName: '',
 		email: 'dennis@mail.ru',
@@ -62,7 +62,7 @@ const usersData = [
 	},
 	{
 		userId: 3,
-		followed: [],
+		followed: {/*key - userId, value - usersData index, */ },
 		firstName: 'Egor',
 		lastName: '',
 		email: 'egor@mail.ru',
@@ -79,7 +79,7 @@ const usersData = [
 	},
 	{
 		userId: 4,
-		followed: [],
+		followed: {/*key - userId, value - usersData index, */ },
 		firstName: 'Kirill',
 		lastName: '',
 		email: 'kirill@mail.ru',
@@ -96,7 +96,7 @@ const usersData = [
 	},
 	{
 		userId: 5,
-		followed: [],
+		followed: {/*key - userId, value - usersData index, */ },
 		firstName: 'Vlad',
 		lastName: '',
 		email: 'vlad@mail.ru',
@@ -113,7 +113,7 @@ const usersData = [
 	},
 	{
 		userId: 6,
-		followed: [],
+		followed: {/*key - userId, value - usersData index, */ },
 		firstName: 'Lesha',
 		lastName: '',
 		email: 'lesha@mail.ru',
@@ -131,7 +131,7 @@ const usersData = [
 	},
 	{
 		userId: 7,
-		followed: [],
+		followed: {/*key - userId, value - usersData index, */ },
 		firstName: 'Misha',
 		lastName: '',
 		email: 'misha@mail.ru',
@@ -148,7 +148,7 @@ const usersData = [
 	},
 	{
 		userId: 8,
-		followed: [],
+		followed: {/*key - userId, value - usersData index, */ },
 		firstName: 'Vasya',
 		lastName: '',
 		email: 'vasya@mail.ru',
@@ -199,7 +199,7 @@ const paginateUsers = (req, res, next) => {
 	let dirtyData = usersData.slice(from, to)
 	let data = dirtyData.map(profile => ({
 		userId: profile.userId,
-		followed: usersData[res.locals.myIndex].followed.indexOf(profile.userId) !== -1 ? true : false,  // Поиск в массиве подписок моего ID
+		followed: usersData[res.locals.myIndex].followed[profile.userId] !== undefined,
 		firstName: profile.firstName,
 		lastName: profile.lastName,
 		avatar: profile.avatar ? profile.avatar : '',
@@ -279,32 +279,32 @@ server.post('/register', (req, res) => {
 				err: true,
 				message: 'User already registered'
 			})
+		} else {
+			const hashedPassword = getHashedPassword(password)
+
+			let userId = Math.ceil(Math.random(10000) * 10000)
+
+			users.push({ // пушим в объект существующих пользователей
+				userId,
+				email,
+				password: hashedPassword
+			})
+			usersData.push({ // пушим в объект данных
+				userId,
+				firstName,
+				lastName,
+				email,
+				followed: {},
+				birth: 'Вечно молодой',
+				location: 'Страна не указана',
+				education: 'Образование не указано',
+				site: 'Сайт не указан',
+				avatar: '',
+				wallpaper: 'https://trikky.ru/wp-content/blogs.dir/1/files/2021/11/07/maxresdefault-3.jpg',
+				postsData: [],
+			})
+			res.json({ err: false, message: 'Registration complete' })
 		}
-
-		const hashedPassword = getHashedPassword(password)
-
-		let userId = Math.ceil(Math.random(10000) * 10000)
-
-		users.push({ // пушим в объект существующих пользователей
-			userId,
-			email,
-			password: hashedPassword
-		})
-		usersData.push({ // пушим в объект данных
-			userId,
-			firstName,
-			lastName,
-			email,
-			followed: [],
-			birth: 'Вечно молодой',
-			location: 'Страна не указана',
-			education: 'Образование не указано',
-			site: 'Сайт не указан',
-			avatar: '',
-			wallpaper: 'https://trikky.ru/wp-content/blogs.dir/1/files/2021/11/07/maxresdefault-3.jpg',
-			postsData: [],
-		})
-		res.json({ err: false, message: 'Registration complete' })
 	} else {
 		res.json({ err: true, message: 'Registration failed' })
 	}
@@ -333,14 +333,18 @@ server.get('/users', [requireAuth, paginateUsers], (req, res) => {
 server.get('/profile/:profileId', [requireAuth], (req, res) => {
 	let profile = usersData.find(profile => profile.userId === Number(req.params.profileId))
 	res.json({
-		profileData: profile
+		profileData: {
+			...profile,
+			followed: Object.keys(Number(profile.followed)) //возвращает массив id пользователей
+		}
 	})
 })
-//Обработка подписки/отдписки
+//Обработка подписки/отдписки 
+/*key - userId, value - usersData index, */
 server.post('/follow/:userId', [requireAuth], (req, res) => {
-	let userId = Number(req.params.userId)
-
-	usersData[res.locals.myIndex].followed.push(userId)
+	const userId = Number(req.params.userId)
+	const index = usersData.findIndex(profile => profile.userId === userId)
+	usersData[res.locals.myIndex].followed[userId] = index
 	res.json({
 		err: false,
 		status: true
@@ -348,9 +352,8 @@ server.post('/follow/:userId', [requireAuth], (req, res) => {
 })
 server.delete('/follow/:userId', [requireAuth], (req, res) => {
 	let userId = Number(req.params.userId)
-	let arrIndexOfUser = usersData[res.locals.myIndex].followed.indexOf(userId)
-	if (arrIndexOfUser !== -1) {
-		usersData[res.locals.myIndex].followed.splice(arrIndexOfUser, 1)
+	if (usersData[res.locals.myIndex].followed[userId] !== undefined) {
+		delete usersData[res.locals.myIndex].followed[userId]
 		res.json({
 			err: false,
 			status: false
