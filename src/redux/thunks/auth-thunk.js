@@ -3,7 +3,7 @@ import {
 	authAPI
 } from "../../API/api"
 import {
-	toggleAuthStatus, setUserData
+	toggleAuthStatus, setUserId
 } from "../actionCreators/auth-action-creator"
 import {
 	setUserProfile
@@ -14,7 +14,7 @@ export const logIn = (authData) => async (dispatch) => {
 	let { err, userId, message } = await authAPI.loginAPI(authData)
 	if (!err) {
 		dispatch(toggleAuthStatus(true))
-		dispatch(setUserData(userId))
+		dispatch(setUserId(userId))
 	} else {
 		dispatch(stopSubmit('authLogin', { _error: message }))
 	}
@@ -30,7 +30,7 @@ export const logOut = () => async (dispatch) => {
 	let { err } = await authAPI.logoutAPI()
 	if (!err) {
 		dispatch(toggleAuthStatus(false))
-		dispatch(setUserData(0))
+		dispatch(setUserId(0))
 		dispatch(setUserProfile({ userId: 0, email: '', firstName: '', lastName: '', name: '', birth: '', location: '', education: '', site: '', avatar: '', wallpaper: '', postsData: [], }))
 	}
 }

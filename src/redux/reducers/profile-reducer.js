@@ -1,4 +1,4 @@
-import { DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE } from '../actions/profile-action'
+import { DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, ADD_POST } from '../actions/profile-action'
 
 let initialState = {
 	userId: 0,
@@ -31,10 +31,10 @@ const profileReducer = (state = initialState, action) => {
 				isFetching: action.isFetching
 			}
 		}
-		case UPDATE_PROFILE: {
+		case ADD_POST: {
 			return {
 				...state,
-				[action.dataType]: Array.isArray(state[action.dataType]) ? [action.data, ...state[action.dataType]] : action.data
+				postsData: [...state.postsData, action.newPost]
 			}
 		}
 		case DELETE_POST: {

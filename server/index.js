@@ -216,7 +216,6 @@ const paginateUsers = (req, res, next) => {
 }
 
 
-
 //Обработка авторизации
 const generateAuthToken = () => {
 	return crypto.randomBytes(30).toString('hex');
@@ -364,23 +363,39 @@ server.delete('/follow/:userId', [requireAuth], (req, res) => {
 })
 //Обработка изменения данных
 server.put('/profile', [requireAuth], (req, res) => {
-	let userId = req.body.userId
-	let type = req.body.type
-	let profile = usersData.find(profile => profile.userId === userId)
+	const data = req.body.data
+	const profile = usersData[res.locals.myIndex]
 	if (profile) {
-		let data = Array.isArray(profile[type]) ? { id: profile[type].length, post: req.body.data } : req.body.data
-		Array.isArray(profile[type]) ? profile[type].unshift(data) : profile[type] = data
+		for (let key in data) {
+			profile[key] = data[key]
+		}
 		res.json({
 			err: false,
-			data,
-			type
 		})
+	}
+})
+//Обработка добавления поста на страницу
+server.post('/profile/add-post', [requireAuth], (req, res) => {
+	const message = req.body.post
+	const profile = usersData[res.locals.myIndex]
+	if (profile) {
+		if (message) {
+			const post = { id: profile.postsData.length, post: message }
+			profile.postsData.push(post)
+			res.json({
+				err: false,
+				newPost: post
+			})
+		} else {
+			res.json({
+				err: true
+			})
+		}
 	}
 })
 //Обработка удаления поста со страницы
 server.delete('/profile/delete-post', [requireAuth], (req, res) => {
-	let profileId = req.body.profileId
-	let profileIndex = usersData.findIndex(profile => profile.userId === profileId)
+	let profileIndex = res.locals.myIndex
 	if (profileIndex !== -1) {
 		let postId = req.body.postId
 		let postIndex = usersData[profileIndex].postsData.findIndex(post => post.id === postId)

@@ -4,24 +4,38 @@ import { compose } from 'redux'
 import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedirectComponent'
 import { useParams } from 'react-router-dom'
 import Profile from './Profile'
-import { getProfile, updateProfile, deleteProfilePost } from '../../redux/thunks/profile-thunk'
+import { getProfile, updateProfile, deleteProfilePost, addProfilePost } from '../../redux/thunks/profile-thunk'
 import ProfilePreloader from '../common/Preloaders/Profile/ProfilePreloader'
+import { useState } from 'react'
+import ProfileForm from './ProfileForm/ProfileForm'
 
 
 function ProfileContainer({ isFetching, ...props }) {
-	let { userId } = useParams()
+	const [editMode, setEditMode] = useState(false)
+	const { userId } = useParams()
+
 	useEffect(() => {
-		props.getProfile(userId)
+		props.getProfile(userId, props.myId)
 	}, [userId]) // eslint-disable-line react-hooks/exhaustive-deps
 
 	return isFetching
 		? <ProfilePreloader />
-		: <Profile {...props} />
+		: editMode
+			? <ProfileForm setEditMode={setEditMode}
+				avatar={props.avatar}
+				wallpaper={props.wallpaper}
+				birth={props.birth}
+				location={props.location}
+				education={props.education}
+				site={props.site}
+				updateProfile={props.updateProfile}
+			/>
+			: <Profile {...props} setEditMode={setEditMode} />
 }
 
 let mapStateToProps = (state) => {
 	return {
-		userId: state.auth.userId,										// Id аккаунта (моего)
+		myId: state.auth.userId,										// Id аккаунта (моего)
 		profileId: state.profilePage.userId,						// Id профиля
 		wallpaper: state.profilePage.wallpaper,
 		name: `${state.profilePage.firstName} ${state.profilePage.lastName}`,
@@ -36,6 +50,6 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-	connect(mapStateToProps, { getProfile, updateProfile, deleteProfilePost }),
+	connect(mapStateToProps, { getProfile, updateProfile, deleteProfilePost, addProfilePost }),
 	withAuthRedirectComponent
 )(ProfileContainer)

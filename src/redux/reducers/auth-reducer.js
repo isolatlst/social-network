@@ -1,7 +1,8 @@
-import { SET_USER_DATA, TOGGLE_AUTH_STATUS } from '../actions/auth-action'
+import { SET_USER_DATA, SET_USER_PHOTO, TOGGLE_AUTH_STATUS } from '../actions/auth-action'
 
 let initialState = {  //тест
 	userId: '',
+	avatar: '',
 	authStatus: false
 }
 
@@ -18,6 +19,12 @@ const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				authStatus: action.authStatus
+			}
+		}
+		case SET_USER_PHOTO: {
+			return {
+				...state,
+				avatar: action.userPhoto
 			}
 		}
 

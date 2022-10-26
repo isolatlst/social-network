@@ -8,10 +8,9 @@ function Profile(props) {
 	return (
 		<main className={classes.content}>
 			< Description
-				userId={props.userId}
-				isMineProfile={props.userId === props.profileId}
-				updateProfile={props.updateProfile}
+				isMineProfile={props.myId === props.profileId}
 				avatar={props.avatar}
+				setEditMode={props.setEditMode}
 
 				wallpaper={props.wallpaper}
 				name={props.name}
@@ -21,12 +20,11 @@ function Profile(props) {
 				site={props.site}
 			/>
 			< MyPosts
-				userId={props.userId}
-				isMineProfile={props.userId === props.profileId}
-				updateProfile={props.updateProfile}
+				isMineProfile={props.myId === props.profileId}
 				avatar={props.avatar}
 
 				postsData={props.postsData}
+				addProfilePost={props.addProfilePost}
 				deleteProfilePost={props.deleteProfilePost}
 			/>
 		</main>

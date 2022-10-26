@@ -2,15 +2,15 @@ import classes from './Header.module.css'
 import { NavLink } from 'react-router-dom'
 import logo from './logo.svg'
 import Avatar from '../common/Avatar/Avatar'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { logOut } from '../../redux/thunks/auth-thunk'
 
 
 function Header() {
-	const { avatar, authStatus } = useSelector(state => state.auth)
+	const { authStatus, avatar } = useSelector(state => state.auth, shallowEqual)
+
 	const dispatch = useDispatch()
 	const logout = () => { dispatch(logOut()) }
-
 
 	return (
 		<header className={classes.header}>

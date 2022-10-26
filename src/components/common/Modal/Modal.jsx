@@ -6,15 +6,13 @@ import classes from './Modal.module.css'
 
 const Modal = ({ children, isModalOpen, setOpenModal }) => {
 	return isModalOpen
-		? createPortal(
+		&& createPortal(
 			<div className={classes.modal} onClick={e => setOpenModal(false)}>
 				<div className={classes.container} onClick={e => e.stopPropagation()}>
 					{children}
 				</div>
 			</div>
 			, document.body)
-		: ''
-
 }
 
 export default Modal

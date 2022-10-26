@@ -1,0 +1,21 @@
+.description__body{
+	position: relative;
+	margin: calc(var(--index)*2.5) 0px calc(var(--index)*2) 0px;
+	display: grid;
+	justify-content: center;
+	grid-template-columns: minmax(165px, 400px);
+	grid-template-rows: auto repeat(auto-fit, 45px);
+	column-gap: calc(var(--index)*1.5);
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.description__body > div{
+	margin-bottom: 30px;
+}	
+.buttons{
+	margin: 0 auto;
+}
+.exitBtn{
+	margin-left: 30px;
+	background: rgb(206, 109, 109);
+}

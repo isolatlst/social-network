@@ -1,3 +1,4 @@
 //Auth const
 export const SET_USER_DATA = 'AUTH/SET-USER-DATA'
+export const SET_USER_PHOTO = 'AUTH/SET-USER-PHOTO'
 export const TOGGLE_AUTH_STATUS = 'AUTH/TOGGLE-AUTH-STATUS'

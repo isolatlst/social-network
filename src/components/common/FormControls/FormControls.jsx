@@ -4,7 +4,7 @@ import classes from './FormControls.module.css'
 export const Input = ({ input, meta: { touched, error, active }, text, ...props }) => {
 	const hasError = touched && error
 	return (
-		<div className={`${classes.group}  ${hasError ? classes.invalidGroup : (touched ? classes.validGroup : '')}`}>
+		<div className={`${classes.group}  ${hasError ? classes.invalidGroup : (input.value || (input.value && touched) ? classes.validGroup : '')}`}>
 			<input className={classes.input} {...input} {...props} />
 			<span className={classes.bar}></span>
 			<label className={classes.label}>{active ? `Enter your ${text}` : hasError ? `${text} ${error}` : text}</label>

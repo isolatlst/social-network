@@ -72,22 +72,32 @@ export const profileAPI = {
 		)
 		return data
 	},
-	async updateProfileAPI(incData, type, userId) {
+	async updateProfileAPI(incData) {
 		let { data } = await axios(
 			_getConfig(
 				'put',
 				`/profile`,
-				{ data: incData, type, userId }
+				{ data: incData }
 			)
 		)
 		return data
 	},
-	async deletePostAPI(postId, profileId) {
+	async addPostAPI(incPostData) {
+		let { data } = await axios(
+			_getConfig(
+				`post`,
+				`/profile/add-post`,
+				{ post: incPostData }
+			)
+		)
+		return data
+	},
+	async deletePostAPI(postId) {
 		let { data } = await axios(
 			_getConfig(
 				'delete',
 				`/profile/delete-post`,
-				{ postId, profileId }
+				{ postId }
 			)
 		)
 		return data

@@ -9,4 +9,3 @@ export const confirmPassword = (value, all) => value === all.password ? undefine
 export const requiredField = value => value ? undefined : 'is required'
 export const maxLength150 = maxLengthCreator(150)
 export const maxLength25 = maxLengthCreator(25)
-
