@@ -1,4 +1,5 @@
 import {SET_PAGE_SIZE, SET_PAGES_COUNT, SET_TOTAL_PAGE, SET_USERS, TOGGLE_FETCHING_STATUS, TOGGLE_FOLLOW_TO_USER, TOGGLE_IS_FOLLOWING_PROGRESS} from '../actions/users-action'
+import {UsersReducerActionType} from "../../types/types";
 
 export type UserType = {
     avatar: string
@@ -19,7 +20,7 @@ let initialState = {
     isFollowingInProgress: [] as Array<number>
 }
 
-const usersReducer = (state = initialState, action: any): InitialStateType => {
+const usersReducer = (state = initialState, action: UsersReducerActionType): InitialStateType => {
     switch (action.type) {
 
         case SET_USERS: {

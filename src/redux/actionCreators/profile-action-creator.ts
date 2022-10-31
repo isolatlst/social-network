@@ -1,26 +1,39 @@
-import {ADD_POST, DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS} from '../actions/profile-action'
+import {ADD_POST, DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE} from '../actions/profile-action'
 import {InitialStateType, PostType} from "../reducers/profile-reducer";
 
 
-type SetUserProfileActionType = {
+export type SetUserProfileActionType = {
     type: typeof SET_USER_PROFILE
-    data: InitialStateType
+    profile: InitialStateType
 }
-type ToggleFetchStatusActionType = {
+export type ToggleFetchStatusActionType = {
     type: typeof TOGGLE_FETCHING_STATUS
     isFetching: boolean
 }
-type AddPostActionType = {
+export type AddPostActionType = {
     type: typeof ADD_POST
     newPost: PostType
 }
-type DeletePostActionType = {
+export type DeletePostActionType = {
     type: typeof DELETE_POST
     postId: number
     isDeleted: boolean
 }
+type UpdateProfileDataType = {
+    avatar: string
+    birth: string
+    location: string
+    education: string
+    site: string
+}
+export type UpdateProfileDataActionType = {
+    type: typeof UPDATE_PROFILE
+    data: UpdateProfileDataType
+}
+
 //Profile export Action Creator
-export const setUserProfile = (data: InitialStateType) => ({type: SET_USER_PROFILE, data})
-export const toggleFetchStatus = (isFetching: boolean) => ({type: TOGGLE_FETCHING_STATUS, isFetching})
-export const addPost = (newPost: PostType) => ({type: ADD_POST, newPost})
-export const deletePost = (postId: number, isDeleted: boolean) => ({type: DELETE_POST, postId, isDeleted})
+export const setUserProfile = (profile: InitialStateType): SetUserProfileActionType => ({type: SET_USER_PROFILE, profile})
+export const toggleFetchStatus = (isFetching: boolean): ToggleFetchStatusActionType => ({type: TOGGLE_FETCHING_STATUS, isFetching})
+export const addPost = (newPost: PostType): AddPostActionType => ({type: ADD_POST, newPost})
+export const deletePost = (postId: number, isDeleted: boolean): DeletePostActionType => ({type: DELETE_POST, postId, isDeleted})
+export const updateProfileData = (data: UpdateProfileDataType): UpdateProfileDataActionType => ({type: "PROFILE/UPDATE-PROFILE", data})

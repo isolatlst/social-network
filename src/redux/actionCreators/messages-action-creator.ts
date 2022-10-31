@@ -1,6 +1,6 @@
 import {SEND_MESSAGE} from '../actions/messages-action'
 
-type SendNewMessageActionType = {
+export type SendNewMessageActionType = {
     type: typeof SEND_MESSAGE
     newMessageData: string
 }

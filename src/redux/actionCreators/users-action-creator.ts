@@ -1,32 +1,32 @@
 import {SET_PAGE_SIZE, SET_PAGES_COUNT, SET_TOTAL_PAGE, SET_USERS, TOGGLE_FETCHING_STATUS, TOGGLE_FOLLOW_TO_USER, TOGGLE_IS_FOLLOWING_PROGRESS} from '../actions/users-action'
 import {UserType} from "../reducers/users-reducer"
 
-type SetUsersActionType = {
+export type SetUsersActionType = {
     type: typeof SET_USERS
     usersData: Array<UserType>
 }
-type ToggleFollowingStatusActionType = {
+export type ToggleFollowingStatusActionType = {
     type: typeof TOGGLE_FOLLOW_TO_USER
     userId: number
     followedStatus: boolean
 }
-type ChangeTotalPageActionType = {
+export type ChangeTotalPageActionType = {
     type: typeof SET_TOTAL_PAGE
     totalPage: number
 }
-type SetPagesCountActionType = {
+export type SetPagesCountActionType = {
     type: typeof SET_PAGES_COUNT
     pagesCount: number
 }
-type SetPageSizeActionType = {
+export type SetPageSizeActionType = {
     type: typeof SET_PAGE_SIZE
     pageSize: number
 }
-type ToggleFetchStatusActionType = {
+export type ToggleFetchStatusActionType = {
     type: typeof TOGGLE_FETCHING_STATUS
     isFetching: boolean
 }
-type ToggleIsFollowingProgressActionType = {
+export type ToggleIsFollowingProgressActionType = {
     type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
     isFetching: boolean
     userId: number

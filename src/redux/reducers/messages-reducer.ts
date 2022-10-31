@@ -1,4 +1,5 @@
 import {SEND_MESSAGE} from '../actions/messages-action'
+import {MessagesReducerActionType} from "../../types/types";
 
 type DialogType = {
     id: number
@@ -30,7 +31,7 @@ let initialState = {
     ] as Array<MessageType>,
 }
 
-const messagesReducer = (state = initialState, action: any): InitialStateType => {
+const messagesReducer = (state = initialState, action: MessagesReducerActionType): InitialStateType => {
     switch (action.type) {
         case SEND_MESSAGE: {
             return {
