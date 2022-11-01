@@ -1,4 +1,4 @@
-import {stopSubmit} from "redux-form"
+import {FormAction, stopSubmit} from "redux-form"
 import {authAPI} from "../../API/api"
 import {setUserId, toggleAuthStatus} from "../actionCreators/auth-action-creator"
 import {setUserProfile, SetUserProfileActionType} from "../actionCreators/profile-action-creator"
@@ -7,7 +7,7 @@ import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "../redux-store";
 
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, AuthReducerActionType | SetUserProfileActionType>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, AuthReducerActionType | SetUserProfileActionType | FormAction>
 
 
 export const logIn = (authData: LoginDataType): ThunkType => async (dispatch) => {
@@ -16,7 +16,6 @@ export const logIn = (authData: LoginDataType): ThunkType => async (dispatch) =>
         dispatch(toggleAuthStatus(true))
         dispatch(setUserId(userId))
     } else {
-        // @ts-ignore
         dispatch(stopSubmit('authLogin', {_error: message}))
     }
 }
@@ -24,7 +23,6 @@ export const logIn = (authData: LoginDataType): ThunkType => async (dispatch) =>
 
 export const register = (authData: RegisterDataType): ThunkType => async (dispatch) => {
     let {message} = await authAPI.registerAPI(authData)
-    // @ts-ignore
     dispatch(stopSubmit('authRegister', {_error: message}))
 }
 

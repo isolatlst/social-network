@@ -14,13 +14,15 @@ let reducers = combineReducers({
     usersPage: usersReducer,
     form: formReducer
 })
-type ReducersType = typeof reducers
-export type AppStateType = ReturnType<ReducersType>
 
 // @ts-ignore //forDev
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunkMiddleware)))
 
+
+type ReducersType = typeof reducers
+export type AppStateType = ReturnType<ReducersType>
+export type AppDispatchType = typeof store.dispatch
 // @ts-ignore //forDev
 window.store = store
 

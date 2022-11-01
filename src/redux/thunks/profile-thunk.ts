@@ -4,7 +4,7 @@ import {setUserPhoto, SetUserPhotoActionType} from "../actionCreators/auth-actio
 import {ThunkAction} from "redux-thunk"
 import {AppStateType} from "../redux-store"
 import {ProfileReducerActionType} from "../../types/types"
-import {reset} from "redux-form"
+import {FormAction, reset} from "redux-form"
 
 type UpdateProfileType = {
     avatar: string
@@ -13,7 +13,7 @@ type UpdateProfileType = {
     education: string
     site: string
 }
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ProfileReducerActionType | SetUserPhotoActionType>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ProfileReducerActionType | SetUserPhotoActionType | FormAction>
 
 
 export const getProfile = (userId: number, myId: number): ThunkType =>
@@ -37,7 +37,6 @@ export const addProfilePost = (incPostData: string, formName: 'profileAddNewPost
     let {err, newPost} = await profileAPI.addPostAPI(incPostData)
     if (!err) {
         dispatch(addPost(newPost))
-        // @ts-ignore
         dispatch(reset(formName))
     }
 }
