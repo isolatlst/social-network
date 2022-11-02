@@ -1,35 +1,36 @@
-import { Field, reduxForm } from 'redux-form'
+import {Field, reduxForm} from 'redux-form'
 import classes from './Dialog.module.css'
 import DialogItem from './DialogItem/DialogItem';
 
 function Dialog(props) {
-	let addNewMessage = (formData) => { props.sendNewMessage(formData.newMessageData) }
+    let addNewMessage = (formData) => {
+        props.sendNewMessage(formData.newMessageData)
+    }
 
-	return (
-		<div className={classes.dialog}>
-			<div className={classes.dialog__items}  >
-				{
-					props.messagesData.map(message =>
-						< DialogItem key={message.id} friend__name={props.friend__name} friend__avatar={props.friend__avatar} friend__message={message.message} />
-					)
-				}
-			</div>
-			<AddMessageReduxForm onSubmit={addNewMessage} />
-		</div>
-	);
+    return (
+        <div className={classes.dialog}>
+            <div className={classes.dialog__items}>
+                {
+                    props.messagesData.map(message =>
+                        < DialogItem key={message.id} friend__name={props.friend__name} friend__avatar={props.friend__avatar} friend__message={message.message}/>
+                    )
+                }
+            </div>
+            <AddMessageReduxForm onSubmit={addNewMessage}/>
+        </div>
+    );
 }
-
 
 
 const AddMessageForm = (props) => {
-	return (
-		<form className={classes.sendMessage} onSubmit={props.handleSubmit}>
-			<Field component='textarea' name='newMessageData' placeholder='type something wonderful...' />
-			<button className={classes.button}>Send message</button>
-		</form>
-	)
+    return (
+        <form className={classes.sendMessage} onSubmit={props.handleSubmit}>
+            <Field component='textarea' name='newMessageData' placeholder='type something wonderful...'/>
+            <button className={classes.button}>Send message</button>
+        </form>
+    )
 }
-const AddMessageReduxForm = reduxForm({ form: 'dialogAddMessageForm' })(AddMessageForm)
+const AddMessageReduxForm = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)
 
 export default Dialog;
 

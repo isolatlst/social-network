@@ -1,11 +1,7 @@
-import {ADD_POST, DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE} from '../actions/profile-action'
-import {ProfileReducerActionType} from "../../types/types";
+import {ProfileActionsType} from "../actionCreators/profile-action-creator";
+import {PostType} from "../../types/state-types";
 
 export type InitialStateType = typeof initialState
-export type PostType = {
-    id: number
-    post: string
-}
 
 let initialState = {
     userId: 0,
@@ -23,28 +19,28 @@ let initialState = {
     isFetching: false,
 }
 
-const profileReducer = (state = initialState, action: ProfileReducerActionType): InitialStateType => {
+const profileReducer = (state = initialState, action: ProfileActionsType): InitialStateType => {
     switch (action.type) {
-        case SET_USER_PROFILE: {
+        case "PROFILE/SET_USER_PROFILE": {
             return {
                 ...state,
                 ...action.profile,
                 isFetching: false
             }
         }
-        case TOGGLE_FETCHING_STATUS: {
+        case "PROFILE/TOGGLE_FETCHING_STATUS": {
             return {
                 ...state,
                 isFetching: action.isFetching
             }
         }
-        case ADD_POST: {
+        case "PROFILE/ADD_POST": {
             return {
                 ...state,
                 postsData: [...state.postsData, action.newPost]
             }
         }
-        case DELETE_POST: {
+        case "PROFILE/DELETE_POST": {
             return {
                 ...state,
                 postsData: action.isDeleted
@@ -52,7 +48,7 @@ const profileReducer = (state = initialState, action: ProfileReducerActionType):
                     : [...state.postsData]
             }
         }
-        case UPDATE_PROFILE: {
+        case "PROFILE/UPDATE-PROFILE": {
             return {
                 ...state,
                 ...action.data

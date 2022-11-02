@@ -1,14 +1,7 @@
-import {SET_PAGE_SIZE, SET_PAGES_COUNT, SET_TOTAL_PAGE, SET_USERS, TOGGLE_FETCHING_STATUS, TOGGLE_FOLLOW_TO_USER, TOGGLE_IS_FOLLOWING_PROGRESS} from '../actions/users-action'
-import {UsersReducerActionType} from "../../types/types";
+import {UsersActionsType} from "../actionCreators/users-action-creator";
+import {UserType} from "../../types/state-types";
 
-export type UserType = {
-    avatar: string
-    firstName: string
-    followed: boolean
-    lastName: string
-    location: string
-    userId: number
-}
+
 type InitialStateType = typeof initialState
 
 let initialState = {
@@ -20,47 +13,47 @@ let initialState = {
     isFollowingInProgress: [] as Array<number>
 }
 
-const usersReducer = (state = initialState, action: UsersReducerActionType): InitialStateType => {
+const usersReducer = (state = initialState, action: UsersActionsType): InitialStateType => {
     switch (action.type) {
 
-        case SET_USERS: {
+        case "USERS/SET_USERS": {
             return {
                 ...state,
                 usersData: action.usersData,
                 isFetching: false
             }
         }
-        case TOGGLE_FOLLOW_TO_USER: {
+        case "USERS/TOGGLE_FOLLOW_TO_USER": {
             return {
                 ...state,
                 usersData: state.usersData.map(user => user.userId === action.userId ? {...user, followed: action.followedStatus} : user)
             }
         }
-        case SET_TOTAL_PAGE: {
+        case "USERS/SET_TOTAL_PAGE": {
             return {
                 ...state,
                 totalPage: action.totalPage
             }
         }
-        case SET_PAGES_COUNT: {
+        case "USERS/SET_PAGES_COUNT": {
             return {
                 ...state,
                 pagesCount: action.pagesCount
             }
         }
-        case SET_PAGE_SIZE: {
+        case "USERS/SET_PAGE_SIZE": {
             return {
                 ...state,
                 pageSize: action.pageSize
             }
         }
-        case TOGGLE_FETCHING_STATUS: {
+        case "USERS/TOGGLE_FETCHING_STATUS": {
             return {
                 ...state,
                 isFetching: action.isFetching
             }
         }
-        case TOGGLE_IS_FOLLOWING_PROGRESS: {
+        case "USERS/TOGGLE_IS_FOLLOWING_PROGRESS": {
             return {
                 ...state,
                 isFollowingInProgress: action.isFetching

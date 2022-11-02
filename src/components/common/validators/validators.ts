@@ -1,4 +1,4 @@
-import {RegisterDataType} from "../../../types/types";
+import {RegisterDataType} from "../../../types/forms";
 
 export type ValidatorType = (value: string, all: RegisterDataType) => string | undefined
 

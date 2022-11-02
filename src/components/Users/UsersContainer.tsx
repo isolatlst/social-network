@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {BaseSyntheticEvent, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
 import withAuthRedirectComponent from '../common/HOCs/AuthRedirect/WithAuthRedirectComponent'
@@ -10,7 +10,9 @@ import classes from './Users.module.css'
 import Users from './Users'
 import Paginator from '../common/Paginator/Paginator'
 import {AppStateType} from "../../redux/redux-store"
-import {UserType} from "../../redux/reducers/users-reducer"
+import {useAppDispatch} from "../../hooks/hooks";
+import {usersACs} from '../../redux/actionCreators/users-action-creator'
+import {UserType} from "../../types/state-types";
 
 
 type MapStatePropsType = {
@@ -30,16 +32,18 @@ type OwnPropsType = {}
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
 
 
-const UsersContainer: React.FC<PropsType> = ({isFetching, ...props}) => {
+const UsersContainer: React.FC<PropsType> = ({isFetching, totalPage, pageSize, getUsers, ...props}) => {
+    const dispatch = useAppDispatch()
+
     useEffect(() => {
-        props.getUsers(props.totalPage, props.pageSize)
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+        getUsers(totalPage, pageSize)
+    }, [getUsers, totalPage, pageSize])
 
     const swapPage = (page: number) => {
-        props.getUsers(page, props.pageSize)
+        dispatch(usersACs.changeTotalPage(page))
     }
-    const selectPageSize = (e: any) => {
-        if (e.target.localName === 'span') props.getUsers(props.totalPage, Number(e.target.innerHTML))
+    const selectPageSize = (e: BaseSyntheticEvent) => {
+        if (e.target.localName === 'span') dispatch(usersACs.setPageSize(Number(e.target.innerHTML)))
     }
 
 
@@ -50,12 +54,12 @@ const UsersContainer: React.FC<PropsType> = ({isFetching, ...props}) => {
         {
             isFetching
                 ? <>
-                    < Paginator pagesCount={props.pagesCount} totalPage={props.totalPage} pageSize={props.pageSize}
+                    < Paginator pagesCount={props.pagesCount} totalPage={totalPage} pageSize={pageSize}
                                 swapPage={swapPage} selectPageSize={selectPageSize}/>
                     <UsersPreloader/>
                 </>
                 : <>
-                    < Paginator pagesCount={props.pagesCount} totalPage={props.totalPage} pageSize={props.pageSize}
+                    < Paginator pagesCount={props.pagesCount} totalPage={totalPage} pageSize={pageSize}
                                 swapPage={swapPage} selectPageSize={selectPageSize}/>
                     <Users {...props} />
                 </>

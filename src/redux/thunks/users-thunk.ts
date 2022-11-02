@@ -1,29 +1,26 @@
-import {followAPI, usersAPI} from "../../API/api"
-import {changeTotalPage, setPagesCount, setPageSize, setUsers, toggleFetchStatus, toggleFollowingStatus, toggleIsFollowingProgress} from "../actionCreators/users-action-creator"
-import {ThunkAction} from "redux-thunk";
-import {UsersReducerActionType} from "../../types/types";
-import {AppStateType} from "../redux-store";
+import {ThunkType} from "../redux-store";
+import {usersACs, UsersActionsType} from "../actionCreators/users-action-creator";
+import {usersAPI} from "../../API/users-API";
+import {followAPI} from "../../API/follow-API";
 
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, UsersReducerActionType>
+type Thunk = ThunkType<UsersActionsType>
 
-export const getUsers = (totalPage: number, pageSize: number): ThunkType =>
+export const getUsers = (totalPage: number, pageSize: number): Thunk =>
     async (dispatch) => {
-        dispatch(toggleFetchStatus(true))
-        dispatch(changeTotalPage(totalPage))
-        dispatch(setPageSize(pageSize))
+        dispatch(usersACs.toggleFetchStatus(true))
         let {usersData, pagesCount} = await usersAPI.getUsersAPI(totalPage, pageSize)
-        dispatch(setUsers(usersData))
-        dispatch(setPagesCount(pagesCount))
+        dispatch(usersACs.setUsers(usersData))
+        dispatch(usersACs.setPagesCount(pagesCount))
     }
 
 
-export const toggleFollow = (userId: number, isFollowed: boolean): ThunkType =>
+export const toggleFollow = (userId: number, isFollowed: boolean): Thunk =>
     async (dispatch) => {
-        dispatch(toggleIsFollowingProgress(true, userId))
+        dispatch(usersACs.toggleIsFollowingProgress(true, userId))
         let {err, status} = await followAPI.toggleFollowAPI(isFollowed, userId)
         if (!err) {
-            dispatch(toggleFollowingStatus(userId, status))
-            dispatch(toggleIsFollowingProgress(false, userId))
+            dispatch(usersACs.toggleFollowingStatus(userId, status))
+            dispatch(usersACs.toggleIsFollowingProgress(false, userId))
         }
     }

@@ -1,5 +1,4 @@
-import {SET_USER_DATA, SET_USER_PHOTO, TOGGLE_AUTH_STATUS} from '../actions/auth-action'
-import {AuthReducerActionType} from "../../types/types";
+import {AuthActionsType} from "../actionCreators/auth-action-creator";
 
 type InitialStateType = typeof initialState
 let initialState = {  //тест
@@ -9,21 +8,21 @@ let initialState = {  //тест
 }
 
 
-const authReducer = (state = initialState, action: AuthReducerActionType): InitialStateType => {
+const authReducer = (state = initialState, action: AuthActionsType): InitialStateType => {
     switch (action.type) {
-        case SET_USER_DATA: {
+        case 'AUTH/SET_USER_DATA': {
             return {
                 ...state,
                 userId: action.userId
             }
         }
-        case TOGGLE_AUTH_STATUS: {
+        case  'AUTH/TOGGLE_AUTH_STATUS': {
             return {
                 ...state,
                 authStatus: action.authStatus
             }
         }
-        case SET_USER_PHOTO: {
+        case 'AUTH/SET_USER_PHOTO': {
             return {
                 ...state,
                 avatar: action.avatar

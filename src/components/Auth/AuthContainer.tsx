@@ -2,8 +2,8 @@ import React from 'react'
 import {Navigate} from 'react-router-dom'
 import {logIn as logInThunk, register as registerThunk} from '../../redux/thunks/auth-thunk'
 import Auth from './Auth'
-import {LoginDataType, RegisterDataType} from "../../types/types";
-import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {LoginDataType, RegisterDataType} from "../../types/forms"
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks"
 
 function AuthContainer() {
     const {authStatus, userId} = useAppSelector(state => state.auth)

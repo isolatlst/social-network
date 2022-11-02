@@ -2,17 +2,11 @@ import React from 'react'
 import classes from './User.module.css'
 import Avatar from '../../common/Avatar/Avatar'
 import {NavLink} from 'react-router-dom'
+import {UserType} from "../../../types/state-types";
 
 type PropsType = {
     myId: number
-    user: {
-        userId: number
-        followed: boolean
-        avatar: string
-        firstName: string
-        lastName: string
-        location: string
-    }
+    user: UserType
     isFollowingInProgress: Array<number>
     toggleFollow: (userId: number, followed: boolean) => void
 }

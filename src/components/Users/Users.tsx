@@ -1,6 +1,6 @@
 import React from 'react'
 import User from './User/User'
-import {UserType} from "../../redux/reducers/users-reducer";
+import {UserType} from "../../types/state-types";
 
 type PropsType = {
     myId: number

@@ -1,39 +1,15 @@
-import {ADD_POST, DELETE_POST, SET_USER_PROFILE, TOGGLE_FETCHING_STATUS, UPDATE_PROFILE} from '../actions/profile-action'
-import {InitialStateType, PostType} from "../reducers/profile-reducer";
+import {InitialStateType} from "../reducers/profile-reducer";
+import {InferActionsTypes} from "../redux-store";
+import {PostType} from "../../types/state-types";
+import {UpdateProfileDataType} from "../../types/forms";
+
+export type ProfileActionsType = InferActionsTypes<typeof profileACs>
 
 
-export type SetUserProfileActionType = {
-    type: typeof SET_USER_PROFILE
-    profile: InitialStateType
+export const profileACs = {
+    setUserProfile: (profile: InitialStateType) => ({type: 'PROFILE/SET_USER_PROFILE', profile} as const),
+    toggleFetchStatus: (isFetching: boolean) => ({type: 'PROFILE/TOGGLE_FETCHING_STATUS', isFetching} as const),
+    addPost: (newPost: PostType) => ({type: 'PROFILE/ADD_POST', newPost} as const),
+    deletePost: (postId: number, isDeleted: boolean) => ({type: 'PROFILE/DELETE_POST', postId, isDeleted} as const),
+    updateProfileData: (data: UpdateProfileDataType) => ({type: 'PROFILE/UPDATE-PROFILE', data} as const),
 }
-export type ToggleFetchStatusActionType = {
-    type: typeof TOGGLE_FETCHING_STATUS
-    isFetching: boolean
-}
-export type AddPostActionType = {
-    type: typeof ADD_POST
-    newPost: PostType
-}
-export type DeletePostActionType = {
-    type: typeof DELETE_POST
-    postId: number
-    isDeleted: boolean
-}
-type UpdateProfileDataType = {
-    avatar: string
-    birth: string
-    location: string
-    education: string
-    site: string
-}
-export type UpdateProfileDataActionType = {
-    type: typeof UPDATE_PROFILE
-    data: UpdateProfileDataType
-}
-
-//Profile export Action Creator
-export const setUserProfile = (profile: InitialStateType): SetUserProfileActionType => ({type: SET_USER_PROFILE, profile})
-export const toggleFetchStatus = (isFetching: boolean): ToggleFetchStatusActionType => ({type: TOGGLE_FETCHING_STATUS, isFetching})
-export const addPost = (newPost: PostType): AddPostActionType => ({type: ADD_POST, newPost})
-export const deletePost = (postId: number, isDeleted: boolean): DeletePostActionType => ({type: DELETE_POST, postId, isDeleted})
-export const updateProfileData = (data: UpdateProfileDataType): UpdateProfileDataActionType => ({type: "PROFILE/UPDATE-PROFILE", data})

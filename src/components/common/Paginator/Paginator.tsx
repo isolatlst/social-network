@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {BaseSyntheticEvent, useState} from 'react'
 import classes from './Paginator.module.css'
 
 type PropsType = {
@@ -7,7 +7,7 @@ type PropsType = {
     pageSize: number
     portionSize?: number
     swapPage: (page: number) => void
-    selectPageSize: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+    selectPageSize: (e: BaseSyntheticEvent) => void
 }
 
 

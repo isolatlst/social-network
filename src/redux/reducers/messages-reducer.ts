@@ -1,17 +1,6 @@
-import {SEND_MESSAGE} from '../actions/messages-action'
-import {MessagesReducerActionType} from "../../types/types";
+import {MessagesActionsType} from "../actionCreators/messages-action-creator";
+import {DialogType, MessageType} from "../../types/state-types";
 
-type DialogType = {
-    id: number
-    name: string
-    avatar: string
-}
-type MessageType = {
-    id: number
-    date: string
-    sender: string
-    message: string
-}
 type InitialStateType = typeof initialState
 
 let initialState = {
@@ -31,9 +20,9 @@ let initialState = {
     ] as Array<MessageType>,
 }
 
-const messagesReducer = (state = initialState, action: MessagesReducerActionType): InitialStateType => {
+const messagesReducer = (state = initialState, action: MessagesActionsType): InitialStateType => {
     switch (action.type) {
-        case SEND_MESSAGE: {
+        case "MESSAGES/SEND_MESSAGE": {
             return {
                 ...state,
                 messagesData: [

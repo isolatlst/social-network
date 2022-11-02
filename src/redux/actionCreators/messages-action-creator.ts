@@ -1,9 +1,7 @@
-import {SEND_MESSAGE} from '../actions/messages-action'
+import {InferActionsTypes} from "../redux-store";
 
-export type SendNewMessageActionType = {
-    type: typeof SEND_MESSAGE
-    newMessageData: string
+export type MessagesActionsType = InferActionsTypes<typeof messagesACs>
+
+export const messagesACs = {
+    sendNewMessage: (newMessageData: string) => ({type: 'MESSAGES/SEND_MESSAGE', newMessageData} as const),
 }
-
-//Messages export Action Creator
-export const sendNewMessage = (newMessageData: string): SendNewMessageActionType => ({type: SEND_MESSAGE, newMessageData})
