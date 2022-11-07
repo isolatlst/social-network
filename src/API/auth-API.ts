@@ -4,7 +4,7 @@ import axios from "axios";
 import {_getConfig} from "./api";
 
 export const authAPI = {
-    async loginAPI(loginData: LoginDataType) {
+    async loginAPI(loginData: LoginDataType | null) {
         const {data}: LoginAPIType = await axios(
             _getConfig(
                 'post',

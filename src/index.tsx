@@ -4,12 +4,12 @@ import reportWebVitals from './reportWebVitals'
 import AppContainerWithProvider from './App'
 import './index.css'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 root.render(
-	// <React.StrictMode>
-	<AppContainerWithProvider />
-	// </React.StrictMode>
+    // <React.StrictMode>
+    <AppContainerWithProvider/>
+    // </React.StrictMode>
 );
 
 

@@ -41,8 +41,11 @@ const Auth: React.FC<PropsType> = (props) => {
 const LoginForm: React.FC<InjectedFormProps<LoginDataType, UseStateType> & UseStateType> = ({error, handleSubmit, openModal}) => {
     return (
         <form className={classes.loginForm} onSubmit={handleSubmit}>
-            {createField<LoginFormNamesType>(Input, [requiredField], '', 'email', 'text', 'Email address')} {/*+correctEmail*/}
-            {createField<LoginFormNamesType>(Input, [requiredField, maxLength25], '', 'password', 'password', 'Password')}
+            {createField<LoginFormNamesType>(Input, [requiredField],
+                '', 'email', 'text', 'Email address')} {/*+correctEmail*/}
+            {createField<LoginFormNamesType>(Input, [requiredField, maxLength25],
+                '', 'password', 'password', 'Password')}
+            
             <span className={classes.error}>{error}</span>
             <div className={`${classes.button} ${classes.loginBtn}`}>
                 <button>Log in</button>
@@ -62,11 +65,16 @@ const LoginReduxForm = reduxForm<LoginDataType, UseStateType>({form: 'authLogin'
 const RegisterForm: React.FC<InjectedFormProps<RegisterDataType>> = ({error, handleSubmit}) => {
     return (
         <form className={classes.registrationForm} onSubmit={handleSubmit}>
-            {createField<RegisterFormNamesType>(Input, [requiredField], '', "firstName", 'text', 'First name')}
-            {createField<RegisterFormNamesType>(Input, [requiredField], '', 'lastName', 'text', 'Last name')}
-            {createField<RegisterFormNamesType>(Input, [requiredField], '', 'email', 'text', 'Email address')} {/*+correctEmail*/}
-            {createField<RegisterFormNamesType>(Input, [requiredField, maxLength25], '', 'password', 'password', 'Password')}
-            {createField<RegisterFormNamesType>(Input, [requiredField, confirmPassword], '', 'confirmPassword', 'password', 'Confirm password')}
+            {createField<RegisterFormNamesType>(Input, [requiredField],
+                '', "firstName", 'text', 'First name')}
+            {createField<RegisterFormNamesType>(Input, [requiredField],
+                '', 'lastName', 'text', 'Last name')}
+            {createField<RegisterFormNamesType>(Input, [requiredField],
+                '', 'email', 'text', 'Email address')} {/*+correctEmail*/}
+            {createField<RegisterFormNamesType>(Input, [requiredField, maxLength25],
+                '', 'password', 'password', 'Password')}
+            {createField<RegisterFormNamesType>(Input, [requiredField, confirmPassword],
+                '', 'confirmPassword', 'password', 'Confirm password')}
             <div className={classes.button}>
                 <span className={classes.error}>{error}</span>
                 <button>Register</button>

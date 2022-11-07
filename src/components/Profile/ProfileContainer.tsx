@@ -7,17 +7,28 @@ import Profile from './Profile'
 import {addProfilePost, deleteProfilePost, getProfile, updateProfile} from '../../redux/thunks/profile-thunk'
 import ProfilePreloader from '../common/Preloaders/Profile/ProfilePreloader'
 import ProfileForm from './ProfileForm/ProfileForm'
+import {AppStateType} from "../../redux/redux-store";
+
+export type DispatchPropsType = {
+    getProfile: (userId: string | undefined, myId: number) => void
+    updateProfile: () => void
+    deleteProfilePost: () => void
+    addProfilePost: () => void
+}
+export type MapStatePropsType = ReturnType<typeof mapStateToProps>
+
+type PropsType = MapStatePropsType & DispatchPropsType
 
 
-function ProfileContainer({isFetching, ...props}) {
-    const [editMode, setEditMode] = useState(false)
+const ProfileContainer: React.FC<PropsType> = (props) => {
+    const [editMode, setEditMode] = useState<boolean>(false)
     const {userId} = useParams()
 
     useEffect(() => {
         props.getProfile(userId, props.myId)
     }, [userId]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    return isFetching
+    return props.isFetching
         ? <ProfilePreloader/>
         : editMode
             ? <ProfileForm setEditMode={setEditMode}
@@ -32,10 +43,10 @@ function ProfileContainer({isFetching, ...props}) {
             : <Profile {...props} setEditMode={setEditMode}/>
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         myId: state.auth.userId,										// Id аккаунта (моего)
-        profileId: state.profilePage.userId,						// Id профиля
+        profileId: state.profilePage.userId,						    // Id профиля
         wallpaper: state.profilePage.wallpaper,
         name: `${state.profilePage.firstName} ${state.profilePage.lastName}`,
         birth: state.profilePage.birth,
@@ -48,7 +59,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {getProfile, updateProfile, deleteProfilePost, addProfilePost}),
-    withAuthRedirectComponent
+    withAuthRedirectComponent<PropsType>
 )(ProfileContainer)

@@ -1,56 +1,61 @@
-.posts__item{
-	position: relative;
-	margin-bottom: calc(var(--index)*1.25);
-	display: flex;	
-	align-items: center;
-	text-align: justify;
-	font-size: calc(var(--index)*1);
+.posts__item {
+    position: relative;
+    margin-bottom: calc(var(--index) * 1.25);
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    font-size: calc(var(--index) * 1);
 }
 
 .posts__item img {
-	align-self: start;
-	width: calc(var(--index)*4.5);
-	margin-right: 	calc(var(--index)*1.25);
+    align-self: start;
+    width: calc(var(--index) * 4.5);
+    min-width: 46.9px;
+    margin-right: calc(var(--index) * 1.25);
 }
+
 .message {
-	max-width: 100%;
-	line-height: 1.5;
-	word-break: break-all;
-	hyphens: auto !important;
-	-moz-hyphens: auto;
+    max-width: 100%;
+    line-height: 1.5;
+    word-break: break-all;
+    hyphens: auto !important;
+    -moz-hyphens: auto;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
 }
 
 
+.posts__item:hover .deletePostButton {
+    display: block;
+}
 
-.posts__item:hover .deletePostButton{
-	display: block;
+.deletePostButton {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    padding: 7px 0px 0px 1px;
+    display: none;
+    width: 20px;
+    height: 20px;
 }
-.deletePostButton{
-	position: absolute;
-	top: 10px;
-	right: 0px;
-	padding: 7px 0px 0px 1px;
-	display: none;
-	width: 20px;
-	height: 20px;
+
+.deletePostButton::before, .deletePostButton::after {
+    content: '';
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: rgba(0, 0, 0, .5);
 }
-.deletePostButton::before, .deletePostButton::after{
-	content: '';
-	position: relative;
-	display: block;
-	width: 18px;
-	height: 2px;
-	background: rgba(0,0,0,.5);
+
+.deletePostButton::before {
+    top: 1px;
+    transform: rotate(45deg);
+    background: rgba(0, 0, 0, 0.8);
 }
-.deletePostButton::before{
-	top: 1px;
-	transform: rotate(45deg);
-	background: rgba(0,0,0,0.8);
-}
-.deletePostButton::after{
-	bottom: 1px;
-	transform: rotate(-45deg);
-	background: rgba(0,0,0,0.8);
+
+.deletePostButton::after {
+    bottom: 1px;
+    transform: rotate(-45deg);
+    background: rgba(0, 0, 0, 0.8);
 }

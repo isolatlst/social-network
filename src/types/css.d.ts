@@ -14,6 +14,7 @@ declare module '*.module.css' {
 
 declare module 'react-markup';
 declare module '*.webp';
+declare module '*.svg';
 declare module '*.png';
 declare module '*.jpg';
 declare module '*.jpeg';

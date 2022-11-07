@@ -80,7 +80,7 @@ let mapStateToProps = (state: AppStateType) => {
 }
 
 
-export default compose<React.Component>(
+export default compose<React.ComponentType>(
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {toggleFollow, getUsers}),
-    withAuthRedirectComponent
+    withAuthRedirectComponent<PropsType>
 )(UsersContainer)

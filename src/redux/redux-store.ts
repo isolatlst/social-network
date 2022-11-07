@@ -23,10 +23,9 @@ window.store = store
 
 
 type ReducersType = typeof reducers
-type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
 
 //Action Creator Type
-export type InferActionsTypes<T extends { [key: string]: (...arg: any[]) => any }> = ReturnType<PropertiesTypes<T>>
+export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 //Thunk Type
 export type ThunkType<Actions extends Action> = ThunkAction<Promise<void>, AppStateType, unknown, Actions>
 //App State Type

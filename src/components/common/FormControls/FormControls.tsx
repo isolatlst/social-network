@@ -4,7 +4,7 @@ import {ValidatorType} from "../validators/validators";
 import React from "react";
 
 type InputPropsType = { text?: string }
-type TextareaPropsType = { maxLength: number }
+type TextareaPropsType = { maxLength?: number }
 
 
 export const Input: React.FC<WrappedFieldProps & InputPropsType> = ({input, meta: {touched, error, active}, text, ...props}) => {
@@ -22,8 +22,8 @@ export const Input: React.FC<WrappedFieldProps & InputPropsType> = ({input, meta
 export const Textarea: React.FC<WrappedFieldProps & TextareaPropsType> = ({input, meta, maxLength, ...props}) => {
     return (
         <>
-            <span className={classes.textSize}>{`${input.value.length}/${maxLength}`}</span>
-            <textarea {...input} {...props} maxLength={maxLength}></textarea>
+            <span className={classes.textSize}>{`${input.value.length}/${maxLength || 300}`}</span>
+            <textarea {...input} {...props} maxLength={maxLength || 300}></textarea>
         </>
     )
 }

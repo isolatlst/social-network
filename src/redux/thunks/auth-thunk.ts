@@ -9,7 +9,7 @@ import {authAPI} from "../../API/auth-API";
 type Thunk = ThunkType<AuthActionsType | ProfileActionsType | FormAction>
 
 
-export const logIn = (authData: LoginDataType): Thunk => async (dispatch) => {
+export const logIn = (authData: LoginDataType | null): Thunk => async (dispatch) => {
     const {err, userId, message} = await authAPI.loginAPI(authData)
     if (!err) {
         dispatch(authACs.toggleAuthStatus(true))
@@ -18,7 +18,6 @@ export const logIn = (authData: LoginDataType): Thunk => async (dispatch) => {
         dispatch(stopSubmit('authLogin', {_error: message}))
     }
 }
-
 
 export const register = (authData: RegisterDataType): Thunk => async (dispatch) => {
     let {message} = await authAPI.registerAPI(authData)

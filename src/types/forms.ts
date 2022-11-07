@@ -13,9 +13,17 @@ export type RegisterDataType = {
 }
 //---Update Profile Inc Data Type
 export type UpdateProfileDataType = {
-    avatar?: string
-    birth?: string
-    education?: string
-    location?: string
-    site?: string
+    avatar: string
+    birth: string
+    education: string
+    location: string
+    site: string
+} | { [key: string]: string }
+
+
+export type SendMessageType = {
+    newMessageData: string
+}
+export type NewPostType = {
+    newPostData: string
 }

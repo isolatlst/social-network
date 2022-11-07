@@ -1,7 +1,7 @@
 import {MessagesActionsType} from "../actionCreators/messages-action-creator";
 import {DialogType, MessageType} from "../../types/state-types";
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 let initialState = {
     dialogsData: [
